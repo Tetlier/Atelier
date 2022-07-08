@@ -6,8 +6,7 @@ let options = {
   headers: {
     // 'User-Agent': 'request',
     'Content-Type': 'application/json',
-    'Authorization': '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'
-    // `${process.env.TOKEN}` change back to this
+    'Authorization': `${process.env.TOKEN}`
   }
 };
 
@@ -22,7 +21,6 @@ let getProducts = () => {
 let getReviews = (id) => {
   let optionsCopy = options;
   optionsCopy.url = options.url + `/reviews/?product_id=${id}`;
-  console.log(optionsCopy.url)
   return axios((optionsCopy));
 };
 
