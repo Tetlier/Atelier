@@ -1,29 +1,34 @@
 import React from 'React';
 import axios from 'axios';
-// import ReviewMapper from './ReviewMapper.jsx';
+import ReviewMapper from './ReviewMapper.jsx';
 
 //hooks only in stateless components aka not classes
+//reviews
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      etc: '',
+      reviewList: [],
     };
   }
 
-  // getReviews() {
-  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=`)
-  // }
+  getReviews(id) {
+    axios.get('/reviews', { params: { id: id } })
+      .then(results => this.setState({ reviewList: results.data }))
+      .catch (err => console.log(err));
+  }
+
+  //to be used in db
 
   componentDidMount() {
-
+    this.getReviews(this.props.id);
   }
 
   render() {
     return (
-      <div>Almost</div>
+      <div><ReviewMapper reviewList = {this.state.reviewList}/></div>
     );
   }
 }
