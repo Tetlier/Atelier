@@ -18,4 +18,13 @@ let getProducts = () => {
   return (axios(optionsCopy)); // defaults to get request
 };
 
+let getReviews = (id) => {
+  let optionsCopy = options;
+  optionsCopy.url = options.url + `/reviews/?product_id=${id}`;
+  return axios((optionsCopy));
+};
+
+//to be used in db
+
 module.exports.getProducts = getProducts;
+module.exports.getReviews = getReviews;
