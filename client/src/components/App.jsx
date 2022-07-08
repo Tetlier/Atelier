@@ -54,7 +54,7 @@ class App extends React.Component {
           <Container>
             <h1>Welcome to Atelier!</h1>
             <Button>Normal</Button>
-            <div><Reviews/></div>
+            <div><Reviews id = '40344'/></div>
           </Container>
         </>
       </ThemeProvider>
