@@ -19,6 +19,7 @@ const theme = {
 };
 
 class App extends React.Component {
+  // Austin Test
   constructor(props) {
     super(props);
     this.state = {
@@ -45,7 +46,7 @@ class App extends React.Component {
   //second div should be the rest of the products (related products) -if have enough time
   //third div should be questions and answers
   //fourth div should be reviews
-
+  // newly inserted comment
   render() {
     return (
       <ThemeProvider theme={theme}>
