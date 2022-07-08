@@ -21,5 +21,12 @@ app.get('/products', (req, res) => {
     });
 });
 
+app.get('/reviews', (req, res) => {
+  console.log('this', req.query.id);
+  controllers.getReviews(req.query.id)
+    .then(data => res.send(data).status(200))
+    .catch(err => {console.log(err); res.sendStatus(401); });
+});
+
 app.listen(3000);
 console.log('Server listening at http://localhost:3000');
