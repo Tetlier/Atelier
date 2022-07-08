@@ -1,5 +1,5 @@
 import React from 'React';
-
+// comment in QA
 /*
 export default function Card({ recipe, onClick }) {
   let url = `https://source.unsplash.com/${recipe.image_id}`;
