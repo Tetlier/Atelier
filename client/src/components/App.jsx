@@ -1,6 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+
+import Reviews from './Reviews/Reviews.jsx';
+// import QA from './Q-A/QA.jsx';
+
 import styled from 'styled-components';
+import {Container} from './styles/Container.styled.js';
+import {ThemeProvider} from 'styled-components';
+import GlobalStyles from './styles/Global.js';
+import {Button} from './styles/Button.styled.js';
+
+const theme = {
+  colors: {
+    header: '#ebfbff',
+    body: '#fff'
+  }
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -15,25 +31,44 @@ class App extends React.Component {
   }
 
   getProducts() {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products')
+    axios.get('/products')
       .then(response => this.setState({ productList: response.data }))
       .catch(err => console.log(err));
   }
 
   componentDidMount() {
-    this.getProducts();
+    // this.getProducts();
   }
 
+  // `
   //first div should be the current item and its details
-  //second div should be the rest of the products
+  //second div should be the rest of the products (related products) -if have enough time
   //third div should be questions and answers
   //fourth div should be reviews
 
   render() {
     return (
-      <div></div>
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyles/>
+          <Container>
+            <h1>Welcome to Atelier!</h1>
+            <Button>Normal</Button>
+            <div><Reviews/></div>
+          </Container>
+        </>
+      </ThemeProvider>
     );
   }
 }
 
 export default App;
+
+
+/**
+ * common styled component:
+ *  1. Button
+ *  2. font type = Finlandica
+ *  3. color
+ *  4.
+ */

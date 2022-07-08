@@ -8,4 +8,4 @@ const root = document.createElement('div');
 root.setAttribute('id', 'root');
 document.body.appendChild(root);
 
-render(<App />, app);
+render(<App />, root);

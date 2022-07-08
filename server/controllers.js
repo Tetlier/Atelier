@@ -10,13 +10,12 @@ let options = {
   }
 };
 
-let getProducts = (username) => {
+let getProducts = () => {
   // need to add end of url to options but not change original options
   let optionsCopy = options;
   optionsCopy.url = options.url + '/products';
-  return (axios(optionsCopy) // defaults to get request
-    .then((res) => res.data)) // res.data
-    .catch(err => res.sendStatus(500));
+  console.log('inside getProducts');
+  return (axios(optionsCopy)); // defaults to get request
 };
 
 module.exports.getProducts = getProducts;
