@@ -10,6 +10,7 @@ import {Container} from './styles/Container.styled.js';
 import {ThemeProvider} from 'styled-components';
 import GlobalStyles from './styles/Global.js';
 import {Button} from './styles/Button.styled.js';
+import StarReview from './styles/StarReview.styled.js';
 
 const theme = {
   colors: {
@@ -61,6 +62,7 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
+            <StarReview rating='1.2'/>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
