@@ -1,27 +1,36 @@
 const axios = require('axios');
 require('dotenv').config();
 
-let options = {
-  url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp',
-  headers: {
-    // 'User-Agent': 'request',
-    'Content-Type': 'application/json',
-    'Authorization': `${process.env.TOKEN}`
-  }
-};
+// let options = {
+//   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp`,
+//   headers: {
+//     'Content-Type': 'application/json',
+//     'Authorization': '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'
+//   }
+// };
 
 let getProducts = () => {
-  // need to add end of url to options but not change original options
-  let optionsCopy = options;
-  optionsCopy.url = options.url + '/products';
-  console.log('inside getProducts');
-  return (axios(optionsCopy)); // defaults to get request
+  let options = {
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': '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'
+    }
+  };
+  return (axios(options)); // defaults to get request
 };
 
 let getReviews = (id) => {
-  let optionsCopy = options;
-  optionsCopy.url = options.url + `/reviews/?product_id=${id}`;
-  return axios((optionsCopy));
+
+  let options = {
+
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': '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'
+    }
+  };
+  return axios((options));
 };
 
 //to be used in db

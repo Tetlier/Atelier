@@ -33,12 +33,19 @@ class App extends React.Component {
 
   getProducts() {
     axios.get('/products')
-      .then(response => this.setState({ productList: response.data }))
+      .then(response => {
+        this.setState({ productList: response.data });
+        return response.data;
+      })
       .catch(err => console.log(err));
   }
 
+  sum(a, b) {
+    return a + b;
+  }
+
   componentDidMount() {
-    // this.getProducts();
+    this.getProducts();
   }
 
   // `
@@ -54,6 +61,7 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
+            <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
           </Container>
@@ -64,12 +72,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-/**
- * common styled component:
- *  1. Button
- *  2. font type = Finlandica
- *  3. color
- *  4.
- */
