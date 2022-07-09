@@ -33,7 +33,5 @@ let getReviews = (id) => {
   return axios((options));
 };
 
-//to be used in db
-
 module.exports.getProducts = getProducts;
 module.exports.getReviews = getReviews;
