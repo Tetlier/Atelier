@@ -62,7 +62,7 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
-            <StarReview rating='1.2'/>
+            <StarReview rating='3.75'/>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
