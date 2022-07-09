@@ -23,12 +23,13 @@ class Reviews extends React.Component {
   //to be used in db
 
   componentDidMount() {
-    this.getReviews(this.props.id);
+    this.getReviews(40344);
   }
 
   render() {
     return (
-      <div><ReviewMapper reviewList = {this.state.reviewList}/></div>
+      // <div><ReviewMapper reviewList = {this.state.reviewList}/></div>
+      <div>ok</div>
     );
   }
 }
