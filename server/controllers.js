@@ -20,10 +20,24 @@ let getProducts = () => {
   return (axios(options)); // defaults to get request
 };
 
-let getReviews = (id) => {
-
+let getProduct = (productId, callback) => {
   let options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${process.env.TOKEN}`
+    }
+  };
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348', options)
+    .then((response) => {
+      callback(null, response.data);
+    })
+    .catch(err => {
+      callback(err, null);
+    });
+};
 
+let getReviews = (id) => {
+  let options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${id}`,
     headers: {
       'Content-Type': 'application/json',
@@ -37,3 +51,4 @@ let getReviews = (id) => {
 
 module.exports.getProducts = getProducts;
 module.exports.getReviews = getReviews;
+module.exports.getProduct = getProduct;

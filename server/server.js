@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
-app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
+// app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
 // other configurations...
 
 app.get('/products', (req, res) => {
@@ -19,6 +19,17 @@ app.get('/products', (req, res) => {
       console.log('caught an error', err);
       res.sendStatus(500);
     });
+});
+
+app.get('/product', (req, res) => {
+  controllers.getProduct(40344, (err, data) => {
+    if (err) {
+      console.log('err for /product : ', err);
+      res.status(500).send();
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 app.get('/reviews', (req, res) => {

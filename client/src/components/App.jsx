@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
 import Reviews from './Reviews/Reviews.jsx';
 // import QA from './Q-A/QA.jsx';
-
 import styled from 'styled-components';
 import {Container} from './styles/Container.styled.js';
 import {ThemeProvider} from 'styled-components';
 import GlobalStyles from './styles/Global.js';
 import {Button} from './styles/Button.styled.js';
+import Overview from './Overview/Overview';
 
 const theme = {
   colors: {
@@ -23,7 +22,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: null,
+      currentProductId: 40344,
       productList: [],
       reviewList: [], // reviews for current product
       questionList: [] // questions & answers for current product
@@ -39,6 +38,7 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
+
 
   sum(a, b) {
     return a + b;
@@ -61,6 +61,7 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
+            <Overview currentProductId={this.state.currentProductId}></Overview>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
