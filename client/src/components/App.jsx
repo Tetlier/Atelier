@@ -33,10 +33,14 @@ class App extends React.Component {
   getProducts() {
     axios.get('/products')
       .then(response => {
-        this.setState({ productList: response.data });
-        return response.data;
+        this.setState({ productList: response.data }, () => {
+          return this.state.productList;
+        });
+
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   sum(a, b) {
