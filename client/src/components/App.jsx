@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import Reviews from './Reviews/Reviews.jsx';
-// import QA from './Q-A/QA.jsx';
+import QA from './Q-A/QA.jsx';
 
 import styled from 'styled-components';
 import {Container} from './styles/Container.styled.js';
@@ -19,7 +19,6 @@ const theme = {
 };
 
 class App extends React.Component {
-  // Austin Test
   constructor(props) {
     super(props);
     this.state = {
@@ -34,10 +33,14 @@ class App extends React.Component {
   getProducts() {
     axios.get('/products')
       .then(response => {
-        this.setState({ productList: response.data });
-        return response.data;
+        this.setState({ productList: response.data }, () => {
+          return this.state.productList;
+        });
+
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   sum(a, b) {
@@ -48,12 +51,11 @@ class App extends React.Component {
     this.getProducts();
   }
 
-  // `
   //first div should be the current item and its details
   //second div should be the rest of the products (related products) -if have enough time
   //third div should be questions and answers
   //fourth div should be reviews
-  // newly inserted comment
+
   render() {
     return (
       <ThemeProvider theme={theme}>
