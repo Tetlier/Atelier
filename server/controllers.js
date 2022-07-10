@@ -11,13 +11,12 @@ require('dotenv').config();
 
 let getProducts = () => {
   let options = {
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': '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'
+      'Authorization': `${process.env.TOKEN}`
     }
   };
-  return (axios(options)); // defaults to get request
+  return (axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products', options)); // defaults to get request
 };
 
 let getProduct = (productId, callback) => {
@@ -28,8 +27,15 @@ let getProduct = (productId, callback) => {
     }
   };
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348', options)
-    .then((response) => {
-      callback(null, response.data);
+    .then((product) => {
+      axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348/styles', options)
+        .then((styles) => {
+          var result = {productInfo: product.data, styleInfo: styles.data};
+          callback(null, result);
+        })
+        .catch(stylesErr => {
+          callback(stylesErr, null);
+        });
     })
     .catch(err => {
       callback(err, null);
