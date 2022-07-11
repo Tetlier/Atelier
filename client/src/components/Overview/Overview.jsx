@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import OverviewContainer from './OverviewContainer';
+import Panel from './Panel';
+import ImageGallery from './ImageGallery';
+import ImageShowcase from './ImageShowcase';
+import ImageSelect from './ImageSelect';
+import ImageItem from './ImageItem';
+import ProductContent from './ProductContent';
 
 const Overview = ({currentProductId}) => {
   const [currentProduct, setCurrentProduct] = useState({});
@@ -21,7 +28,44 @@ const Overview = ({currentProductId}) => {
     Object.keys(currentProduct).length !== 0
     && Object.keys(currentProductStyle).length !== 0
     &&
-    <div>
+    <OverviewContainer>
+      <Panel>
+        {/* left panel */}
+        <ImageGallery>
+          <ImageShowcase>
+            {
+              currentProductStyle.results[0].photos.map((photo, i) => {
+                return (
+                  <img key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+                );
+              })
+            }
+          </ImageShowcase>
+        </ImageGallery>
+        <ImageSelect>
+          {
+            currentProductStyle.results[0].photos.map((photo, i) => {
+              return (
+                <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+              );
+            })
+          }
+        </ImageSelect>
+        {/* right panel */}
+        <ProductContent>
+          <h2 class='product-title'>{currentProduct.name}</h2>
+          {/* <Review></Review> will be added once review branch is merged */}
+        </ProductContent>
+      </Panel>
+    </OverviewContainer>
+  );
+};
+
+export default Overview;
+
+
+/**
+ * <div>
       <div>name: {currentProduct.name}</div>
       <br/>
       <div>category: {currentProduct.category}</div>
@@ -70,7 +114,4 @@ const Overview = ({currentProductId}) => {
       </ul>
       <br/>
     </div>
-  );
-};
-
-export default Overview;
+ */

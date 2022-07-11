@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './Reviews/Reviews.jsx';
-// import QA from './Q-A/QA.jsx';
 import styled from 'styled-components';
 import {Container} from './styles/Container.styled.js';
 import {ThemeProvider} from 'styled-components';
 import GlobalStyles from './styles/Global.js';
 import {Button} from './styles/Button.styled.js';
 import Overview from './Overview/Overview';
+import QA from './Q-A/QA';
 
 const theme = {
   colors: {
@@ -65,6 +65,8 @@ class App extends React.Component {
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
+            <QA productId='40344'/>
+
           </Container>
         </>
       </ThemeProvider>
