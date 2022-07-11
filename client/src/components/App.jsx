@@ -63,7 +63,7 @@ class App extends React.Component {
             <h1>Welcome to Atelier!</h1>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
-            <div><Reviews id = '40344'/></div>
+            <div><Reviews currentProductId = '40344' Container = {Container} Button = {Button}/></div>
           </Container>
         </>
       </ThemeProvider>

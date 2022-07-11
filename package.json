@@ -20,8 +20,8 @@
     "eslint-config-airbnb": "^19.0.4",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-test-renderer": "^18.2.0",
     "styled-components": "5.3.5"
   },

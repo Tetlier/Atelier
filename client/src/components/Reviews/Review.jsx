@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Review = (props) => {
+const Review = ({review}) => {
 
   // "review_id": 1274559,
   // "rating": 3,
@@ -15,12 +15,12 @@ const Review = (props) => {
 
   return (
     <div>
-      <div>{props.review.rating}</div>
-      <div>{props.review.date}</div>Í
-      <div>{props.review.summary}</div>
-      <div>{props.review.body}</div>
-      <div>{props.review.recommended}</div>
-      <div>{props.review.helpfulness}</div>
+      <div>Rating: {review.rating}</div>
+      <div>Date: {review.date}</div>
+      <div>Summary: {review.summary}</div>
+      <div>Body: {review.body}</div>
+      <div>{review.recommended ? 'I recommend this product' : null}</div>
+      <div>Helpfulness: {review.helpfulness}</div>
     </div>
   );
 };
