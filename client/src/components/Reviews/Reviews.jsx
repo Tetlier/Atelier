@@ -22,9 +22,9 @@ class Reviews extends React.Component {
 
   //to be used in db
 
-  componentDidMount() {
-    this.getReviews(40344);
-  }
+  // componentDidMount() {
+  //   this.getReviews(40344);
+  // }
 
   render() {
     return (
