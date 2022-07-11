@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReviewMapper from './ReviewMapper.jsx';
 import MetaReview from './MetaReview.jsx';
+import Form from './Form.jsx';
+import Test from './Test.jsx';
 
 //hooks only in stateless components aka not classes
 //reviews
 
-const Reviews = ({ currentProductId, Container, Button }) => {
+const Reviews = ({ currentProductId, Container, Button, StarReview }) => {
   let startPoint = 2;
   const [metaReview, setMetaReview] = useState([]);
   const [reviewList, setReviewList] = useState([]);
@@ -24,8 +26,12 @@ const Reviews = ({ currentProductId, Container, Button }) => {
       .catch(err => console.log(err));
   };
 
-  let toggleForm = () => {
-    formClick(prevform => !prevform);
+  let openForm = () => {
+    formClick(prevState => true);
+  };
+
+  let closeForm = () => {
+    formClick(prevState => false);
   };
 
   //to be used in db
@@ -42,13 +48,14 @@ const Reviews = ({ currentProductId, Container, Button }) => {
 
   return (
     <Container>
-      <div><MetaReview metaReview={metaReview} /></div>
+      <div><MetaReview metaReview={metaReview} StarReview = {StarReview} /></div>
       <div><ReviewMapper reviewList={reviewList} /></div>
+      <div><Form closeForm = {closeForm.bind(this)} form = {form}/></div>
       <div>
         <Button
-          onClick = {() => getTwoReviews(currentProductId)}>More Reviews</Button>
+          onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button>
         <Button
-          onClick = {() => toggleForm()}>Add a Review + </Button></div>
+          onClick={() => openForm()}>Add a Review + </Button></div>
     </Container>
   );
 };
