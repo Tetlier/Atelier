@@ -19,6 +19,17 @@ app.get('/products', (req, res) => {
     });
 });
 
+app.get('/product', (req, res) => {
+  controllers.getProduct(40344, (err, data) => {
+    if (err) {
+      console.log('err for /product : ', err);
+      res.status(500).send();
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 app.get('/reviews', (req, res) => {
   controllers.getReviews(req.query.id)
     .then((results) => {
