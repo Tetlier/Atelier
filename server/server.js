@@ -1,12 +1,14 @@
 const path = require('path');
 const express = require('express');
 const controllers = require('./controllers.js');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
+
+// app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
 
 app.get('/products', (req, res) => {
   controllers.getProducts()
