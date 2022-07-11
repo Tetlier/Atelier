@@ -7,7 +7,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
-app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
 
 app.get('/products', (req, res) => {
   controllers.getProducts()
@@ -25,7 +24,7 @@ app.get('/reviews', (req, res) => {
       res.send(results.data).status(200);
     })
     .catch(err => {
-      res.sendStatus(401);
+      res.sendStatus(500);
     });
 });
 
