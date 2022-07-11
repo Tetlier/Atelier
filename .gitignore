@@ -3,4 +3,4 @@
 bower_components
 node_modules
 .env
-./client/dist/bundle.j
+client/dist/bundle.js
