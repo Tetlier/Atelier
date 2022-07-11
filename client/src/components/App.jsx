@@ -22,7 +22,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: null,
+      currentProductId: 40344,
       productList: [],
       reviewList: [], // reviews for current product
       questionList: [] // questions & answers for current product
@@ -34,9 +34,21 @@ class App extends React.Component {
     axios.get('/products')
       .then(response => {
         this.setState({ productList: response.data }, () => {
+          console.log('products: ', this.state.productList);
           return this.state.productList;
         });
 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  getProducts2() {
+    axios.get('http://localhost:3000/products')
+      .then(response => {
+        console.log('fetched data: ', response.data);
+        return response.data;
       })
       .catch((err) => {
         console.log(err);
@@ -63,9 +75,8 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
-            <div> <input type = 'radio'></input></div>
-            <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
+            <div><QA productId={this.state.currentProductId}/></div>
           </Container>
         </>
       </ThemeProvider>

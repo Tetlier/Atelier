@@ -16,15 +16,18 @@ class Reviews extends React.Component {
 
   getReviews(id) {
     axios.get('/reviews', { params: { id: id } })
-      .then(results => this.setState({ reviewList: results.data }))
+      .then(results => {
+        this.setState({ reviewList: results.data });
+        console.log('reviews: ', results.data);
+      })
       .catch (err => console.log(err));
   }
 
   //to be used in db
 
-  // componentDidMount() {
-  //   this.getReviews(40344);
-  // }
+  componentDidMount() {
+    this.getReviews(40344);
+  }
 
   render() {
     return (
