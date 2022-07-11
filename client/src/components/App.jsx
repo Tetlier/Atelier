@@ -62,7 +62,9 @@ class App extends React.Component {
 
         //Rounding down and converting to quarter percentages
         avg = Math.floor(ratingsum / total * 4) / 4;
-        this.setState({ overallRating: avg });
+        this.setState({ currentProductRating: avg });
+
+        console.log('current Product Rating:', this.state.currentProductRating);
 
       }
       )
@@ -95,7 +97,7 @@ class App extends React.Component {
             <StarReview rating='3.75'/>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
-            <div><Reviews currentProductId = '40344' Container = {Container} Button = {Button} StarReview = {StarReview}/></div>
+            <div><Reviews currentProductId = '40344' Container = {Container} Button = {Button} StarReview = {StarReview} currentProductRating = {this.state.currentProductRating}/></div>
           </Container>
         </>
       </ThemeProvider>

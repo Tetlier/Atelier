@@ -56,7 +56,7 @@ const Form = ({ closeForm, form }) => {
           value={review}
           onChange={event => handleChange(event, setReview)}
         ></textarea> </div><div> {review.length}/50 characters</div></div>
-        <div class= 'rating'>Rating:
+        <div>Rating:
           <input type='radio' name='starRating' onClick = {handleRating}></input>
           <input type='radio' name='starRating'></input>
           <input type='radio' name='starRating'></input>

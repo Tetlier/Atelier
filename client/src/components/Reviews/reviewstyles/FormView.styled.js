@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const FormView = styled.div`
+  margin: 10px 10px 10px 10px;
   width: 800px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);

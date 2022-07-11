@@ -1,7 +1,7 @@
-const MetaReview = (props) => {
+const MetaReview = ({currentProductRating}) => {
   return (
     <div>
-      <div>Average Review: {props.metaReview.product_id}</div>
+      <div>Average Review: {currentProductRating}</div>
       <div> % of reviewers recommend this product.</div>
     </div>
   );

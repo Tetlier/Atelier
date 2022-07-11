@@ -3,12 +3,11 @@ import axios from 'axios';
 import ReviewMapper from './ReviewMapper.jsx';
 import MetaReview from './MetaReview.jsx';
 import Form from './Form.jsx';
-import Test from './Test.jsx';
 
 //hooks only in stateless components aka not classes
 //reviews
 
-const Reviews = ({ currentProductId, Container, Button, StarReview }) => {
+const Reviews = ({ currentProductId, Container, Button, StarReview, currentProductRating }) => {
   let startPoint = 2;
   const [metaReview, setMetaReview] = useState([]);
   const [reviewList, setReviewList] = useState([]);
@@ -48,7 +47,7 @@ const Reviews = ({ currentProductId, Container, Button, StarReview }) => {
 
   return (
     <Container>
-      <div><MetaReview metaReview={metaReview} StarReview = {StarReview} /></div>
+      <div><MetaReview metaReview={metaReview} StarReview = {StarReview} currentProductRating ={currentProductRating}/></div>
       <div><ReviewMapper reviewList={reviewList} /></div>
       <div><Form closeForm = {closeForm.bind(this)} form = {form}/></div>
       <div>
