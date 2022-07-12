@@ -24,6 +24,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductId: null,
+      currentProductRating: 0,
       productList: [],
       reviewList: [], // reviews for current product
       questionList: [] // questions & answers for current product
@@ -44,12 +45,41 @@ class App extends React.Component {
       });
   }
 
+  getAverageRating(id) {
+    axios.get('/meta', { params: { id: id } })
+      .then(results => {
+        let avg = 0;
+        let ratingsum = 0;
+        let total = 0;
+        let ratingvals = Object.keys(results.data.ratings);
+        let ratingamounts = Object.values(results.data.ratings);
+
+        //looping through ratings and obtaining the sums/totals
+        for (let i = 0; i < ratingvals.length; i++) {
+          ratingsum += (ratingvals[i] * ratingamounts[i]);
+          total += parseInt(ratingamounts[i]);
+        }
+
+        //Rounding down and converting to quarter percentages
+        avg = Math.floor(ratingsum / total * 4) / 4;
+        this.setState({ currentProductRating: avg });
+
+        console.log('current Product Rating:', this.state.currentProductRating);
+
+      }
+      )
+      .catch(err => console.log(err));
+  }
+
   sum(a, b) {
     return a + b;
   }
 
   componentDidMount() {
     this.getProducts();
+
+    //below is a test. remove when testing complete
+    this.getAverageRating(40344); // gives us 3.75
   }
 
   //first div should be the current item and its details
@@ -67,7 +97,7 @@ class App extends React.Component {
             <StarReview rating='3.75'/>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
-            <div><Reviews id = '40344'/></div>
+            <div><Reviews currentProductId = '40344' Container = {Container} Button = {Button} StarReview = {StarReview} currentProductRating = {this.state.currentProductRating}/></div>
           </Container>
         </>
       </ThemeProvider>

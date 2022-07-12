@@ -25,9 +25,15 @@ app.get('/reviews', (req, res) => {
     .then((results) => {
       res.send(results.data).status(200);
     })
-    .catch(err => {
-      res.sendStatus(401);
-    });
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+app.get('/meta', (req, res) => {
+  controllers.getMetaReview(req.query.id)
+    .then((results) => {
+      res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
 });
 
 app.listen(3000);
