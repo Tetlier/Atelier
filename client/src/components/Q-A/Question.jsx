@@ -2,12 +2,10 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Answer from './Answer';
 
-export default function Question({question}) {
+export default function Question({question, questions, setQuestions, sessionCookie, addToCookie}) {
   const [answerCount, setAnswerCount] = useState(2);
   const [answers, setAnswers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [helpful, setHelpful] = useState(false);
-  const [reported, setReported] = useState(false);
 
   useEffect(() => {
     let config = { params: {
@@ -26,7 +24,6 @@ export default function Question({question}) {
           setHasMore(false);
           setAnswers(ans.data);
         }
-
       })
       .catch((err) => {
         console.log('Error: ', err);
@@ -34,23 +31,94 @@ export default function Question({question}) {
 
   }, [answerCount]);
 
+  const markHelpful = function() {
+    // adds question to cookie
+    addToCookie(question.question_id, 'helpful');
+    // updates questions array with new helpfulness count
+    let indexOfQ = questions.indexOf(question);
+    let newQuestions = questions.slice();
+    newQuestions[indexOfQ].question_helpfulness++;
+    setQuestions(newQuestions);
+    // axios call to database
+    axios.put(`/qa/questions/${question.question_id}/helpful`)
+      .then(() => {
+        console.log('helpfulness increased');
+      })
+      .catch((err) => {
+        // revert back to original helpfulness count if error
+        setQuestions(questions);
+        console.log('Error: ', err);
+      });
+  };
+
+  const reportQuestion = function() {
+    let confirmed = window.confirm('Do you really want to report this question?');
+    if (confirmed) {
+      // adds question to cookie (no need to test if already added since reported questions will not be gotten)
+      addToCookie(question.question_id, 'reported');
+      // updates questions array with reported
+      let indexOfQ = questions.indexOf(question);
+      let newQuestions = questions.slice();
+      newQuestions[indexOfQ].reported = true;
+      setQuestions(newQuestions);
+      // axios call to database
+      axios.put(`/qa/questions/${question.question_id}/report`)
+        .then(() => {
+          window.alert('Question reported');
+        })
+        .catch((err) => {
+          // revert back to original helpfulness count if error
+          setQuestions(questions);
+          console.log('Error: ', err);
+        });
+    } else {
+      console.log('Not reported');
+    }
+  };
+
   return (
     <div className="question">
       <h4>Q: {question.question_body}</h4>
       <aside>
         Helpful?&nbsp;
-        {/* <span
-          onClick={() => }>
+        {/* if not marked as helpful before */}
+        {(document.cookie.slice(5) !== sessionCookie.s_id ||
+          !(sessionCookie.actions.includes(question.question_id + 'h'))) &&
+          <span onClick={() => markHelpful()}>
           Yes {`(${question.question_helpfulness})`}
-        </span>
-        <span
-          onClick={() => }>
-          Report
-        </span> */}
+          </span>
+        }
+        {/* if already marked as helpful */}
+        {(document.cookie.slice(5) === sessionCookie.s_id &&
+          (sessionCookie.actions.includes(question.question_id + 'h'))) &&
+          <span>
+            <b>Yes {`(${question.question_helpfulness})`}</b>
+          </span>
+        }
+        <span> | </span>
+        {/* if question has not been reported */}
+        {!(question.reported) &&
+          <span
+            onClick={() => reportQuestion()}>
+            Report
+          </span>
+        }
+        {/* if question has been reported */}
+        {(question.reported) &&
+          <span><b>Reported</b></span>
+        }
       </aside>
       <h4>A: </h4>
       <div>
-        {answers.map((answer, index) => <Answer key={index} answer={answer}/>)}
+        {answers.map((answer, index) =>
+          <Answer key={answer.answer_id}
+            answer={answer}
+            answers={answers}
+            setAnswers={setAnswers}
+            sessionCookie={sessionCookie}
+            addToCookie={addToCookie}
+          />
+        )}
         {hasMore &&
         <p onClick={() => setAnswerCount(100)}>LOAD MORE ANSWERS</p>
         }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Question from './Question.jsx';
 import {Button} from '../styles/Button.styled.js';
 
-export default function QuestionList({productId, searchTerm}) {
+export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie}) {
   // array of questions
   const [questions, setQuestions] = useState([]);
   // current number of questions to display
@@ -40,11 +40,18 @@ export default function QuestionList({productId, searchTerm}) {
     <div className="questionList">
       {questions.length > 0 &&
         <div>
-          {questions.map((question, index) => <Question key={index} question={question}/> )}
+          {questions.map((question, index) =>
+            <Question
+              key={question.question_id}
+              question={question}
+              questions={questions}
+              setQuestions={setQuestions}
+              sessionCookie={sessionCookie}
+              addToCookie={addToCookie}/> )}
         </div>
       }
       {hasMore &&
-        <Button onClick={() => setQuestionCount(questionCount + 2)}>More Answered Questions</Button>
+        <Button onClick={() => setQuestionCount(questionCount + 10)}>More Answered Questions</Button>
       }
       <Button>Add a Question</Button>
     </div>
