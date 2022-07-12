@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-export default function Answer ({answer, answers, setAnswers, sessionCookie, addToCookie}) {
+export default function Answer ({answer, answers, setAnswers, sessionCookie, addToCookie, sellerName}) {
   const [reported, setReported] = useState(false);
 
   // gets components of date
@@ -57,7 +57,10 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
   return (
     <div className="answer">
       <div className="answer-body">{answer.body}</div>
-      <div className="answer-footer">by {answer.answerer_name}, {month} {day}, {year} {'\n'}
+      <div className="answer-footer">by&nbsp;
+        {answer.answerer_name.toLowerCase() === sellerName && <b>Seller</b>}
+        {answer.answerer_name.toLowerCase() !== sellerName && answer.answerer_name}
+        , {month} {day}, {year} {'\n'}
         &nbsp;| Helpful?&nbsp;
         {/* if not marked as helpful before */}
         {(document.cookie.slice(5) !== sessionCookie.s_id ||

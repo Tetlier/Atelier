@@ -3,7 +3,7 @@ import axios from 'axios';
 import Question from './Question.jsx';
 import {Button} from '../styles/Button.styled.js';
 
-export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie}) {
+export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName}) {
   // array of questions
   const [questions, setQuestions] = useState([]);
   // current number of questions to display
@@ -47,7 +47,8 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
               questions={questions}
               setQuestions={setQuestions}
               sessionCookie={sessionCookie}
-              addToCookie={addToCookie}/> )}
+              addToCookie={addToCookie}
+              sellerName={sellerName}/> )}
         </div>
       }
       {hasMore &&

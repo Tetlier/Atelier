@@ -14,8 +14,12 @@ export default function QA ({productId, sessionCookie, addToCookie}) {
     <div>
       <h2>Questions &amp; Answers</h2>
       <Search updateSearch={updateSearch}/>
-      <QuestionList productId={productId} searchTerm={searchTerm}
-        sessionCookie={sessionCookie} addToCookie={addToCookie}/>
+      <QuestionList productId={productId}
+        searchTerm={searchTerm}
+        sessionCookie={sessionCookie}
+        addToCookie={addToCookie}
+        sellerName={sellerName}
+      />
     </div>
   );
 }

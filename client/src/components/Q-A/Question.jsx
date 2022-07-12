@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Answer from './Answer';
 
-export default function Question({question, questions, setQuestions, sessionCookie, addToCookie}) {
+export default function Question({question, questions, setQuestions, sessionCookie, addToCookie, sellerName}) {
   const [answerCount, setAnswerCount] = useState(2);
   const [answers, setAnswers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -117,6 +117,7 @@ export default function Question({question, questions, setQuestions, sessionCook
             setAnswers={setAnswers}
             sessionCookie={sessionCookie}
             addToCookie={addToCookie}
+            sellerName={sellerName}
           />
         )}
         {hasMore &&
