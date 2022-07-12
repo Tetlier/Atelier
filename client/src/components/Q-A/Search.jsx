@@ -5,6 +5,7 @@ export default function Search({updateSearch}) {
   const [term, setTerm] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
+  // passes searchTerm to QA
   useEffect(() => {
     updateSearch(searchTerm);
   }, [searchTerm]);

@@ -46,14 +46,7 @@ class App extends React.Component {
   }
 
   getProducts2() {
-    axios.get('http://localhost:3000/products')
-      .then(response => {
-        console.log('fetched data: ', response.data);
-        return response.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return axios.get('http://localhost:3000/products');
   }
 
   sum(a, b) {
