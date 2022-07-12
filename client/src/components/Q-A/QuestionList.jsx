@@ -24,11 +24,12 @@ export default function QuestionList({productId, searchTerm}) {
         // tests if there are more questions
         if (qs.data.length > questionCount) {
           setHasMore(true);
+          // slices off the extra question
+          setQuestions(qs.data.slice(0, qs.data.length - 1));
         } else {
           setHasMore(false);
+          setQuestions(qs.data);
         }
-        // slices off the extra question
-        setQuestions(qs.data.slice(0, qs.data.length - 1));
       })
       .catch((err) => {
         console.log('Error: ', err);
