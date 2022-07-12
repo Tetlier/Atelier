@@ -10,6 +10,7 @@ import GlobalStyles from './styles/Global.js';
 import {Button} from './styles/Button.styled.js';
 import Overview from './Overview/Overview';
 
+
 const theme = {
   colors: {
     header: '#ebfbff',
@@ -30,7 +31,7 @@ class App extends React.Component {
   }
 
   getProducts() {
-    axios.get('/products')
+    axios.get('http://localhost:3000/products')
       .then(response => {
         this.setState({ productList: response.data }, () => {
           return this.state.productList;
@@ -42,12 +43,16 @@ class App extends React.Component {
       });
   }
 
+  getProducts2() {
+    return axios.get('http://localhost:3000/products');
+  }
+
   sum(a, b) {
     return a + b;
   }
 
   componentDidMount() {
-    this.getProducts();
+    // this.getProducts();
   }
 
   //first div should be the current item and its details
@@ -63,9 +68,9 @@ class App extends React.Component {
           <Container>
             <h1>Welcome to Atelier!</h1>
             <Overview currentProductId={this.state.currentProductId}></Overview>
-            <div> <input type = 'radio'></input></div>
+            {/* <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
-            <div><Reviews id = '40344'/></div>
+            <div><Reviews id = '40344'/></div> */}
           </Container>
         </>
       </ThemeProvider>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const Panel = styled.div`
+export const StyledCart = styled.div`
 
 `;

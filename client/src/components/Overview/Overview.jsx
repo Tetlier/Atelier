@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import OverviewContainer from './OverviewContainer';
-import Panel from './Panel';
-import ImageGallery from './ImageGallery';
 import ImageShowcase from './ImageShowcase';
-import ImageSelect from './ImageSelect';
 import ImageItem from './ImageItem';
 import ProductContent from './ProductContent';
+import StyleSelector from './StyleSelector';
+import ProductDetail from './ProductDetail';
+import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
+import { Panel } from '../styles/Overview/Panel.styled';
+import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
+import { ImageSelect } from '../styles/Overview/ImageSelect.styled';
 
 const Overview = ({currentProductId}) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [currentProductStyle, setCurrentProductStyle] = useState({});
-  console.log('currentProduct ', currentProduct);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
-        console.log(response.data);
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(response.data.styleInfo);
+        console.log(response.data.productInfo);
         console.log(response.data.styleInfo);
         console.log('API called');
       }));
@@ -28,36 +29,34 @@ const Overview = ({currentProductId}) => {
     Object.keys(currentProduct).length !== 0
     && Object.keys(currentProductStyle).length !== 0
     &&
-    <OverviewContainer>
-      <Panel>
-        {/* left panel */}
-        <ImageGallery>
-          <ImageShowcase>
+    <div>
+      <OverviewContainer>
+        <Panel>
+          {/* left panel */}
+          <ImageGallery>
+            <ImageShowcase productStyle={currentProductStyle} />
+          </ImageGallery>
+          <ImageSelect>
             {
               currentProductStyle.results[0].photos.map((photo, i) => {
                 return (
-                  <img key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+                  <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
                 );
               })
             }
-          </ImageShowcase>
-        </ImageGallery>
-        <ImageSelect>
-          {
-            currentProductStyle.results[0].photos.map((photo, i) => {
-              return (
-                <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
-              );
-            })
-          }
-        </ImageSelect>
-        {/* right panel */}
-        <ProductContent>
-          <h2 class='product-title'>{currentProduct.name}</h2>
-          {/* <Review></Review> will be added once review branch is merged */}
-        </ProductContent>
-      </Panel>
-    </OverviewContainer>
+          </ImageSelect>
+          {/* right panel */}
+          <ProductContent>
+            {/* <Review></Review> will be added once review branch is merged */}
+            <h2 className='product-category'>{currentProduct.category}</h2>
+            <h2 className='product-title'>{currentProduct.name}</h2>
+          </ProductContent>
+          <StyleSelector/>
+          {/* down panel */}
+          <ProductDetail description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features} />
+        </Panel>
+      </OverviewContainer>
+    </div>
   );
 };
 
