@@ -34,7 +34,7 @@ const router = express.Router();
 
 app.use('/qa/questions', router.get('', controllers.getQuestions));
 
-app.get('/qa/questions', router.get('/:question_id/answers', controllers.getAnswers));
+app.use('/qa/questions', router.get('/:question_id/answers', controllers.getAnswers));
 
 app.listen(3000);
 console.log('Server listening at http://localhost:3000');

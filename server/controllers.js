@@ -24,6 +24,7 @@ let getQuestions = (req, res) => {
   let count = params.count;
   let filter = params.filter;
 
+  // can update to include filter for answers too
   client.get(`/qa/questions/?product_id=${id}&count=100`)
     .then((result) => {
       // keep the questions with filter term
@@ -49,7 +50,13 @@ let getAnswers = (req, res) => {
   let count = req.query.count;
   client.get(`qa/questions/${questionId}/answers?count=${count}`)
     .then((result) => {
-      res.status(200).send(result.data);
+      let answers = result.data.results;
+      // sort by descending helpfulness
+      answers.sort((a, b) => {
+        return b.question_helpfulness - a.question_helpfulness;
+      });
+      console.log('sorted answers: ', answers);
+      res.status(200).send(answers);
     })
     .catch((err) => {
       console.log('server error');
