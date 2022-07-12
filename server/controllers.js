@@ -55,8 +55,55 @@ let getAnswers = (req, res) => {
       answers.sort((a, b) => {
         return b.question_helpfulness - a.question_helpfulness;
       });
-      console.log('sorted answers: ', answers);
       res.status(200).send(answers);
+    })
+    .catch((err) => {
+      console.log('server error');
+      res.sendStatus(500);
+    });
+};
+
+let markQasHelpful = (req, res) => {
+  let questionId = req.params.question_id;
+  client.put(`qa/questions/${questionId}/helpful`)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('server error');
+      res.sendStatus(500);
+    });
+};
+
+let reportQuestion = (req, res) => {
+  let questionId = req.params.question_id;
+  client.put(`qa/questions/${questionId}/report`)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('server error');
+      res.sendStatus(500);
+    });
+};
+
+let markAasHelpful = (req, res) => {
+  let answerId = req.params.answer_id;
+  client.put(`qa/answers/${answerId}/helpful`)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log('server error');
+      res.sendStatus(500);
+    });
+};
+
+let reportAnswer = (req, res) => {
+  let answerId = req.params.answer_id;
+  client.put(`qa/answers/${answerId}/report`)
+    .then(() => {
+      res.sendStatus(204);
     })
     .catch((err) => {
       console.log('server error');
@@ -68,3 +115,7 @@ module.exports.getProducts = getProducts;
 module.exports.getReviews = getReviews;
 module.exports.getQuestions = getQuestions;
 module.exports.getAnswers = getAnswers;
+module.exports.markQasHelpful = markQasHelpful;
+module.exports.reportQuestion = reportQuestion;
+module.exports.markAasHelpful = markAasHelpful;
+module.exports.reportAnswer = reportAnswer;
