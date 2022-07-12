@@ -26,9 +26,13 @@ class App extends React.Component {
       currentProductId: 40344,
       productList: [],
       reviewList: [], // reviews for current product
-      questionList: [] // questions & answers for current product
+      sessionCookie: {
+        's_id': document.cookie.slice(5),
+        actions: []
+      }
     };
     this.getProducts = this.getProducts.bind(this);
+    this.addToCookie = this.addToCookie.bind(this);
   }
 
   getProducts() {
@@ -49,12 +53,16 @@ class App extends React.Component {
     return axios.get('http://localhost:3000/products');
   }
 
-  sum(a, b) {
-    return a + b;
-  }
-
   componentDidMount() {
     this.getProducts();
+  }
+
+  // takes in id (question or answer) and action (helpful or reported) to add to cookie
+  addToCookie(id, action) {
+    action = action.toLowerCase();
+    // adds id number + h or r for helpful or reported
+    this.state.sessionCookie.actions.push(id + action.slice(0, 1));
+    console.log('cookie: ', this.state.sessionCookie);
   }
 
   //first div should be the current item and its details
@@ -73,7 +81,9 @@ class App extends React.Component {
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div>
-            <div><QA productId={this.state.currentProductId}/></div>
+            <div><QA productId={this.state.currentProductId}
+              sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
+            </div>
           </Container>
         </>
       </ThemeProvider>

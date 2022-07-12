@@ -40,9 +40,9 @@ app.use('/qa/questions', router.put('/:question_id/helpful', controllers.markQas
 
 app.use('/qa/questions', router.put('/:question_id/report', controllers.reportQuestion));
 
-app.use('/qa/answers', router.put('/:answer_id/helpful', controllers.markAasHelpful));
+app.use('/qa', router.put('/answers/:answer_id/helpful', controllers.markAasHelpful));
 
-app.use('/qa/answers', router.put('/:answer_id/report', controllers.reportAnswer));
+app.use('/qa', router.put('/answers/:answer_id/report', controllers.reportAnswer));
 
 app.listen(3000);
 console.log('Server listening at http://localhost:3000');

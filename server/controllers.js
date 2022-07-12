@@ -39,7 +39,7 @@ let getQuestions = (req, res) => {
       res.status(200).send(filtered.slice(0, count));
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error getting questions');
       res.sendStatus(500);
     });
 
@@ -58,7 +58,7 @@ let getAnswers = (req, res) => {
       res.status(200).send(answers);
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error getting answers');
       res.sendStatus(500);
     });
 };
@@ -70,7 +70,7 @@ let markQasHelpful = (req, res) => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error marking question as helpful');
       res.sendStatus(500);
     });
 };
@@ -82,7 +82,7 @@ let reportQuestion = (req, res) => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error reporting question');
       res.sendStatus(500);
     });
 };
@@ -94,7 +94,7 @@ let markAasHelpful = (req, res) => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error marking answer as helpful');
       res.sendStatus(500);
     });
 };
@@ -106,7 +106,7 @@ let reportAnswer = (req, res) => {
       res.sendStatus(204);
     })
     .catch((err) => {
-      console.log('server error');
+      console.log('server error reporting answer');
       res.sendStatus(500);
     });
 };
