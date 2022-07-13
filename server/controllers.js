@@ -112,12 +112,9 @@ let reportAnswer = (req, res) => {
 };
 
 let postQuestion = (req, res) => {
-  console.log('posting question');
   let question = req.body.data;
-  console.log('question');
   client.post('/qa/questions', question)
     .then(() => {
-      console.log('posted');
       res.sendStatus(201);
     })
     .catch((err) => {
