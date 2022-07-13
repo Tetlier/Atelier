@@ -15,12 +15,14 @@ import { Button } from '../styles/Button.styled.js';
 const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   const [startPoint, setStart] = useState(0);
 
+  //reviewList states and hooks
   const [reviewList, setReviewList] = useState([]);
   const [reviewPage, setPage] = useState(1);
   const [catchUpPage, incPage] = useState(1);
   const [moreResults, noMoreresults] = useState(true);
   const [sort, toggleSort] = useState('newest');
 
+  //metaReview states and hooks
   const [metaReview, setMetaReview] = useState({});
   const [form, formClick] = useState(false);
 
@@ -74,24 +76,23 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   };
 
 
+//currently broken
+  let changeSort = (option) => {
+    toggleSort(option);
+    setReviewList([]);
+    console.log('should be empty', reviewList);
+    console.log('should be changd', sort);
+    incPage(1);
+    if (reviewPage > 1) {
+      while (catchUpPage < reviewPage) {
+        getPageReviews(currentProductId, startPage);
+      }
+    }
+    getResidualResults(currentProductId);
+  };
 
-  // let changeSort = (option) => {
-  //   toggleSort(option);
-  //   setReviewList([]);
-  //   console.log('should be empty', reviewList);
-  //   console.log('should be changd', sort);
-  //   incPage(1);
-  //   if (reviewPage > 1) {
-  //     while (catchUpPage < reviewPage) {
-  //       getPageReviews(currentProductId, startPage);
-  //     }
-  //   }
-  //   getResidualResults(currentProductId);
-  // };
-
-
+ //Gets initial metareview and two reviews
   useEffect(() => {
-    //get initial meta and two reviews
     getTwoReviews(currentProductId);
     getMetaReview(currentProductId);
   }, []);

@@ -14,6 +14,12 @@ const MetaReview = ({ metaReview, currentProductRating }) => {
     changeRecommended(prevState => Math.round(100 * (recommended / ( recommended + notRecommended))));
   };
 
+  //in progress.
+  // let getRatings = () => {
+  //   let starRatings = [];
+  //   metaReview.ratings
+  // };
+
   return (
     <div> {metaReview.recommended ?
       <div>
