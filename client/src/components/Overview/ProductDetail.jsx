@@ -1,4 +1,4 @@
-import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled copy';
+import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled';
 const ProductDetail = ({description, slogan, features}) => {
   return (
     <StyledProductDetail>

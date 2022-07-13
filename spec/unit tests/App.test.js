@@ -8,7 +8,7 @@ it('gets list of products', () => {
   return appComponent.getProducts2()
     .then((response) => {
       // console.log('products: ', response.data);
-      expect(response.data.length).toBe(4);
+      expect(response.data.length).toBe(5);
     });
   // .catch((err) => {
   //   console.log('error: ', err);

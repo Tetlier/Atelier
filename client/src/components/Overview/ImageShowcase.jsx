@@ -5,8 +5,8 @@ const ImageShowcase = ({productStyle}) => {
     <StyledImgShowcase>
       {
         productStyle.results[0].photos.map((photo, i) => {
-          return (
-            <img key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+          return ( i === 0 &&
+            <img key={i} src={photo.thumbnail_url} alt = 'shoe image' className= {i === 0 ? 'active' : ''}/>
           );
         })
       }

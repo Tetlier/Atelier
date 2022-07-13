@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import ImageShowcase from './ImageShowcase';
 import ImageItem from './ImageItem';
-import ProductContent from './ProductContent';
 import StyleSelector from './StyleSelector';
 import ProductDetail from './ProductDetail';
 import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
 import { Panel } from '../styles/Overview/Panel.styled';
 import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
 import { ImageSelect } from '../styles/Overview/ImageSelect.styled';
+import { ProductContent } from '../styles/Overview/ProductContent.styled';
 
 const Overview = ({currentProductId}) => {
   const [currentProduct, setCurrentProduct] = useState({});
@@ -35,26 +35,27 @@ const Overview = ({currentProductId}) => {
           {/* left panel */}
           <ImageGallery>
             <ImageShowcase productStyle={currentProductStyle} />
+            <ImageSelect>
+              {
+                currentProductStyle.results[0].photos.map((photo, i) => {
+                  return ( (i === 0 || i === 1 || i === 2) &&
+                    <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+                  );
+                })
+              }
+            </ImageSelect>
           </ImageGallery>
-          <ImageSelect>
-            {
-              currentProductStyle.results[0].photos.map((photo, i) => {
-                return (
-                  <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
-                );
-              })
-            }
-          </ImageSelect>
+
           {/* right panel */}
           <ProductContent>
             {/* <Review></Review> will be added once review branch is merged */}
             <h2 className='product-category'>{currentProduct.category}</h2>
-            <h2 className='product-title'>{currentProduct.name}</h2>
+            <h1 className='product-title'>{currentProduct.name}</h1>
+            <StyleSelector productStyle={currentProductStyle}/>
           </ProductContent>
-          <StyleSelector/>
-          {/* down panel */}
-          <ProductDetail description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features} />
         </Panel>
+        {/* down panel */}
+        <ProductDetail description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features} />
       </OverviewContainer>
     </div>
   );

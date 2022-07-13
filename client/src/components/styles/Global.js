@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
 
   img{
     width: 100%
+    height: 100px;
     display: block;
   }
 
