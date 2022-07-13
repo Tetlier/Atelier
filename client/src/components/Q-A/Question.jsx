@@ -129,7 +129,17 @@ export default function Question({productId, question, questions, setQuestions, 
               />
             )}
             {hasMore &&
-            <p onClick={() => setAnswerCount(100)}>LOAD MORE ANSWERS</p>
+            <p onClick={() => {
+              setAnswerCount(100);
+              setHasMore(false);
+            }}>LOAD MORE ANSWERS</p>
+            }
+            {(!hasMore && answerCount > 2) &&
+            <p onClick={() => {
+              setAnswerCount(2);
+              setHasMore(true);
+              setAnswers(answers.slice(0, 2));
+            }}>COLLAPSE ANSWERS</p>
             }
           </div>
         </div>

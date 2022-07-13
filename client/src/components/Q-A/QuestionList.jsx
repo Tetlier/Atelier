@@ -58,7 +58,7 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
         </div>
       }
       {hasMore &&
-        <Button onClick={() => setQuestionCount(questionCount + 10)}>More Answered Questions</Button>
+        <Button onClick={() => setQuestionCount(questionCount + 2)}>More Answered Questions</Button>
       }
       <Button onClick={() => setAddQuestion(true)}>Add a Question +</Button>
       <QuestionForm
