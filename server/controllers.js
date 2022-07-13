@@ -11,6 +11,10 @@ let getProducts = () => {
   return (client.get('/products'));
 };
 
+let getReviews = (id, page, sort ) => {
+  return (client.get(`/reviews/?product_id=${id}&page=${page}&count=10&sort=${sort}`));
+};
+
 let getProduct = (productId, callback) => {
   let options = {
     headers: {
@@ -34,11 +38,8 @@ let getProduct = (productId, callback) => {
     });
 };
 
-let getReviews = (id) => {
-  return (client.get(`/reviews/?product_id=${id}`));
-};
 
-let getMetaReview = (id) => {
+let getMetaReview = (id, page) => {
   return (client.get(`/reviews/meta?product_id=${id}`));
 };
 

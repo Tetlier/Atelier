@@ -1,4 +1,6 @@
 // tests App.jsx functions
+//test specific function within component
+
 import renderer from 'react-test-renderer';
 import App from '../../client/src/components/App.jsx';
 
@@ -14,3 +16,5 @@ it('gets list of products', () => {
   //   console.log('error: ', err);
   // });
 });
+
+
