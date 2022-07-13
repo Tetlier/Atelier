@@ -2,14 +2,17 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 import { Button } from '../styles/Button.styled.js';
+import QuestionForm from './QuestionForm';
 
-export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName}) {
+export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName, productName}) {
   // array of questions
   const [questions, setQuestions] = useState([]);
   // current number of questions to display
   const [questionCount, setQuestionCount] = useState(2);
   // whether there are more questions or not
   const [hasMore, setHasMore] = useState(true);
+  // whether to show the add question modal or not
+  const [addQuestion, setAddQuestion] = useState(false);
 
   // when searchTerm is updated, will update list of questions
   useEffect(() => {
@@ -49,13 +52,24 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
               setQuestions={setQuestions}
               sessionCookie={sessionCookie}
               addToCookie={addToCookie}
-              sellerName={sellerName}/> )}
+              sellerName={sellerName}
+              productName={productName}
+            /> )}
         </div>
       }
       {hasMore &&
         <Button onClick={() => setQuestionCount(questionCount + 10)}>More Answered Questions</Button>
       }
-      <Button>Add a Question</Button>
+      <Button onClick={() => setAddQuestion(true)}>Add a Question +</Button>
+      <QuestionForm
+        triggered={addQuestion}
+        setTrigger={setAddQuestion}
+        productId={productId}
+        setQuestions={setQuestions}
+        questionCount={questionCount}
+        searchTerm={searchTerm}
+        productName={productName}
+      />
     </div>
   );
 }

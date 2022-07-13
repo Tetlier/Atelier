@@ -48,6 +48,8 @@ router.put('/qa/answers/:answer_id/helpful', controllers.markAasHelpful);
 
 router.put('/qa/answers/:answer_id/report', controllers.reportAnswer);
 
+router.post('/qa/questions', controllers.postQuestion);
+
 router.post('/qa/questions/:question_id/answers', controllers.postAnswer);
 
 app.listen(3000);

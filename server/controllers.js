@@ -111,6 +111,21 @@ let reportAnswer = (req, res) => {
     });
 };
 
+let postQuestion = (req, res) => {
+  console.log('posting question');
+  let question = req.body.data;
+  console.log('question');
+  client.post('/qa/questions', question)
+    .then(() => {
+      console.log('posted');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server error posting question: ', err);
+      res.sendStatus(500);
+    });
+};
+
 let postAnswer = (req, res) => {
   let questionId = req.params.question_id;
   let answer = req.body.data;
@@ -119,7 +134,7 @@ let postAnswer = (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log('server error posting answer: ', err);
+      console.log('server error posting answer');
       res.sendStatus(500);
     });
 };
@@ -145,6 +160,7 @@ module.exports.markQasHelpful = markQasHelpful;
 module.exports.reportQuestion = reportQuestion;
 module.exports.markAasHelpful = markAasHelpful;
 module.exports.reportAnswer = reportAnswer;
+module.exports.postQuestion = postQuestion;
 module.exports.postAnswer = postAnswer;
 
 module.exports.getProduct = getProduct;

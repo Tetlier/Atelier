@@ -1,14 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import QuestionList from './QuestionList.jsx';
 import Search from './Search';
+import axios from 'axios';
 
 export default function QA ({productId, sessionCookie, addToCookie}) {
   const [searchTerm, setSearchTerm] = useState('');
   const sellerName = 'atelier';
+  const [productName, setProductName] = useState('');
 
   const updateSearch = function(searchTerm) {
     setSearchTerm(searchTerm);
   };
+
+  useEffect(() => {
+    // get product name
+    axios.get(`/products/${productId}`)
+      .then((res) => {
+        setProductName(res.data.name);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+  });
 
   return (
     <div>
@@ -19,6 +32,7 @@ export default function QA ({productId, sessionCookie, addToCookie}) {
         sessionCookie={sessionCookie}
         addToCookie={addToCookie}
         sellerName={sellerName}
+        productName={productName}
       />
     </div>
   );

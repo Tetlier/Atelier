@@ -3,23 +3,13 @@ import axios from 'axios';
 import Answer from './Answer';
 import AnswerForm from './AnswerForm';
 
-export default function Question({productId, question, questions, setQuestions, sessionCookie, addToCookie, sellerName}) {
+export default function Question({productId, question, questions, setQuestions, sessionCookie, addToCookie, sellerName, productName}) {
   const [answerCount, setAnswerCount] = useState(2);
   const [answers, setAnswers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [addAnswer, setAddAnswer] = useState(false);
-  const [productName, setProductName] = useState('');
 
   useEffect(() => {
-    // get product name
-    axios.get(`/products/${productId}`)
-      .then((res) => {
-        setProductName(res.data.name);
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      });
-
     let config = { params: {
       count: answerCount + 1, // gets one more answer to see if there are more
     } };
