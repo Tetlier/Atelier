@@ -20,8 +20,19 @@ app.get('/products', (req, res) => {
     });
 });
 
+app.get('/product', (req, res) => {
+  controllers.getProduct(40344, (err, data) => {
+    if (err) {
+      console.log('err for /product : ', err);
+      res.status(500).send();
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 app.get('/reviews', (req, res) => {
-  controllers.getReviews(req.query.id)
+  controllers.getReviews(req.query.id, req.query.page, req.query.sort)
     .then((results) => {
       res.send(results.data).status(200);
     })
@@ -30,11 +41,17 @@ app.get('/reviews', (req, res) => {
     });
 });
 
+app.get('/meta', (req, res) => {
+  controllers.getMetaReview(req.query.id)
+    .then((results) => {
+      res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
 const router = express.Router();
 
 app.use('/', router);
-// may need to delete and use Austin's
-router.get('/products/:product_id', controllers.getProduct);
 
 router.get('/qa/questions/:question_id/answers', controllers.getAnswers);
 

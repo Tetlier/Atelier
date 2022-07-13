@@ -12,4 +12,3 @@ it('should get a list of products', () => {
       console.log('error: ', err);
     });
 });
-

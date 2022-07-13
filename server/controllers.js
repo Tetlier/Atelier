@@ -13,8 +13,35 @@ let getProducts = () => {
   return (client.get('/products'));
 };
 
-let getReviews = (id) => {
-  return (client.get(`/reviews/?product_id=${id}`));
+let getProduct = (productId, callback) => {
+  let options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${process.env.TOKEN}`
+    }
+  };
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348', options)
+    .then((product) => {
+      axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348/styles', options)
+        .then((styles) => {
+          var result = {productInfo: product.data, styleInfo: styles.data};
+          callback(null, result);
+        })
+        .catch(stylesErr => {
+          callback(stylesErr, null);
+        });
+    })
+    .catch(err => {
+      callback(err, null);
+    });
+};
+
+let getReviews = (id, page, sort ) => {
+  return (client.get(`/reviews/?product_id=${id}&page=${page}&count=10&sort=${sort}`));
+};
+
+let getMetaReview = (id, page) => {
+  return (client.get(`/reviews/meta?product_id=${id}`));
 };
 
 // returns first ${count} number of questions that contains filter term, sorted by helpfulness
@@ -136,20 +163,8 @@ let postAnswer = (req, res) => {
     });
 };
 
-// may need to delete when merging
-let getProduct = (req, res) => {
-  let productId = req.params.product_id;
-  client.get(`/products/${productId}`)
-    .then((result) => {
-      res.status(200).send(result.data);
-    })
-    .catch((err) => {
-      console.log('server error getting product details');
-      res.sendStatus(500);
-    });
-};
-
 module.exports.getProducts = getProducts;
+module.exports.getProduct = getProduct;
 module.exports.getReviews = getReviews;
 module.exports.getQuestions = getQuestions;
 module.exports.getAnswers = getAnswers;
@@ -159,5 +174,4 @@ module.exports.markAasHelpful = markAasHelpful;
 module.exports.reportAnswer = reportAnswer;
 module.exports.postQuestion = postQuestion;
 module.exports.postAnswer = postAnswer;
-
-module.exports.getProduct = getProduct;
+module.exports.getMetaReview = getMetaReview;
