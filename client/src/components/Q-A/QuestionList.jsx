@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
-import { Button } from '../styles/Button.styled.js';
 import QuestionForm from './QuestionForm';
+import { Button } from '../styles/Button.styled.js';
+import { ScrollList } from '../styles/Q-A/ScrollList.styled';
 
 export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName, productName}) {
   // array of questions
@@ -37,26 +38,31 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
       .catch((err) => {
         console.log('Error: ', err);
       });
+    // limits refresh to every 1 s
+    setTimeout(() => {}, 1000);
   }, [searchTerm, questionCount]);
 
   return (
     <div className="questionList">
-      {questions.length > 0 &&
-        <div>
-          {questions.map((question, index) =>
-            <Question
-              key={question.question_id}
-              productId={productId}
-              question={question}
-              questions={questions}
-              setQuestions={setQuestions}
-              sessionCookie={sessionCookie}
-              addToCookie={addToCookie}
-              sellerName={sellerName}
-              productName={productName}
-            /> )}
-        </div>
-      }
+      <ScrollList>
+        {questions.length > 0 &&
+          <div>
+            {questions.map((question, index) =>
+              <Question
+                key={question.question_id}
+                productId={productId}
+                question={question}
+                questions={questions}
+                setQuestions={setQuestions}
+                sessionCookie={sessionCookie}
+                addToCookie={addToCookie}
+                sellerName={sellerName}
+                productName={productName}
+              /> )}
+          </div>
+        }
+      </ScrollList>
+      <br></br>
       {hasMore &&
         <Button onClick={() => setQuestionCount(questionCount + 2)}>More Answered Questions</Button>
       }

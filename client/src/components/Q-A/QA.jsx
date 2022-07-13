@@ -5,8 +5,8 @@ import axios from 'axios';
 
 export default function QA ({productId, sessionCookie, addToCookie}) {
   const [searchTerm, setSearchTerm] = useState('');
-  const sellerName = 'atelier';
   const [productName, setProductName] = useState('');
+  const sellerName = 'atelier';
 
   const updateSearch = function(searchTerm) {
     setSearchTerm(searchTerm);
