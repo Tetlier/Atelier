@@ -48,7 +48,7 @@ let getQuestions = (req, res) => {
 let getAnswers = (req, res) => {
   let questionId = req.params.question_id;
   let count = req.query.count;
-  client.get(`qa/questions/${questionId}/answers?count=${count}`)
+  client.get(`/qa/questions/${questionId}/answers?count=${count}`)
     .then((result) => {
       let answers = result.data.results;
       // sort by descending helpfulness
@@ -65,7 +65,7 @@ let getAnswers = (req, res) => {
 
 let markQasHelpful = (req, res) => {
   let questionId = req.params.question_id;
-  client.put(`qa/questions/${questionId}/helpful`)
+  client.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
       res.sendStatus(204);
     })
@@ -77,7 +77,7 @@ let markQasHelpful = (req, res) => {
 
 let reportQuestion = (req, res) => {
   let questionId = req.params.question_id;
-  client.put(`qa/questions/${questionId}/report`)
+  client.put(`/qa/questions/${questionId}/report`)
     .then(() => {
       res.sendStatus(204);
     })
@@ -89,7 +89,7 @@ let reportQuestion = (req, res) => {
 
 let markAasHelpful = (req, res) => {
   let answerId = req.params.answer_id;
-  client.put(`qa/answers/${answerId}/helpful`)
+  client.put(`/qa/answers/${answerId}/helpful`)
     .then(() => {
       res.sendStatus(204);
     })
@@ -101,12 +101,38 @@ let markAasHelpful = (req, res) => {
 
 let reportAnswer = (req, res) => {
   let answerId = req.params.answer_id;
-  client.put(`qa/answers/${answerId}/report`)
+  client.put(`/qa/answers/${answerId}/report`)
     .then(() => {
       res.sendStatus(204);
     })
     .catch((err) => {
       console.log('server error reporting answer');
+      res.sendStatus(500);
+    });
+};
+
+let postAnswer = (req, res) => {
+  let questionId = req.params.question_id;
+  let answer = req.body.data;
+  client.post(`/qa/questions/${questionId}/answers`, answer)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server error posting answer: ', err);
+      res.sendStatus(500);
+    });
+};
+
+// may need to delete when merging
+let getProduct = (req, res) => {
+  let productId = req.params.product_id;
+  client.get(`/products/${productId}`)
+    .then((result) => {
+      res.status(200).send(result.data);
+    })
+    .catch((err) => {
+      console.log('server error getting product details');
       res.sendStatus(500);
     });
 };
@@ -119,3 +145,6 @@ module.exports.markQasHelpful = markQasHelpful;
 module.exports.reportQuestion = reportQuestion;
 module.exports.markAasHelpful = markAasHelpful;
 module.exports.reportAnswer = reportAnswer;
+module.exports.postAnswer = postAnswer;
+
+module.exports.getProduct = getProduct;

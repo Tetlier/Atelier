@@ -20,11 +20,10 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
     let newAnswers = answers.slice();
     newAnswers[indexOfQ].helpfulness++;
     setAnswers(newAnswers);
-    console.log('calling database to mark helpful');
     // axios call to database
     axios.put(`/qa/answers/${answer.answer_id}/helpful`)
       .then((res) => {
-        console.log('response: ', res);
+        console.log('increased helpfulness');
       })
       .catch((err) => {
         // revert back to original helpfulness count if error

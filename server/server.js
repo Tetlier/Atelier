@@ -32,17 +32,23 @@ app.get('/reviews', (req, res) => {
 
 const router = express.Router();
 
-app.use('/qa/questions', router.get('', controllers.getQuestions));
+app.use('/', router);
+// may need to delete and use Austin's
+router.get('/products/:product_id', controllers.getProduct);
 
-app.use('/qa/questions', router.get('/:question_id/answers', controllers.getAnswers));
+router.get('/qa/questions/:question_id/answers', controllers.getAnswers);
 
-app.use('/qa/questions', router.put('/:question_id/helpful', controllers.markQasHelpful));
+router.get('/qa/questions', controllers.getQuestions);
 
-app.use('/qa/questions', router.put('/:question_id/report', controllers.reportQuestion));
+router.put('/qa/questions/:question_id/helpful', controllers.markQasHelpful);
 
-app.use('/qa', router.put('/answers/:answer_id/helpful', controllers.markAasHelpful));
+router.put('/qa/questions/:question_id/report', controllers.reportQuestion);
 
-app.use('/qa', router.put('/answers/:answer_id/report', controllers.reportAnswer));
+router.put('/qa/answers/:answer_id/helpful', controllers.markAasHelpful);
+
+router.put('/qa/answers/:answer_id/report', controllers.reportAnswer);
+
+router.post('/qa/questions/:question_id/answers', controllers.postAnswer);
 
 app.listen(3000);
 console.log('Server listening at http://localhost:3000');

@@ -1,13 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Answer from './Answer';
+import AnswerForm from './AnswerForm';
 
-export default function Question({question, questions, setQuestions, sessionCookie, addToCookie, sellerName}) {
+export default function Question({productId, question, questions, setQuestions, sessionCookie, addToCookie, sellerName}) {
   const [answerCount, setAnswerCount] = useState(2);
   const [answers, setAnswers] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [addAnswer, setAddAnswer] = useState(false);
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
+    // get product name
+    axios.get(`/products/${productId}`)
+      .then((res) => {
+        setProductName(res.data.name);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+
     let config = { params: {
       count: answerCount + 1, // gets one more answer to see if there are more
     } };
@@ -42,7 +54,7 @@ export default function Question({question, questions, setQuestions, sessionCook
     // axios call to database
     axios.put(`/qa/questions/${question.question_id}/helpful`)
       .then(() => {
-        console.log('helpfulness increased');
+        console.log('increased helpfulness');
       })
       .catch((err) => {
         // revert back to original helpfulness count if error
@@ -107,23 +119,39 @@ export default function Question({question, questions, setQuestions, sessionCook
         {(question.reported) &&
           <span><b>Reported</b></span>
         }
+        <span> | </span>
+        <span onClick={() => setAddAnswer(true)}>
+          Add Answer
+        </span>
       </aside>
-      <h4>A: </h4>
-      <div>
-        {answers.map((answer, index) =>
-          <Answer key={answer.answer_id}
-            answer={answer}
-            answers={answers}
-            setAnswers={setAnswers}
-            sessionCookie={sessionCookie}
-            addToCookie={addToCookie}
-            sellerName={sellerName}
-          />
-        )}
-        {hasMore &&
-        <p onClick={() => setAnswerCount(100)}>LOAD MORE ANSWERS</p>
-        }
-      </div>
+      {answers.length > 0 &&
+        <div>
+          <h4>A: </h4>
+          <div>
+            {answers.map((answer, index) =>
+              <Answer key={answer.answer_id}
+                answer={answer}
+                answers={answers}
+                setAnswers={setAnswers}
+                sessionCookie={sessionCookie}
+                addToCookie={addToCookie}
+                sellerName={sellerName}
+              />
+            )}
+            {hasMore &&
+            <p onClick={() => setAnswerCount(100)}>LOAD MORE ANSWERS</p>
+            }
+          </div>
+        </div>
+      }
+      <AnswerForm
+        triggered={addAnswer}
+        setTrigger={setAddAnswer}
+        questionBody={question.question_body}
+        questionId={question.question_id}
+        productName={productName}
+        setAnswers={setAnswers}
+      />
     </div>
   );
 }

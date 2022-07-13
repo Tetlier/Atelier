@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
-import {Button} from '../styles/Button.styled.js';
+import { Button } from '../styles/Button.styled.js';
 
 export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName}) {
   // array of questions
@@ -43,6 +43,7 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
           {questions.map((question, index) =>
             <Question
               key={question.question_id}
+              productId={productId}
               question={question}
               questions={questions}
               setQuestions={setQuestions}
