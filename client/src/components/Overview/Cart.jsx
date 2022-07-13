@@ -13,8 +13,6 @@ const Cart = ({selectedStyle}) => {
     let index = event.target.value;
     // https://stackoverflow.com/questions/30306486/get-selected-option-text-using-react-js
     let text = event.nativeEvent.target[index].text;
-    console.log('selectedSize :::::: ', index);
-    console.log('text :::::: ', text);
     for (const [key, value] of Object.entries(selectedStyle.skus)) {
       if (value.size === text) {
         var quantityArr = [];
@@ -23,7 +21,6 @@ const Cart = ({selectedStyle}) => {
         }
       }
     }
-    console.log(quantityArr);
     setSelectedSizeQuantity(quantityArr);
   };
 
@@ -32,9 +29,11 @@ const Cart = ({selectedStyle}) => {
       <div className="custom-select" style={{'width': '200px'}} >
         <select defaultValue={{label: 'SELECT SIZE:', value: 0}} onChange={handleChange}>
           {
+            // TODO: If there is no remaining stock for the current style, the dropdown should become inactive and read “OUT OF STOCK”.
+            // TODO: Don't know why, chrome warning option needs key
             Object.values(selectedStyle.skus).map((sku, i) => {
               return ( sku.quantity > 0 &&
-                <option value={i}>{sku.size}</option>
+                <option key={i} value={i}>{sku.size}</option>
               );
             })
           }
@@ -43,8 +42,9 @@ const Cart = ({selectedStyle}) => {
       <div className="custom-select" style={{'width': '200px'}}>
         <select defaultValue={{label: 'SELECT QUANTITY:', value: 0}}>
           {
+            // TODO: Don't know why, chrome warning option needs key
             selectedSizeQuantity.map(item => {
-              return <option value={item.key}>{item.key}</option>;
+              return item.key <= 15 && <option key={item.key} value={item.key}>{item.key}</option>;
             })
           }
         </select>

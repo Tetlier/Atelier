@@ -25,7 +25,7 @@ const StyleSelector = ({productStyle}) => {
             return (
               <img key={i} src={style.photos[0].thumbnail_url}
                 alt = 'shoe image' className={i === 0 ? 'active' : ''}
-                style = {{'border-radius': '50%', 'width': '120px', 'height': '120px'}}
+                style = {{'borderRadius': '50%', 'width': '120px', 'height': '120px'}}
                 // https://upmostly.com/tutorials/pass-a-parameter-through-onclick-in-react
                 onClick = {() => handleClick(i)}
               />

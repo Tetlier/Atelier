@@ -18,9 +18,9 @@ const Overview = ({currentProductId}) => {
       .then((response => {
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(response.data.styleInfo);
-        console.log(response.data.productInfo);
-        console.log(response.data.styleInfo);
-        console.log('API called');
+        // console.log(response.data.productInfo);
+        // console.log(response.data.styleInfo);
+        // console.log('API called');
       }));
   }, []);
 
@@ -39,6 +39,7 @@ const Overview = ({currentProductId}) => {
               {
                 currentProductStyle.results[0].photos.map((photo, i) => {
                   return ( (i === 0 || i === 1 || i === 2) &&
+                    // https://reactjs.org/warnings/special-props.html
                     <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
                   );
                 })

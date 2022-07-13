@@ -1,10 +1,10 @@
 
 import { StyledImgItem } from '../styles/Overview/ImageItem.styled';
 
-const ImageItem = ({key, src, alt}) => {
+const ImageItem = ({ src, alt}) => {
   return (
     <StyledImgItem>
-      <a href='#' data-id={key}>
+      <a href='#'>
         <img src={src} alt={alt}/>
       </a>
     </StyledImgItem>
