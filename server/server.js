@@ -1,13 +1,14 @@
 const path = require('path');
 const express = require('express');
 const controllers = require('./controllers.js');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
-app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
+
+// app.use(cors({origin: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp'}));
 
 app.get('/products', (req, res) => {
   controllers.getProducts()
@@ -35,9 +36,15 @@ app.get('/reviews', (req, res) => {
     .then((results) => {
       res.send(results.data).status(200);
     })
-    .catch(err => {
-      res.sendStatus(401);
-    });
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+app.get('/meta', (req, res) => {
+  controllers.getMetaReview(req.query.id)
+    .then((results) => {
+      res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
 });
 
 app.listen(3000);
