@@ -1,4 +1,4 @@
-import React from 'React';
+import React, {useState} from 'react';
 
 /*
 export default function Card({ recipe, onClick }) {
@@ -22,3 +22,16 @@ export default function Card({ recipe, onClick }) {
     </aside>
   );
 }*/
+
+const QA = ({productId}) => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      ----------------QA----------------
+      Count : {count}
+    </div>
+  );
+};
+
+
+export default QA;
