@@ -97,7 +97,7 @@ class App extends React.Component {
             <StarReview rating='3.75'/>
             <div> <input type = 'radio'></input></div>
             <Button>Normal</Button>
-            <div><Reviews currentProductId = '40344' Container = {Container} Button = {Button} StarReview = {StarReview} currentProductRating = {this.state.currentProductRating}/></div>
+            <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
           </Container>
         </>
       </ThemeProvider>

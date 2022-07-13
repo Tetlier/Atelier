@@ -21,7 +21,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  controllers.getReviews(req.query.id)
+  controllers.getReviews(req.query.id, req.query.page, req.query.sort)
     .then((results) => {
       res.send(results.data).status(200);
     })

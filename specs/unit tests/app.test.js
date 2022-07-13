@@ -1,7 +1,8 @@
 //This file tests the functionality of App specific functions
-const App = require('../../client/src/components/App.jsx');
+import App from '../../client/src/components/App.jsx';
 // getProducts = require('../client/src/components/App.jsx’).getProducts;
 import renderer from 'react-test-renderer';
+
 test('gets all the products', () => {
   const appComponent = renderer.create('<App/>');
   expect(appComponent.getProducts().length).toBe(5);

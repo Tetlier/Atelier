@@ -10,11 +10,11 @@ const client = axios.create({
 let getProducts = () => {
   return (client.get('/products'));
 };
-let getReviews = (id) => {
-  return (client.get(`/reviews/?product_id=${id}`));
+let getReviews = (id, page, sort ) => {
+  return (client.get(`/reviews/?product_id=${id}&page=${page}&count=10&sort=${sort}`));
 };
 
-let getMetaReview = (id) => {
+let getMetaReview = (id, page) => {
   return (client.get(`/reviews/meta?product_id=${id}`));
 };
 

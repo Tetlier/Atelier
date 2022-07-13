@@ -2,10 +2,10 @@
 import React from 'react';
 import Review from './Review.jsx';
 
-const ReviewMapper = ({ reviewList }) => {
+const ReviewMapper = ({ reviewList, StarReview }) => {
   return (
     <div>{reviewList.map(review =>
-      <Review review={review} key={reviewList.indexOf(review)} />)}</div>
+      <Review review={review} key={reviewList.indexOf(review)} StarReview = {StarReview} />)}</div>
   );
 };
 
