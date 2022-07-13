@@ -4,3 +4,5 @@ bower_components
 node_modules
 .env
 client/dist/bundle.js
+package-lock.json
+
