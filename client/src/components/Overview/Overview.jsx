@@ -9,20 +9,28 @@ import { Panel } from '../styles/Overview/Panel.styled';
 import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
 import { ImageSelect } from '../styles/Overview/ImageSelect.styled';
 import { ProductContent } from '../styles/Overview/ProductContent.styled';
+import ProductFeatures from './ProductFeatures';
 
 const Overview = ({currentProductId}) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [currentProductStyle, setCurrentProductStyle] = useState({});
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(response.data.styleInfo);
-        // console.log(response.data.productInfo);
-        // console.log(response.data.styleInfo);
-        // console.log('API called');
       }));
   }, []);
+
+  // https://stackoverflow.com/questions/64191896/usestate-in-useeffect-does-not-update-state
+  useEffect(() => {
+  }, [currentProductStyle]);
+
+  // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
+  const handleStlyeChange = (key) => {
+    setSelectedStyleIndex(key);
+  };
 
 
   return (
@@ -31,33 +39,37 @@ const Overview = ({currentProductId}) => {
     &&
     <div>
       <OverviewContainer>
-        <Panel>
-          {/* left panel */}
-          <ImageGallery>
-            <ImageShowcase productStyle={currentProductStyle} />
-            <ImageSelect>
-              {
-                currentProductStyle.results[0].photos.map((photo, i) => {
-                  return ( (i === 0 || i === 1 || i === 2) &&
-                    // https://reactjs.org/warnings/special-props.html
-                    <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
-                  );
-                })
-              }
-            </ImageSelect>
-          </ImageGallery>
+        {/* left panel */}
+        <ImageSelect className='imageSelect'>
+          {
+            currentProductStyle.results[selectedStyleIndex].photos.map((photo, i) => {
+              return ( (i === 0 || i === 1 || i === 2) &&
+                // https://reactjs.org/warnings/special-props.html
+                <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
+              );
+            })
+          }
+        </ImageSelect>
 
-          {/* right panel */}
-          <ProductContent>
-            {/* <Review></Review> will be added once review branch is merged */}
-            <h2 className='product-category'>{currentProduct.category}</h2>
-            <h1 className='product-title'>{currentProduct.name}</h1>
-            <StyleSelector productStyle={currentProductStyle}/>
-          </ProductContent>
-        </Panel>
-        {/* down panel */}
-        <ProductDetail description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features} />
+        <ImageGallery className='imageGallery'>
+          <ImageShowcase productStyle={currentProductStyle.results[selectedStyleIndex]} />
+        </ImageGallery>
+
+
+        {/* right panel */}
+        <ProductContent className='productContent'>
+          {/* <Review></Review> will be added once review branch is merged */}
+          <h2 className='product-category'>{currentProduct.category}</h2>
+          <h1 className='product-title'>{currentProduct.name}</h1>
+          <StyleSelector
+            productStyle={currentProductStyle}
+            stlyeChange={handleStlyeChange}
+            selectedStyleIndex={selectedStyleIndex}/>
+        </ProductContent>
       </OverviewContainer>
+      {/* down panel */}
+      <ProductDetail className='productDetail'
+        description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features}/>
     </div>
   );
 };

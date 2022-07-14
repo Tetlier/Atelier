@@ -5,20 +5,17 @@ import { StyleGrid } from '../styles/Overview/StyleGrid.styled';
 import { StyleGridItem } from '../styles/Overview/StyleGridItem.styled';
 import { useState } from 'react';
 
-const StyleSelector = ({productStyle}) => {
+const StyleSelector = ({productStyle, stlyeChange, selectedStyleIndex}) => {
   const [selectedStyle, setSelectedStyle] = useState(productStyle.results[0]);
-
-  let handleClick = (key) => {
-    setSelectedStyle(productStyle.results[key]);
-  };
 
   return (
     <StyledStyleSelector>
       <div className='product-price'>
-        <p className='last-price'>Price: <span>${selectedStyle['original_price']}</span></p>
-        {selectedStyle['sale_price'] !== null && <p className='new-price'>Sell Price: <span>$175</span></p>}
+        <p>productStyle.results[selectedStyleIndex] is  {productStyle.results[selectedStyleIndex].name}</p>
+        <p className='last-price'>Price: <span>${productStyle.results[selectedStyleIndex]['original_price']}</span></p>
+        {productStyle.results[selectedStyleIndex]['sale_price'] !== null && <p className='new-price'>Sell Price: <span>${productStyle.results[selectedStyleIndex]['sale_price']}</span></p>}
       </div>
-      <h1>Style : {selectedStyle.name}</h1>
+      <h1>Style : {productStyle.results[selectedStyleIndex].name}</h1>
       <StyleGrid>
         {
           productStyle.results.map((style, i) => {
@@ -27,14 +24,14 @@ const StyleSelector = ({productStyle}) => {
                 alt = 'shoe image' className={i === 0 ? 'active' : ''}
                 style = {{'borderRadius': '50%', 'width': '120px', 'height': '120px'}}
                 // https://upmostly.com/tutorials/pass-a-parameter-through-onclick-in-react
-                onClick = {() => handleClick(i)}
+                onClick = {() => stlyeChange(i)}
               />
             );
           })
         }
       </StyleGrid>
       <br/>
-      <Cart selectedStyle={selectedStyle}/>
+      <Cart selectedStyle={productStyle.results[selectedStyleIndex]}/>
     </StyledStyleSelector>
   );
 };

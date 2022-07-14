@@ -1,18 +1,14 @@
-import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled';
-const ProductDetail = ({description, slogan, features}) => {
+const ProductFeatures = ({features}) => {
   return (
-    <StyledProductDetail>
-      <h1 style={{'flexBasis': '40%'}}>Description: {description}</h1>
-      <br/>
-      <h1 style={{'flexBasis': '20%'}}>Slogan: {slogan}</h1>
-      <ul style={{'flexBasis': '20%'}}>
+    <div>
+      <ul>
         {
           features.map((item, i) => {
             return (<li key={i}>feature: {item.feature},  value: {item.value} </li>);
           })
         }
       </ul>
-      <div className='social-links' style={{'flexBasis': '20%'}}>
+      <div className='social-links'>
         <p>Share At: </p>
         <a href='#'>
           <i className='fab fa-facebook-f'></i>
@@ -27,8 +23,8 @@ const ProductDetail = ({description, slogan, features}) => {
           <i className='fab fa-whatsapp'></i>
         </a>
       </div>
-    </StyledProductDetail>
+    </div>
   );
 };
 
-export default ProductDetail;
+export default ProductFeatures;
