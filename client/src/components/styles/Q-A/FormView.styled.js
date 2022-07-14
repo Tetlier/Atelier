@@ -7,9 +7,7 @@ export const FormView = styled.div`
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
-  position: fixed;
-  left: 20%;
-  bottom: 20%;
+  position:relative;
   z-index: 10;
   border-radius: 10px;
 `;
