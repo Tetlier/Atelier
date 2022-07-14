@@ -24,11 +24,13 @@ class App extends React.Component {
     this.state = {
       currentProductId: 40344,
       currentProductRating: 0,
-      productList: [],
-      reviewList: [], // reviews for current product
-      questionList: [] // questions & answers for current product
+      sessionCookie: {
+        's_id': document.cookie.slice(5),
+        actions: []
+      }
     };
     this.getProducts = this.getProducts.bind(this);
+    this.addToCookie = this.addToCookie.bind(this);
   }
 
   getProducts() {
@@ -42,10 +44,6 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  getProducts2() {
-    return axios.get('http://localhost:3000/products');
   }
 
   getAverageRating(id) {
@@ -74,15 +72,19 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  sum(a, b) {
-    return a + b;
-  }
-
   componentDidMount() {
     this.getProducts();
 
     //below is a test. remove when testing complete
     this.getAverageRating(40344); // gives us 3.75
+  }
+
+  // takes in id (question or answer) and action (helpful or reported) to add to cookie
+  addToCookie(id, action) {
+    action = action.toLowerCase();
+    // adds id number + h or r for helpful or reported
+    this.state.sessionCookie.actions.push(id + action.slice(0, 1));
+    console.log('cookie: ', this.state.sessionCookie);
   }
 
   //first div should be the current item and its details
@@ -102,9 +104,10 @@ class App extends React.Component {
             <Button>Normal</Button>
             <div><Reviews id = '40344'/></div> */}
             <StarReview rating='3.75'/>
-            <div> <input type = 'radio'></input></div>
-            <Button>Normal</Button>
             <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
+            <div><QA productId={this.state.currentProductId}
+              sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
+            </div>
           </Container>
         </>
       </ThemeProvider>

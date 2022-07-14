@@ -36,7 +36,9 @@ app.get('/reviews', (req, res) => {
     .then((results) => {
       res.send(results.data).status(200);
     })
-    .catch(err => { console.log(err); res.sendStatus(500); });
+    .catch(err => {
+      res.sendStatus(500);
+    });
 });
 
 app.get('/meta', (req, res) => {
@@ -46,6 +48,26 @@ app.get('/meta', (req, res) => {
     })
     .catch(err => { console.log(err); res.sendStatus(500); });
 });
+
+const router = express.Router();
+
+app.use('/', router);
+
+router.get('/qa/questions/:question_id/answers', controllers.getAnswers);
+
+router.get('/qa/questions', controllers.getQuestions);
+
+router.put('/qa/questions/:question_id/helpful', controllers.markQasHelpful);
+
+router.put('/qa/questions/:question_id/report', controllers.reportQuestion);
+
+router.put('/qa/answers/:answer_id/helpful', controllers.markAasHelpful);
+
+router.put('/qa/answers/:answer_id/report', controllers.reportAnswer);
+
+router.post('/qa/questions', controllers.postQuestion);
+
+router.post('/qa/questions/:question_id/answers', controllers.postAnswer);
 
 app.listen(3000);
 console.log('Server listening at http://localhost:3000');

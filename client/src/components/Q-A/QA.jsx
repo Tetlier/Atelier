@@ -1,37 +1,39 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import QuestionList from './QuestionList.jsx';
+import Search from './Search';
+import axios from 'axios';
 
-/*
-export default function Card({ recipe, onClick }) {
-  let url = `https://source.unsplash.com/${recipe.image_id}`;
-  // See examples/Card.html for what this component should render.
-  let header;
-  if (recipe.favorite) {
-    header = <h2>{recipe.name}&nbsp;<sup>⭐️</sup></h2>;
-  } else {
-    header = <h2>{recipe.name}&nbsp;</h2>;
-  }
-  return (
-    <aside onClick={() => { onClick({'id': recipe._id}); }}>
-      <img src={url} width="384" height="192" alt={`${recipe.name} image`}></img>
-      {header}
-      <small>{formatDistanceToNow(new Date(parseISO(recipe.createdAt)), {
-        addSuffix: true,
-        includeSeconds: true
-      })}</small>
-      <p>{recipe.description}</p>
-    </aside>
-  );
-}*/
+export default function QA ({productId, sessionCookie, addToCookie}) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [productName, setProductName] = useState('');
+  const sellerName = 'atelier';
 
-const QA = ({productId}) => {
-  const [count, setCount] = useState(0);
+  const updateSearch = function(searchTerm) {
+    setSearchTerm(searchTerm);
+  };
+
+  useEffect(() => {
+    // get product name
+    axios.get('/product', {productId: productId})
+      .then((res) => {
+        setProductName(res.data.productInfo.name);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+  });
+
   return (
     <div>
-      ----------------QA----------------
-      Count : {count}
+      <h2>Questions &amp; Answers</h2>
+      <Search updateSearch={updateSearch}/>
+      <QuestionList productId={productId}
+        searchTerm={searchTerm}
+        sessionCookie={sessionCookie}
+        addToCookie={addToCookie}
+        sellerName={sellerName}
+        productName={productName}
+      />
     </div>
   );
-};
-
-
-export default QA;
+}

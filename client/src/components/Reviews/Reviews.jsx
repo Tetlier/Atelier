@@ -76,7 +76,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   };
 
 
-//currently broken
+  //currently broken
   let changeSort = (option) => {
     toggleSort(option);
     setReviewList([]);
@@ -91,7 +91,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
     getResidualResults(currentProductId);
   };
 
- //Gets initial metareview and two reviews
+  //Gets initial metareview and two reviews
   useEffect(() => {
     getTwoReviews(currentProductId);
     getMetaReview(currentProductId);
@@ -130,9 +130,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
       <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
       <div> {moreResults ? <Button
         onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-        <Button
-          data-testid='addReview'
-          onClick={() => openForm()}>Add a Review + </Button></div>
+      <Button
+        data-testid='addReview'
+        onClick={() => openForm()}>Add a Review + </Button></div>
     </Container>
   );
 };
