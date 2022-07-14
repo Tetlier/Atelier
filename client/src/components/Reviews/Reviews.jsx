@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+//Components
 import ReviewMapper from './ReviewMapper.jsx';
 import MetaReview from './MetaReview.jsx';
 import Form from './Form.jsx';
-
-
+//styled components
 import { Button } from '../styles/Button.styled.js';
+import { Grid, Row, Col, Scroll } from '../styles/reviewstyles/reviewWidget.styled.js';
 
-import { ReviewContainer } from '../styles/reviewstyles/ReviewContainer.styled.js';
-import { Metareviewpanel } from '../styles/reviewstyles/Metareviewpanel.styled.js';
-import { Reviewpanel } from '../styles/reviewstyles/Reviewpanel.styled.js';
-import { Scroll } from '../styles/reviewstyles/Scroll.styled.js';
-
-
-//hooks only in stateless components aka not classes
-//reviews
 
 const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
+
+  //hooks related to the review list and restrictions
   const [startPoint, setStart] = useState(0);
-
   const [filterRating, setFilterRating] = useState([]);
-  const [count, setCount] = useState(10);
+  const [noMoreResults, setnoMoreResults] = useState(false);
 
-  //reviewList states and hooks
+  //hooks related to controlling parameters for review GET requests
+  const [count, setCount] = useState(10);
   const [reviewList, setReviewList] = useState([]);
-  const [resultMax, setResultMax] = useState(false);
   const [dropDownSort, setDropDownSort] = useState('relevant');
 
-  //metaReview states and hooks
+  //metaReview and form hooks
   const [metaReview, setMetaReview] = useState({});
   const [form, formClick] = useState(false);
 
+  //Submits GET request to results and obtains 2 new reviews
   let getTwoReviews = () => {
     axios.get('/reviews', { params: { id: currentProductId, count: count, sort: dropDownSort } })
       .then(results => {
@@ -39,12 +34,13 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
           setReviewList(updatedPage);
           setStart(prevState => prevState += 2);
         } else {
-          setResultMax(prevState => true);
+          setnoMoreResults(prevState => true);
         }
       })
       .catch(err => console.log(err));
   };
 
+  //Submits GET request to results and obtains ALL new reviews
   let getPageReviews = () => {
     axios.get('/reviews', { params: { id: currentProductId, count: count, sort: dropDownSort } })
       .then(results => {
@@ -54,42 +50,42 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
       .catch(err => console.log(err));
   };
 
+  //Submits GET request to meta and obtains meta information for the product
   let getMetaReview = (id) => {
     axios.get('/meta', { params: { id: id } })
       .then(results => { setMetaReview(prevState => results.data); })
       .catch(err => console.log(err));
   };
 
+  //toggles opening and closing of form
   let closeForm = () => {
     formClick(false);
   };
 
-  //Gets initial metareview and two reviews
+  //On initialization, gets metareview and two reviews
   useEffect(() => {
     getTwoReviews(currentProductId);
     getMetaReview(currentProductId);
   }, []);
 
+  //increases count state when startPoint reaches the same value
   useEffect(() => {
-    console.log('start', startPoint);
     if (startPoint === count) {
       setCount(prevState => prevState += 10);
     }
   }, [startPoint]);
 
+
+
   //Monitors for changes in dropDownSort after initialization and gets new sorted info on change
+  //tech debt-temporary fix?
   useEffect(() => {
-    //tech debt-temporary fix››
     startPoint >= 2 ? getPageReviews() : null;
   }, [dropDownSort]);
 
-  useEffect(() => {
-    console.log('changed');
-  }, [filterRating]);
 
-
-  //sort will filter existing list and also add sort params
-  let toggleFilter = (rating) => {
+  //Adds and removes rating filters
+  let toggleFilter = async (rating) => {
     if (filterRating.includes(rating)) {
       let position = filterRating.indexOf(rating);
       filterRating.splice(position, 1);
@@ -98,36 +94,41 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
       filterRating.push(rating);
       setFilterRating(filterRating);
     }
+    getPageReviews();
   };
 
   return (
-    <ReviewContainer>
-      <Metareviewpanel>
-        <MetaReview metaReview={metaReview}
-          currentProductRating={currentProductRating}
-          toggleFilter={toggleFilter.bind(this)}
-          setFilterRating={setFilterRating}
-          filterRating={filterRating} /></Metareviewpanel>
-      <Reviewpanel>
-        <label> Sort By: </label>
-        <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
-          <option value='helpful'>Helpfulness</option>
-          <option value='newest'>Newest</option>
-          <option value='relevant'>Relevance</option>
-        </select>
-        <Scroll> {
-          reviewList.length > 1 ?
-            <ReviewMapper reviewList={reviewList}
-              filterRating={filterRating} /> : null}
-        </Scroll>
-        <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
-        <div> {!resultMax ? <Button
-          onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-          <Button
-            data-testid='addReview'
-            onClick={() => formClick(true)}>Add a Review + </Button></div>
-      </Reviewpanel>
-    </ReviewContainer>
+    <Grid>
+      <Row>
+        <Col>
+          <MetaReview metaReview={metaReview}
+            currentProductRating={currentProductRating}
+            getPageReviews={getPageReviews}
+            toggleFilter={toggleFilter}
+            setFilterRating={setFilterRating}
+            filterRating={filterRating} />
+        </Col>
+        <Col size='1.8'>
+          <label> Sort By: </label>
+          <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
+            <option value='helpful'>Helpfulness</option>
+            <option value='newest'>Newest</option>
+            <option value='relevant'>Relevance</option>
+          </select>
+          <Scroll> {
+            reviewList.length > 1 ?
+              <ReviewMapper reviewList={reviewList}
+                filterRating={filterRating} /> : null}
+          </Scroll>
+          <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
+          <Row> {!noMoreResults ? <Button
+            onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
+            <Button
+              data-testid='addReview'
+              onClick={() => formClick(true)}>Add a Review + </Button></Row>
+        </Col>
+      </Row>
+    </Grid>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { SingleReviewStars } from '../styles/reviewstyles/SingleReviewStars.styled.js';
-import { ThumbNail } from '../styles/reviewstyles/ThumbNail.styled.js';
+import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
-import { LargePhoto } from '../styles/reviewstyles/LargePhoto.styled.js';
-import { SingleReview } from '../styles/reviewstyles/SingleReview.styled.js';
 import { ReviewComponent } from '../styles/reviewstyles/ReviewComponent.styled.js';
 import axios from 'axios';
+
+import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
 
 const Review = ({ review, StarReview }) => {
 
@@ -13,10 +12,11 @@ const Review = ({ review, StarReview }) => {
   const [clicked, setClicked] = useState(false);
   const [image, setImage] = useState(false);
 
-  const enlargeThumbnail = (photo) => {
+  //broken. Only gets the last photo
+  const enlargeThumbnail = (img) => {
     return (
       <Background onClick={() => setImage(!image)}>
-        <LargePhoto src={photo.url} />
+        <FullSize src={img} />
       </Background>
     );
   };
@@ -37,23 +37,27 @@ const Review = ({ review, StarReview }) => {
   };
 
   return (
-    <SingleReview>
-      <ReviewComponent> <SingleReviewStars rating={review.rating} /></ReviewComponent>
-      <ReviewComponent><b> {review.summary}</b></ReviewComponent>
-      <div>{getDate()}</div>
+    <ReviewGrid>
+      <ReviewRow>
+        <ReviewCol size='4.25'>
+          <ReviewStars rating={review.rating} />
+        </ReviewCol>
+        <ReviewCol size='2'>
+          <div>By {review.reviewer_name} on {getDate()}</div>
+        </ReviewCol>
+      </ReviewRow>
+      <ReviewRow><b> {review.summary}</b></ReviewRow>
       {review.recommend ? <div> I recommend this product ✅</div> : null}
-      <div>{review.reviewer_name}</div>
       {restriction ? <div maxLength={250}>{review.body}</div> : <div>{review.body}</div>}
       {review.body.length > 250 ?
         <button
           onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
-
-      <div>{review.photos.map(photo => <div> {image ? enlargeThumbnail(photo) : <ThumbNail
+      <ReviewRow>{review.photos.map(photo => <ReviewCol> {image ? enlargeThumbnail(photo.url) : <ThumbNail
         onClick={() => setImage(!image)}
         src={photo.url}
-        key={`${photo.url}`} />}</div>)}</div>
+        key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
 
 
       {!clicked ? <div>Was this review helpful?
@@ -61,7 +65,7 @@ const Review = ({ review, StarReview }) => {
           onClick={() => submitHelpful(review.review_id)}>Yes</button>
         <button
           onClick={() => setClicked(true)}>No</button></div> : 'Response Recorded'}
-    </SingleReview>
+    </ReviewGrid>
   );
 };
 

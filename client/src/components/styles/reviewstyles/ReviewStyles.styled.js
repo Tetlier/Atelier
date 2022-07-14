@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 
-export const FormStar = styled.input`
+export const ReviewGrid = styled.div`
+border: 1px #ccc solid;
+padding: 10px;
+`;
 
+export const ReviewRow = styled.div`
+display: flex;
+`;
 
+export const ReviewCol = styled.div`
+flex: ${props=> props.size}
+`;
+
+export const ReviewStars = styled.div`
   --percent: calc(${({rating}) => rating} / 5 * 100%);
   --star-size: 20px;
   --star-color: #808080;

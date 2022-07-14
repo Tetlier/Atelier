@@ -1,10 +1,8 @@
-// import React, { useState } from 'react';
 import React from 'react';
 import Review from './Review.jsx';
 
 
 const ReviewMapper = ({ reviewList, StarReview, filterRating }) => {
-
 
   return (
     <div>{reviewList.map(review => {
