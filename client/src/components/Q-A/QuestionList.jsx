@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 import QuestionForm from './QuestionForm';
-import { Button } from '../styles/Button.styled.js';
-import { ScrollList } from '../styles/Q-A/ScrollList.styled';
+import { InlineButton } from '../styles/Q-A/InlineButton.styled.js';
+import { ScrollList } from '../styles/Q-A/QAList.styled.js';
 
 export default function QuestionList({productId, searchTerm, sessionCookie, addToCookie, sellerName, productName}) {
   // array of questions
@@ -63,9 +63,9 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
       </ScrollList>
       <br></br>
       {hasMore &&
-        <Button onClick={() => setQuestionCount(questionCount + 2)}>More Answered Questions</Button>
+        <InlineButton onClick={() => setQuestionCount(questionCount + 2)}>More Answered Questions</InlineButton>
       }
-      <Button onClick={() => setAddQuestion(true)}>Add a Question +</Button>
+      <InlineButton onClick={() => setAddQuestion(true)}>Add a Question +</InlineButton>
       <QuestionForm
         triggered={addQuestion}
         setTrigger={setAddQuestion}

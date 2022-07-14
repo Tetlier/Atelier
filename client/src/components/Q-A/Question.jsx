@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Answer from './Answer';
 import AnswerForm from './AnswerForm';
+import { QorATitle, QAside, LinkHover, ClickedLink, QuestionBody, LoadMore } from '../styles/Q-A/QAList.styled.js';
 
 export default function Question({productId, question, questions, setQuestions, sessionCookie, addToCookie, sellerName, productName}) {
   const [answerCount, setAnswerCount] = useState(2);
@@ -80,43 +81,48 @@ export default function Question({productId, question, questions, setQuestions, 
 
   return (
     <div className="question">
-      <h4>Q: {question.question_body}</h4>
-      <aside>
-        Helpful?&nbsp;
-        {/* if not marked as helpful before */}
-        {(document.cookie.slice(5) !== sessionCookie.s_id ||
-          !(sessionCookie.actions.includes(question.question_id + 'h'))) &&
-          <span onClick={() => markHelpful()}>
-          Yes {`(${question.question_helpfulness})`}
-          </span>
-        }
-        {/* if already marked as helpful */}
-        {(document.cookie.slice(5) === sessionCookie.s_id &&
-          (sessionCookie.actions.includes(question.question_id + 'h'))) &&
-          <span>
-            <b>Yes {`(${question.question_helpfulness})`}</b>
-          </span>
-        }
-        <span> | </span>
-        {/* if question has not been reported */}
-        {!(question.reported) &&
-          <span
-            onClick={() => reportQuestion()}>
-            Report
-          </span>
-        }
-        {/* if question has been reported */}
-        {(question.reported) &&
-          <span><b>Reported</b></span>
-        }
-        <span> | </span>
-        <span onClick={() => setAddAnswer(true)}>
-          Add Answer
-        </span>
-      </aside>
+      <QorATitle>
+        <QuestionBody>
+          <h4>Q: {question.question_body}</h4>
+        </QuestionBody>
+        <QAside>
+          Helpful?&nbsp;
+          {/* if not marked as helpful before */}
+          {(document.cookie.slice(5) !== sessionCookie.s_id ||
+            !(sessionCookie.actions.includes(question.question_id + 'h'))) &&
+            <LinkHover onClick={() => markHelpful()}>
+            Yes {`(${question.question_helpfulness})`}
+            </LinkHover>
+          }
+          {/* if already marked as helpful */}
+          {(document.cookie.slice(5) === sessionCookie.s_id &&
+            (sessionCookie.actions.includes(question.question_id + 'h'))) &&
+            <ClickedLink>Yes {`(${question.question_helpfulness})`}</ClickedLink>
+          }
+          <span> | </span>
+          {/* if question has not been reported */}
+          {!(question.reported) &&
+            <LinkHover
+              onClick={() => reportQuestion()}>
+              Report
+            </LinkHover>
+          }
+          {/* if question has been reported */}
+          {(question.reported) &&
+            <ClickedLink>Reported</ClickedLink>
+          }
+          <span> | </span>
+          <LinkHover onClick={() => setAddAnswer(true)}>
+            Add Answer
+          </LinkHover>
+        </QAside>
+      </QorATitle>
+      <br></br>
       {answers.length > 0 &&
         <div>
-          <h4>A: </h4>
+          <QorATitle>
+            <h4>A: </h4>
+          </QorATitle>
           <div>
             {answers.map((answer, index) =>
               <Answer key={answer.answer_id}
@@ -129,17 +135,17 @@ export default function Question({productId, question, questions, setQuestions, 
               />
             )}
             {hasMore &&
-            <p onClick={() => {
+            <LoadMore onClick={() => {
               setAnswerCount(100);
               setHasMore(false);
-            }}>LOAD MORE ANSWERS</p>
+            }}>LOAD MORE ANSWERS</LoadMore>
             }
             {(!hasMore && answerCount > 2) &&
-            <p onClick={() => {
+            <LoadMore onClick={() => {
               setAnswerCount(2);
               setHasMore(true);
               setAnswers(answers.slice(0, 2));
-            }}>COLLAPSE ANSWERS</p>
+            }}>COLLAPSE ANSWERS</LoadMore>
             }
           </div>
         </div>

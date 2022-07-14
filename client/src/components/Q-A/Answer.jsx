@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { AnswerStyle, AnswerFooter, LinkHover, ClickedLink } from '../styles/Q-A/QAList.styled';
 
 export default function Answer ({answer, answers, setAnswers, sessionCookie, addToCookie, sellerName}) {
   const [reported, setReported] = useState(false);
@@ -54,41 +55,41 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
 
   // need to account for seller name being bolded
   return (
-    <div className="answer">
-      <div className="answer-body">{answer.body}</div>
-      <div className="answer-footer">by&nbsp;
-        {answer.answerer_name.toLowerCase() === sellerName && <b>Seller</b>}
-        {answer.answerer_name.toLowerCase() !== sellerName && answer.answerer_name}
-        , {month} {day}, {year} {'\n'}
-        &nbsp;| Helpful?&nbsp;
-        {/* if not marked as helpful before */}
-        {(document.cookie.slice(5) !== sessionCookie.s_id ||
-          !(sessionCookie.actions.includes(answer.answer_id + 'h'))) &&
-          <span onClick={() => markHelpful()}>
-          Yes {`(${answer.helpfulness})`}
-          </span>
-        }
-        {/* if already marked as helpful */}
-        {(document.cookie.slice(5) === sessionCookie.s_id &&
-          (sessionCookie.actions.includes(answer.answer_id + 'h'))) &&
-          <span>
-            <b>Yes {`(${answer.helpfulness})`}</b>
-          </span>
-        }
-        <span> | </span>
-        {/* if answer has not been reported */}
-        {(document.cookie.slice(5) !== sessionCookie.s_id ||
-          !(sessionCookie.actions.includes(answer.answer_id + 'r'))) &&
-          <span
-            onClick={() => reportAnswer()}>
-            Report
-          </span>
-        }
-        {/* if answer has been reported */}
-        {(reported) &&
-          <span><b>Reported</b></span>
-        }
+    <AnswerStyle>
+      <div className="answer">
+        <div className="answer-body">{answer.body}</div>
+        <AnswerFooter>
+          <div className="answer-footer">by&nbsp;
+            {answer.answerer_name.toLowerCase() === sellerName && <b>Seller</b>}
+            {answer.answerer_name.toLowerCase() !== sellerName && answer.answerer_name}
+            , {month} {day}, {year} {'\n'}
+            &nbsp;| Helpful?&nbsp;
+            {/* if not marked as helpful before */}
+            {(document.cookie.slice(5) !== sessionCookie.s_id ||
+              !(sessionCookie.actions.includes(answer.answer_id + 'h'))) &&
+              <LinkHover
+                onClick={() => markHelpful()}>
+                Yes {`(${answer.helpfulness})`}
+              </LinkHover>
+            }
+            {/* if already marked as helpful */}
+            {(document.cookie.slice(5) === sessionCookie.s_id &&
+              (sessionCookie.actions.includes(answer.answer_id + 'h'))) &&
+              <ClickedLink>Yes {`(${answer.helpfulness})`}</ClickedLink>
+            }
+            <span> | </span>
+            {/* if answer has not been reported */}
+            {(document.cookie.slice(5) !== sessionCookie.s_id ||
+              !(sessionCookie.actions.includes(answer.answer_id + 'r'))) &&
+              <LinkHover onClick={() => reportAnswer()}>Report</LinkHover>
+            }
+            {/* if answer has been reported */}
+            {(reported) &&
+              <ClickedLink>Reported</ClickedLink>
+            }
+          </div>
+        </AnswerFooter>
       </div>
-    </div>
+    </AnswerStyle>
   );
 }

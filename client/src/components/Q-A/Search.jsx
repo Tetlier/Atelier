@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { QorATitle } from '../styles/Q-A/QAList.styled.js';
 
 export default function Search({updateSearch}) {
 
@@ -24,13 +25,16 @@ export default function Search({updateSearch}) {
 
   return (
     <div className="search">
-      <form>
-        <input type="text"
-          value={term}
-          placeholder="Have a question? Search for answers..."
-          onChange={(e) => { handleChange(e); }}
-        />
-      </form>
+      <QorATitle>
+        <form>
+          <input type="text"
+            value={term}
+            placeholder="Have a question? Search for answers..."
+            size="50"
+            onChange={(e) => { handleChange(e); }}
+          />
+        </form>
+      </QorATitle>
     </div>
   );
 }

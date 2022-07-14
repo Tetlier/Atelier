@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { FormBackground } from '../styles/Q-A/FormBackground.styled';
-import { FormView } from '../styles/Q-A/FormView.styled';
+import { FormView, FormBackground } from '../styles/Q-A/FormView.styled';
 import { Button } from '../styles/Button.styled.js';
 
 export default function AnswerForm ({triggered, setTrigger, questionBody, questionId, productName, setAnswers}) {
