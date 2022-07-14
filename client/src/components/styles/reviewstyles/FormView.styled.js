@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormView = styled.div`
+export const FormView = styled.form`
   margin: 50px 50px 50px 50px;
   width: 800px;
   height: 500px;

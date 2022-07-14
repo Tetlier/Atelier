@@ -4,9 +4,13 @@ import ReviewMapper from './ReviewMapper.jsx';
 import MetaReview from './MetaReview.jsx';
 import Form from './Form.jsx';
 
-import { Container } from '../styles/Container.styled.js';
+
 import { Button } from '../styles/Button.styled.js';
 
+import { ReviewContainer } from '../styles/reviewstyles/ReviewContainer.styled.js';
+import { Metareviewpanel } from '../styles/reviewstyles/Metareviewpanel.styled.js';
+import { Reviewpanel } from '../styles/reviewstyles/Reviewpanel.styled.js';
+import { Scroll } from '../styles/reviewstyles/Scroll.styled.js';
 
 
 //hooks only in stateless components aka not classes
@@ -15,48 +19,37 @@ import { Button } from '../styles/Button.styled.js';
 const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   const [startPoint, setStart] = useState(0);
 
+  const [filterRating, setFilterRating] = useState([]);
+  const [count, setCount] = useState(10);
+
   //reviewList states and hooks
   const [reviewList, setReviewList] = useState([]);
-  const [reviewPage, setPage] = useState(1);
-  const [catchUpPage, incPage] = useState(1);
-  const [moreResults, noMoreresults] = useState(true);
-  const [sort, toggleSort] = useState('newest');
+  const [resultMax, setResultMax] = useState(false);
+  const [dropDownSort, setDropDownSort] = useState('relevant');
 
   //metaReview states and hooks
   const [metaReview, setMetaReview] = useState({});
   const [form, formClick] = useState(false);
 
-  let getTwoReviews = (id) => {
-    axios.get('/reviews', { params: { id: id, page: reviewPage, sort: sort } })
+  let getTwoReviews = () => {
+    axios.get('/reviews', { params: { id: currentProductId, count: count, sort: dropDownSort } })
       .then(results => {
-        if (results) {
+        if (results.data.results) {
           let updatedPage = reviewList.concat(results.data.results.slice(startPoint, (startPoint + 2)));
           setReviewList(updatedPage);
           setStart(prevState => prevState += 2);
         } else {
-          noMoreresults(prevState => false);
+          setResultMax(prevState => true);
         }
       })
       .catch(err => console.log(err));
   };
 
-  let getPageReviews = (id, startPage) => {
-    axios.get('/reviews', { params: { id: id, page: reviewPage, sort: sort } })
+  let getPageReviews = () => {
+    axios.get('/reviews', { params: { id: currentProductId, count: count, sort: dropDownSort } })
       .then(results => {
-        let updatedPage = reviewList.concat(results.data.results);
+        let updatedPage = (results.data.results.slice(0, startPoint));
         setReviewList(updatedPage);
-        incPage(prevState => prevState += 1);
-      })
-      .catch(err => console.log(err));
-  };
-
-  let getResidualResults = (id) => {
-    axios.get('/reviews', { params: { id: id, page: reviewPage, sort: sort } })
-      .then(results => {
-        console.log('should be empty', reviewList, 'should be changed', sort);
-        let updatedPage = reviewList.concat(results.data.results.slice(0, startPoint));
-        setReviewList(updatedPage);
-        console.log('info we get', results.data.results.slice(0, (startPoint)));
       })
       .catch(err => console.log(err));
   };
@@ -67,28 +60,8 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
       .catch(err => console.log(err));
   };
 
-  let openForm = () => {
-    formClick(prevState => true);
-  };
-
   let closeForm = () => {
-    formClick(prevState => false);
-  };
-
-
-  //currently broken
-  let changeSort = (option) => {
-    toggleSort(option);
-    setReviewList([]);
-    console.log('should be empty', reviewList);
-    console.log('should be changd', sort);
-    incPage(1);
-    if (reviewPage > 1) {
-      while (catchUpPage < reviewPage) {
-        getPageReviews(currentProductId, startPage);
-      }
-    }
-    getResidualResults(currentProductId);
+    formClick(false);
   };
 
   //Gets initial metareview and two reviews
@@ -98,42 +71,63 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   }, []);
 
   useEffect(() => {
-    if (startPoint === 10) {
-      setPage(prevState => prevState += 1);
-      setStart(0);
+    console.log('start', startPoint);
+    if (startPoint === count) {
+      setCount(prevState => prevState += 10);
     }
   }, [startPoint]);
 
-  // useEffect(() => {
-  //   setReviewList([]);
-  //   console.log('current list', reviewList);
-  //   incPage(1);
-  //   if (reviewPage > 1) {
-  //     while (catchUpPage < reviewPage) {
-  //       getPageReviews(currentProductId, startPage);
-  //     }
-  //   }
-  //   getResidualResults(currentProductId);
-  // }, [sort]);
+  //Monitors for changes in dropDownSort after initialization and gets new sorted info on change
+  useEffect(() => {
+    //tech debt-temporary fix››
+    startPoint >= 2 ? getPageReviews() : null;
+  }, [dropDownSort]);
+
+  useEffect(() => {
+    console.log('changed');
+  }, [filterRating]);
+
 
   //sort will filter existing list and also add sort params
+  let toggleFilter = (rating) => {
+    if (filterRating.includes(rating)) {
+      let position = filterRating.indexOf(rating);
+      filterRating.splice(position, 1);
+      setFilterRating(filterRating);
+    } else {
+      filterRating.push(rating);
+      setFilterRating(filterRating);
+    }
+  };
+
   return (
-    <Container>
-      <label> Sort on: </label>
-      <ul>
-        <button onClick={() => changeSort('helpful')}>Helpful</button>
-        <button onClick={() => changeSort('newest')}>Newest</button>
-        <button onClick={() => changeSort('relevant')}>Relevant</button>
-      </ul>
-      <div><MetaReview metaReview={metaReview} currentProductRating={currentProductRating}/></div>
-      <div> {reviewList.length > 1 ? <ReviewMapper reviewList={reviewList} /> : null}</div>
-      <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
-      <div> {moreResults ? <Button
-        onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-      <Button
-        data-testid='addReview'
-        onClick={() => openForm()}>Add a Review + </Button></div>
-    </Container>
+    <ReviewContainer>
+      <Metareviewpanel>
+        <MetaReview metaReview={metaReview}
+          currentProductRating={currentProductRating}
+          toggleFilter={toggleFilter.bind(this)}
+          setFilterRating={setFilterRating}
+          filterRating={filterRating} /></Metareviewpanel>
+      <Reviewpanel>
+        <label> Sort By: </label>
+        <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
+          <option value='helpful'>Helpfulness</option>
+          <option value='newest'>Newest</option>
+          <option value='relevant'>Relevance</option>
+        </select>
+        <Scroll> {
+          reviewList.length > 1 ?
+            <ReviewMapper reviewList={reviewList}
+              filterRating={filterRating} /> : null}
+        </Scroll>
+        <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
+        <div> {!resultMax ? <Button
+          onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
+          <Button
+            data-testid='addReview'
+            onClick={() => formClick(true)}>Add a Review + </Button></div>
+      </Reviewpanel>
+    </ReviewContainer>
   );
 };
 

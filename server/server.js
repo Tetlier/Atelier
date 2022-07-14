@@ -32,7 +32,7 @@ app.get('/product', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  controllers.getReviews(req.query.id, req.query.page, req.query.sort)
+  controllers.getReviews(req.query.id, req.query.count, req.query.sort)
     .then((results) => {
       res.send(results.data).status(200);
     })
@@ -43,6 +43,14 @@ app.get('/reviews', (req, res) => {
 
 app.get('/meta', (req, res) => {
   controllers.getMetaReview(req.query.id)
+    .then((results) => {
+      res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+app.put('/reviews', (req, res) => {
+  controllers.putHelpful(req.body.review_id)
     .then((results) => {
       res.send(results.data).status(200);
     })

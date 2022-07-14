@@ -4,13 +4,15 @@
  *   https://github.com/hackreactor-labs/eslint-config-hackreactor
  */
 
+
 module.exports = {
   env: {
-    'es6': true
+    'es6': true,
+    'node': true,
   },
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 6,
+    ecmaVersion: 8,
     ecmaFeatures: {
       'jsx': true
     }

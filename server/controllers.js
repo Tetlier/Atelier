@@ -36,12 +36,18 @@ let getProduct = (productId, callback) => {
     });
 };
 
-let getReviews = (id, page, sort ) => {
-  return (client.get(`/reviews/?product_id=${id}&page=${page}&count=10&sort=${sort}`));
+let getReviews = (id, count, sort ) => {
+  return (client.get(`/reviews/?product_id=${id}&count=${count}&sort=${sort}`));
 };
 
 let getMetaReview = (id, page) => {
   return (client.get(`/reviews/meta?product_id=${id}`));
+};
+
+// eslint-disable-next-line camelcase
+let putHelpful = (review_id) => {
+  // eslint-disable-next-line camelcase
+  return (client.put(`/reviews/${review_id}/helpful`));
 };
 
 // returns first ${count} number of questions that contains filter term, sorted by helpfulness
@@ -175,3 +181,4 @@ module.exports.reportAnswer = reportAnswer;
 module.exports.postQuestion = postQuestion;
 module.exports.postAnswer = postAnswer;
 module.exports.getMetaReview = getMetaReview;
+module.exports.putHelpful = putHelpful;
