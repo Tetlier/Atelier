@@ -6,13 +6,17 @@ import StyleRating from './StyleRating.jsx';
 import StarRating from './StarRating.jsx';
 
 const Form = ({ closeForm, form, metaReview }) => {
-
   //form values
   const [summary, setSummary] = useState('');
   const [name, setName] = useState('');
   const [review, setReview] = useState('');
   const [email, setEmail] = useState('');
   const [recommend, setrecommend] = useState(false);
+  //starrating values
+  const [starRating, setStarRating] = useState(0);
+  //stylerating values
+  const [charRating, setCharRating] = useState({});
+
 
   let handleChange = (event, setState) => {
     setState(event.target.value);
@@ -78,14 +82,14 @@ const Form = ({ closeForm, form, metaReview }) => {
             onChange={event => handleChange(event, setEmail)}></input>
             <div>For authentication reasons, you will not be emailed</div></div>
 
-          <StarRating />
+          <StarRating starRating={starRating} setStarRating={setStarRating} />
           <input id='file' type='file' accept='image/png, image/jpeg'></input>
           <div>Would you recommend this product?
             <div>
               <div>Yes<input id='yes' name='selectOne' type='radio' value={true}></input></div>
               <div>No<input id='no' name='selectOne' type='radio' value={false}></input></div></div>
           </div>
-          <StyleRating metaReview={metaReview} />
+          <StyleRating metaReview={metaReview} setCharRating ={setCharRating} />
 
         </FormCol>
 

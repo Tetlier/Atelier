@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { HiddenRadio } from '../styles/reviewstyles/formStyles.styled.js';
 
-const StarRating = () => {
+const StarRating = ({starRating, setStarRating}) => {
 
   //Starrating hooks
-  const [starRating, setStarRating] = useState(0);
   const [hover, setHover] = useState(null);
   const [starExplanation, setStarExplanation] = useState(null);
 

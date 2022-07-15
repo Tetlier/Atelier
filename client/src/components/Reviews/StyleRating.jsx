@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
-const StyleRating = ({ metaReview }) => {
+const StyleRating = ({ metaReview, setCharRating }) => {
+  //style rating values
+  const [sizeRating, setSizeRating] = useState(null);
+  const [widthRating, setWidthRating] = useState(null);
+  const [comfortRating, setComfortRating] = useState(null);
+  const [qualityRating, setQualityRating] = useState(null);
+  const [lengthRating, setLengthRating] = useState(null);
+  const [fitRating, setFitRating] = useState(null);
 
-  //styleRating hooks - one for the review one for the rating (event.value?)
-  const [SizeRating, setSizeRating] = useState(null);
-  const [WidthRating, setWidthRating] = useState(null);
-  const [QualityRating, setQualityRating] = useState(null);
-  const [LengthRating, setLengthRating] = useState(null);
-  const [FitRating, setFitRating] = useState(null);
-  const [ComfortRating, setComfortRating] = useState(null);
+  //style rating explanations
+  const [sizeRatingExplanation, setSizeRatingExplanation] = useState(null);
+  const [widthRatingExplanation, setWidthRatingExplanation] = useState(null);
+  const [comfortRatingExplanation, setComfortRatingExplanation] = useState(null);
+  const [qualityRatingExplanation, setQualityRatingExplanation] = useState(null);
+  const [lengthRatingExplanation, setLengthRatingExplanation] = useState(null);
+  const [fitRatingExplanation, setFitRatingExplanation] = useState(null);
 
-  //selection function that matches the character rating to its corresponding explanation
-  let selection = (style, rating, setState) => {
+  //Updates rating and explanation on click for the characteristics
+  let selection = (style, rating, setRating, setRatingExplanation) => {
     const obj = {
       Size: {
         1: 'A size too small',
@@ -56,8 +63,8 @@ const StyleRating = ({ metaReview }) => {
         5: 'Runs long',
       },
     };
-    //make the fit here for each style for universal use
-    setState(obj[style][rating]) ? setState(obj[style][rating]) : null;
+    setRating(rating);
+    setRatingExplanation(obj[style][rating]);
   };
 
   return (
@@ -77,12 +84,18 @@ const StyleRating = ({ metaReview }) => {
                       type='radio'
                       name={characteristic}
                       value={thisRating}
-                      onClick={(event) => { selection(event.target.name, event.target.value, eval(`set${event.target.name}Rating`)); }}></input></div>
+                      onClick={(event) => {
+                        selection(
+                          event.target.name,
+                          event.target.value,
+                          eval(`set${event.target.name}Rating`),
+                          eval(`set${event.target.name}RatingExplanation`));
+                      }}></input></div>
                   </div>
                 );
               })}
               </div>
-              <div>This rating means: {eval(`${characteristic}Rating`)}</div>
+              <div>This rating means: {eval(`${characteristic.toLowerCase()}RatingExplanation`)}</div>
             </div>
           );
         })}
