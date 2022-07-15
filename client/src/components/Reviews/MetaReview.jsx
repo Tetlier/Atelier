@@ -3,10 +3,10 @@ import axios from 'axios';
 
 import { MetaGrid, MetaRow, MetaCol, SummaryStar, Clickable } from '../styles/reviewstyles/metaReviewStyles.styled.js';
 
-const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter }) => {
+const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings }) => {
   const [recommended, setRecommended] = useState(0);
   const [ratingsArray, setRatingsArray] = useState([]);
-  const [totalRatings, setTotalRatings] = useState(0);
+
 
   useEffect(() => {
     if (metaReview.recommended) {
@@ -29,9 +29,11 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
       starRatings.star = eachStar[i];
       starRatings.amount = eachAmount[i];
       ratingsArray.push(starRatings);
+
       setRatingsArray(ratingsArray);
       total += parseInt(eachAmount[i]);
     }
+    console.log('fc', typeof setTotalRatings, 'val', totalRatings);
     setTotalRatings(total);
   };
 
@@ -40,17 +42,16 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
       <MetaRow>
         <div>< SummaryStar rating={currentProductRating} /></div>
         <h2>Average Review: {currentProductRating}</h2>
-        <div>out of {totalRatings} ratings</div>
         <div> {recommended}% of reviewers recommend this product.</div>
         <div>Rating Breakdown</div>
         <div> {filterRating.length !== 0 ? <button onClick={() => setFilterRating([])}> Remove all filters</button> : null}</div>
-        <div>{ratingsArray.map(rating =>
-          <Clickable onClick={() => toggleFilter(parseInt(rating.star))}>
+        <div>{ratingsArray.reverse().map(rating =>
+          <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key = {rating + 'techdebt2'}>
             <div>{rating.star} stars <progress value={rating.amount / totalRatings}></progress></div>
             <div>{rating.amount} ratings</div>
           </Clickable>)}</div>
         <div>{Object.entries(metaReview.characteristics).map(character =>
-          <div>
+          <div key = {character + 'techdebt1'}>
             <div>{character[0]}</div>
             <input type='range' value={character[1].value} min='0' max='5'></input> </div>)}
         </div>

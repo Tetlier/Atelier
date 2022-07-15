@@ -10,6 +10,8 @@ display: flex;
 
 export const Col = styled.div`
 flex: ${props=> props.size};
+margin-right: 50px;
+
 `;
 
 export const Scroll = styled.div`

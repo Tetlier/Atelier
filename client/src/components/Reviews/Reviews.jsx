@@ -23,6 +23,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
 
   //metaReview and form hooks
   const [metaReview, setMetaReview] = useState({});
+  const [totalRatings, setTotalRatings] = useState(0);
   const [form, formClick] = useState(false);
 
   //Submits GET request to results and obtains 2 new reviews
@@ -101,15 +102,18 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
     <Grid>
       <Row>
         <Col>
-          <MetaReview metaReview={metaReview}
+          <MetaReview
+            metaReview={metaReview}
             currentProductRating={currentProductRating}
             getPageReviews={getPageReviews}
             toggleFilter={toggleFilter}
             setFilterRating={setFilterRating}
-            filterRating={filterRating} />
+            filterRating={filterRating}
+            setTotalRatings={setTotalRatings}
+            totalRatings={totalRatings} />
         </Col>
         <Col size='1.8'>
-          <label> Sort By: </label>
+          <label> {totalRatings} reviews, sorted by: </label>
           <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
             <option value='helpful'>Helpfulness</option>
             <option value='newest'>Newest</option>
@@ -120,12 +124,12 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
               <ReviewMapper reviewList={reviewList}
                 filterRating={filterRating} /> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} /></div>
-          <Row> {!noMoreResults ? <Button
+          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} /></div>
+          <div> {!noMoreResults ? <Button
             onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
             <Button
               data-testid='addReview'
-              onClick={() => formClick(true)}>Add a Review + </Button></Row>
+              onClick={() => formClick(true)}>Add a Review + </Button></div>
         </Col>
       </Row>
     </Grid>

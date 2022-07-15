@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ReviewGrid = styled.div`
 border: 1px #ccc solid;
 padding: 10px;
+gap: 3em;
 `;
 
 export const ReviewRow = styled.div`
