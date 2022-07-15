@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { FormView, FormBackground } from '../styles/Q-A/FormView.styled';
-import { Button } from '../styles/Button.styled.js';
+import { FormView, FormBackground, FormTitle, FormSection, FormEntry, FormLabel, FormQuestionEntry } from '../styles/Q-A/FormView.styled';
+import { SmallButton } from '../styles/Q-A/InlineButton.styled.js';
+import { AnswerFooter } from '../styles/Q-A/QAList.styled.js';
 
 export default function AnswerForm ({triggered, setTrigger, questionBody, questionId, productName, setAnswers}) {
 
@@ -45,25 +46,25 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
     <div className="answer-form">
       <FormBackground>
         <FormView>
-          <h3>Submit your Answer</h3>
-          <h4>{productName}: {questionBody}</h4>
+          <FormTitle>
+            <h3>Submit your Answer</h3>
+            <h4>{productName}: {questionBody}</h4>
+          </FormTitle>
           <form onSubmit={(e) => submitAnswer(e)}>
-            <label>Your Answer<sup><font color="#ff0000">*</font></sup>:&nbsp;
-              <input
-                type="text"
+            <FormSection>
+              <FormLabel>Your Answer<sup><font color="#ff0000">*</font></sup>:&nbsp;</FormLabel>
+              <FormQuestionEntry
                 required
                 placeholder="Enter your answer"
-                size="50"
                 autoComplete="off"
-                value={answerBody}
                 minLength="10" maxLength="1000"
-                onChange={(e) => setAnswerBody(e.target.value)}
-              />
-            </label>
-            <br></br>
-            <br></br>
-            <label>Your nickname<sup><font color="#ff0000">*</font></sup>:&nbsp;
-              <input
+                onChange={(e) => setAnswerBody(e.target.value)}>
+                {answerBody}
+              </FormQuestionEntry>
+            </FormSection>
+            <FormSection>
+              <FormLabel>Your nickname<sup><font color="#ff0000">*</font></sup>:&nbsp;</FormLabel>
+              <FormEntry
                 type="text"
                 required
                 placeholder="Example: jack543!"
@@ -73,12 +74,11 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
                 minLength="5" maxLength="60"
                 onChange={(e) => setNickname(e.target.value)}
               />
-              <div>For privacy reasons, do not use your full name or email address</div>
-            </label>
-            <br></br>
-            <br></br>
-            <label>Your email<sup><font color="#ff0000">*</font></sup>:&nbsp;
-              <input
+              <AnswerFooter>For privacy reasons, do not use your full name or email address</AnswerFooter>
+            </FormSection>
+            <FormSection>
+              <FormLabel>Your email<sup><font color="#ff0000">*</font></sup>:&nbsp;</FormLabel>
+              <FormEntry
                 type="email"
                 required
                 placeholder="Example: jack@email.com"
@@ -88,20 +88,17 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
                 minLength="10" maxLength="60"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <div>For authentication reasons, you will not be emailed</div>
-            </label>
-            <br></br>
-            <br></br>
-            <label>Upload your photos {'(optional)'}:&nbsp;
+              <AnswerFooter>For authentication reasons, you will not be emailed</AnswerFooter>
+            </FormSection>
+            <FormSection>
+              <FormLabel>Upload your photos {'(optional)'}:&nbsp;</FormLabel>
               <input
                 type="file"
               />
-            </label>
-            <br></br>
-            <br></br>
-            <Button type="submit">Submit
-            </Button>
-            <Button onClick={() => setTrigger(false)}>Cancel</Button>
+            </FormSection>
+            <SmallButton type="submit">Submit
+            </SmallButton>
+            <SmallButton onClick={() => setTrigger(false)}>Cancel</SmallButton>
           </form>
         </FormView>
       </FormBackground>

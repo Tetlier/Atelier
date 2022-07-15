@@ -3,6 +3,7 @@ import axios from 'axios';
 import Answer from './Answer';
 import AnswerForm from './AnswerForm';
 import { QorATitle, QAside, LinkHover, ClickedLink, QuestionBody, LoadMore } from '../styles/Q-A/QAList.styled.js';
+import { InlineButton } from '../styles/Q-A/InlineButton.styled';
 
 export default function Question({productId, question, questions, setQuestions, sessionCookie, addToCookie, sellerName, productName}) {
   const [answerCount, setAnswerCount] = useState(2);
@@ -80,7 +81,7 @@ export default function Question({productId, question, questions, setQuestions, 
   };
 
   return (
-    <div className="question">
+    <div className="question-and-answer">
       <QorATitle>
         <QuestionBody>
           <h4>Q: {question.question_body}</h4>
@@ -117,7 +118,6 @@ export default function Question({productId, question, questions, setQuestions, 
           </LinkHover>
         </QAside>
       </QorATitle>
-      <br></br>
       {answers.length > 0 &&
         <div>
           <QorATitle>

@@ -6,7 +6,8 @@ export const ScrollList = styled.div`
 `;
 
 export const QorATitle = styled.div`
-  margin: 15px 10px 10px 0px;
+  padding: 20px 10px 0px 0px;
+  display: flex;
 `;
 
 export const QAside = styled.aside`
@@ -16,7 +17,7 @@ export const QAside = styled.aside`
   width: 30%;
 `;
 
-export const QuestionBody = styled.span`
+export const QuestionBody = styled.div`
   float: left;
   width: 67.5%;
   margin: 0 2.5% 0 0;
@@ -37,7 +38,7 @@ export const ClickedLink = styled.span`
 `;
 
 export const AnswerStyle = styled.div`
-  margin: 0px 0px 10px 30px;
+  padding: 0px 0px 10px 15px;
 `;
 
 export const AnswerFooter = styled.div`
@@ -50,4 +51,16 @@ export const LoadMore = styled.div`
   cursor: pointer;
   font-weight: bold;
   font-size: 0.8em;
+  width: max-content;
+`;
+
+export const SearchStyle = styled.div`
+  padding: 20px 0px 0px 0px;
+`;
+
+export const SearchEntry = styled.input`
+  padding: 5px;
+  height: 50px;
+  font-size: 1em;
+  width: 95%;
 `;
