@@ -7,14 +7,15 @@ import ProductDetail from './ProductDetail';
 import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
 import { Panel } from '../styles/Overview/Panel.styled';
 import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
-import { ImageSelect } from '../styles/Overview/ImageSelect.styled';
 import { ProductContent } from '../styles/Overview/ProductContent.styled';
 import ProductFeatures from './ProductFeatures';
+import ImageCarousel from './ImageCarousel';
 
 const Overview = ({currentProductId}) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [currentProductStyle, setCurrentProductStyle] = useState({});
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
@@ -32,6 +33,10 @@ const Overview = ({currentProductId}) => {
     setSelectedStyleIndex(key);
   };
 
+  const handleThumbnailChange = (key) => {
+    setSelectedThumbnailIndex(key);
+  };
+
 
   return (
     Object.keys(currentProduct).length !== 0
@@ -40,7 +45,10 @@ const Overview = ({currentProductId}) => {
     <div>
       <OverviewContainer>
         {/* left panel */}
-        <ImageSelect className='imageSelect'>
+        {/* https://robkendal.co.uk/blog/how-to-build-a-multi-image-carousel-in-react-and-tailwind
+            https://dev.to/rakumairu/how-to-show-multiple-item-in-simple-react-carousel-32dd
+        */}
+        {/* <ImageSelect className='imageSelect'>
           {
             currentProductStyle.results[selectedStyleIndex].photos.map((photo, i) => {
               return ( (i === 0 || i === 1 || i === 2) &&
@@ -49,10 +57,19 @@ const Overview = ({currentProductId}) => {
               );
             })
           }
-        </ImageSelect>
+        </ImageSelect> */}
+        <ImageCarousel
+          productStyle={currentProductStyle.results[selectedStyleIndex]}
+          thumbnailChange={handleThumbnailChange}
+          selectedThumbnailIndex={selectedThumbnailIndex}
+        />
 
         <ImageGallery className='imageGallery'>
-          <ImageShowcase productStyle={currentProductStyle.results[selectedStyleIndex]} />
+          <ImageShowcase
+            productStyle={currentProductStyle.results[selectedStyleIndex]}
+            thumbnailChange={handleThumbnailChange}
+            selectedThumbnailIndex={selectedThumbnailIndex}
+          />
         </ImageGallery>
 
 

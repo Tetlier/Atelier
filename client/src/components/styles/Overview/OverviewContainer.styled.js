@@ -5,7 +5,7 @@ export const OverviewContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 15px;
-  height: 700px;
+  height: 850px;
 
   // display: grid;
   // grid-template-columns: repeat(7, 1fr);
