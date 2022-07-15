@@ -14,6 +14,7 @@ export default function Question({productId, question, questions, setQuestions, 
   useEffect(() => {
     let config = { params: {
       count: answerCount + 1, // gets one more answer to see if there are more
+      sellerName: sellerName
     } };
     axios.get(`/qa/questions/${question.question_id}/answers`, config)
       .then((ans) => {
@@ -157,6 +158,7 @@ export default function Question({productId, question, questions, setQuestions, 
         questionId={question.question_id}
         productName={productName}
         setAnswers={setAnswers}
+        sellerName={sellerName}
       />
     </div>
   );

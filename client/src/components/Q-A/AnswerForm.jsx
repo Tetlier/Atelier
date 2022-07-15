@@ -4,7 +4,7 @@ import { FormView, FormBackground, FormTitle, FormSection, FormEntry, FormLabel,
 import { SmallButton } from '../styles/Q-A/InlineButton.styled.js';
 import { AnswerFooter } from '../styles/Q-A/QAList.styled.js';
 
-export default function AnswerForm ({triggered, setTrigger, questionBody, questionId, productName, setAnswers}) {
+export default function AnswerForm ({triggered, setTrigger, questionBody, questionId, productName, setAnswers, sellerName}) {
 
   const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
@@ -29,7 +29,7 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
         setTrigger(false);
       })
       .then(() => {
-        axios.get(`/qa/questions/${questionId}/answers`, {params: {count: 100}})
+        axios.get(`/qa/questions/${questionId}/answers`, {params: {count: 100, sellerName: sellerName}})
           .then((ans) => {
             setAnswers(ans.data);
           })
@@ -57,9 +57,9 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
                 required
                 placeholder="Enter your answer"
                 autoComplete="off"
+                value={answerBody}
                 minLength="10" maxLength="1000"
                 onChange={(e) => setAnswerBody(e.target.value)}>
-                {answerBody}
               </FormQuestionEntry>
             </FormSection>
             <FormSection>

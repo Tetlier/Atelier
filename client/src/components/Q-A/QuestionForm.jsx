@@ -47,9 +47,9 @@ export default function QuestionForm ({triggered, setTrigger, productId, setQues
                 required
                 placeholder="Enter your question"
                 autoComplete="off"
+                value={questionBody}
                 minLength="10" maxLength="1000"
                 onChange={(e) => setQuestionBody(e.target.value)}>
-                {questionBody}
               </FormQuestionEntry>
             </FormSection>
             <FormSection>
