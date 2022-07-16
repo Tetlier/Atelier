@@ -5,6 +5,11 @@ export const StyledImageCarousel = styled.div`
   flex-direction: column;
   margin-left: 150px;
   // position: relative;
+
+
+
+
+
   .container {
     position: relative;
     overflow: hidden;
@@ -58,4 +63,62 @@ export const StyledImageCarousel = styled.div`
   .carousel-container img.active {
     opacity: 0.3;
   }
+
+  // .main {
+  //   text-align: center;
+  //   height: 100vh;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-around;
+  // }
+
+  // .title {
+  //  font-size: 42px;
+  // }
+
+
+  // .image {
+  //   height: 100px;
+  //   width: 100px;
+  //   font-size: 25px;
+  //   background: blue;
+  //   margin: 10px;
+  //   display: inline-block;
+  //   line-height: 100px;
+  // }
+
+
+  // .image-container {
+  //   vertical-align: middle;
+  //   display: inline-block;
+  //   white-space: nowrap;
+  //   overflow-x: auto;
+  //   overflow-y: hidden;
+  //   width: 20%;
+  // }
+
+  // .prev, .next {
+  //   padding-top: 10px;
+  //   padding-bottom: 10px;
+  //   height: 100%;
+  //   cursor: pointer;
+  //   color: black;
+  //   transition: 0.6s ease;
+  // }
+
+  // .next {
+  //   margin-left: 5px;
+  // }
+
+  // .prev {
+  //   margin-right: 5px;
+  // }
+
+  // .prev:hover, .next:hover {
+  //   color: white;
+  //   height: 100%;
+  //   background-color: rgba(0,0,0,0.8);
+  // }
+
+
 `;

@@ -1,8 +1,11 @@
 import React, {useEffect, useState, useRef} from 'react';
 import { StyledImageCarousel } from '../styles/Overview/ImageCarousel.styled';
 import ImageItem from './ImageItem';
+import $ from 'jquery';
 
 // https://robkendal.co.uk/blog/how-to-build-a-multi-image-carousel-in-react-and-tailwind
+// https://medium.com/@RahulTMody/create-a-scrolling-image-slider-in-react-1e4eddcd407b
+// https://codepen.io/rmody3/pen/EXObmR
 const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) => {
   // return <StyledImageCarousel>
   //   {
@@ -59,17 +62,23 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
       : 0;
   }, []);
 
+  const scroll = (direction) => {
+    // console.log('scroll clicked, direction is ', direction);
+    let far = $( '.carousel-container' ).height() / 2 * direction;
+    let pos = $('.carousel-container').scrollTop() + far;
+    $('.carousel-container').animate( { scrollTop: pos }, 1000);
+  };
+
   return (
     <StyledImageCarousel>
       <div className='container'>
         <div className='buttonContainer'>
           <button
-            onClick={movePrev}
+            onClick={scroll(-1)}
             className='buttonHolder'
             disabled={isDisabled('prev')}
           >
             <i className="fa-solid fa-angles-up"></i>
-            <span className='sr-only'>Prev</span>
           </button>
           <div
             ref={carousel}
@@ -89,17 +98,56 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             })}
           </div>
           <button
-            onClick={moveNext}
+            onClick={() => {
+              scroll(1);
+            }}
             className='buttonHolder'
             disabled={isDisabled('next')}
           >
             <i className="fa-solid fa-angles-down"></i>
-            <span className='sr-only'>Next</span>
           </button>
         </div>
       </div>
     </StyledImageCarousel>
   );
+
+
+  // return (
+  //   <StyledImageCarousel>
+  //     <div className="main">
+  //       <div className="wrapper">
+  //         <button
+  //           onClick={scroll(-1)}
+  //           className='buttonHolder'
+  //           disabled={isDisabled('prev')}
+  //         >
+  //           <i className="fa-solid fa-angles-up"></i>
+  //         </button>
+  //         <div className="image-container">
+  //           {productStyle.photos.map((photo, index) => {
+  //             return (
+  //               <img
+  //                 className={`${selectedThumbnailIndex === index ? ' active' : ''}`}
+  //                 key={index}
+  //                 src={photo.thumbnail_url}
+  //                 onClick={() => {
+  //                   thumbnailChange(index);
+  //                 }}
+  //                 alt = 'shoe image'/>
+  //             );
+  //           })}
+  //         </div>
+  //         <button
+  //           onClick={scroll(1)}
+  //           className='buttonHolder'
+  //           disabled={isDisabled('next')}
+  //         >
+  //           <i className="fa-solid fa-angles-down"></i>
+  //         </button>
+  //       </div>
+  //     </div>;
+  //   </StyledImageCarousel>
+  // );
 };
 
 export default ImageCarousel;

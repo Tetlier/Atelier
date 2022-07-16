@@ -10,8 +10,9 @@ import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
 import { ProductContent } from '../styles/Overview/ProductContent.styled';
 import ProductFeatures from './ProductFeatures';
 import ImageCarousel from './ImageCarousel';
+import StarReview from '../styles/StarReview.styled';
 
-const Overview = ({currentProductId}) => {
+const Overview = ({currentProductId, currentProductRating}) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [currentProductStyle, setCurrentProductStyle] = useState({});
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
@@ -75,9 +76,11 @@ const Overview = ({currentProductId}) => {
 
         {/* right panel */}
         <ProductContent className='productContent'>
-          {/* <Review></Review> will be added once review branch is merged */}
-          <h2 className='product-category'>{currentProduct.category}</h2>
-          <h1 className='product-title'>{currentProduct.name}</h1>
+          {/* TODO: Link Read all review to review */}
+          <h3 style={{'textDecoration': 'underline'}}><StarReview rating={currentProductRating} /> Read all reviews </h3>
+          <br/>
+          <h2 className='product-category'>Category : {currentProduct.category}</h2>
+          <h1 className='product-title'>Name : {currentProduct.name}</h1>
           <StyleSelector
             productStyle={currentProductStyle}
             stlyeChange={handleStlyeChange}
