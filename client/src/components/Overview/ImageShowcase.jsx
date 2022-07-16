@@ -41,15 +41,14 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   // https://codepen.io/elevadorstudio/pen/zYxyVVy
   // TODO: figure out the equation, right now, it's not correct.
   let handleMouseMove = (ev) => {
-    console.log('ev.offsetX, ', ev.nativeEvent.offsetX);
-    console.log('ev.offsetY, ', ev.nativeEvent.offsetY);
+    // console.log('ev.offsetX, ', ev.nativeEvent.offsetX);
+    // console.log('ev.offsetY, ', ev.nativeEvent.offsetY);
     setMousePosition({
       left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
     // left: (ev.pageX - ev.nativeEvent.offsetX), top: (ev.pageY - ev.nativeEvent.offsetY)});
   };
 
   const showExpandedView = (imageUrl, index) => {
-    console.log('::::::::::::');
     return (
       <Background key={index} onClick={() => clickPhoto()}>
         <LargePhoto
@@ -143,7 +142,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             }
             e.stopPropagation();
             changeToZoomView();
-            console.log('::::::::::::');
           }}
         />
 
