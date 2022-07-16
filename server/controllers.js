@@ -87,12 +87,23 @@ let getQuestions = (req, res) => {
 let getAnswers = (req, res) => {
   let questionId = req.params.question_id;
   let count = req.query.count;
+  let sellerName = req.query.sellerName.toLowerCase();
+
   client.get(`/qa/questions/${questionId}/answers?count=${count}`)
     .then((result) => {
       let answers = result.data.results;
       // sort by descending helpfulness
       answers.sort((a, b) => {
-        return b.question_helpfulness - a.question_helpfulness;
+        // seller answers should be at top
+        if (a.answerer_name.toLowerCase() === sellerName && b.answerer_name.toLowerCase() === sellerName) {
+          return b.question_helpfulness - a.question_helpfulness;
+        } else if (a.answerer_name.toLowerCase() === sellerName) {
+          return -1;
+        } else if (b.answerer_name.toLowerCase() === sellerName) {
+          return 1;
+        } else {
+          return b.question_helpfulness - a.question_helpfulness;
+        }
       });
       res.status(200).send(answers);
     })

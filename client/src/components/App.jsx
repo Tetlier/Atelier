@@ -81,7 +81,6 @@ class App extends React.Component {
     action = action.toLowerCase();
     // adds id number + h or r for helpful or reported
     this.state.sessionCookie.actions.push(id + action.slice(0, 1));
-    console.log('cookie: ', this.state.sessionCookie);
   }
 
   //first div should be the current item and its details
