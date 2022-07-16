@@ -95,17 +95,19 @@ const StyleRating = ({ metaReview, setCharRating }) => {
                   <div>
                     <div
                     > {thisRating} <input
-                        type='radio'
-                        name={characteristic}
-                        value={thisRating}
-                        required
-                        onClick={(event) => {
-                          selection(
-                            event.target.name,
-                            event.target.value,
-                            eval(`set${event.target.name}Rating`),
-                            eval(`set${event.target.name}RatingExplanation`));
-                        }}></input></div>
+                      type='radio'
+                      name={characteristic}
+                      value={thisRating}
+                      onClick={(event) => {
+                        selection(
+                          event.target.name,
+                          event.target.value,
+                          eval(`set${event.target.name}Rating`),
+                          eval(`set${event.target.name}RatingExplanation`));
+
+                      }}
+                      required></input>
+                    </div>
                   </div>
                 );
               })}

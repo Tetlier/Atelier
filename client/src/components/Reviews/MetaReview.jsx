@@ -44,7 +44,7 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
         <div> {recommended}% of reviewers recommend this product.</div>
         <div>Rating Breakdown</div>
         <div> {filterRating.length !== 0 ? <button onClick={() => setFilterRating([])}> Remove all filters</button> : null}</div>
-        <div>{ratingsArray.reverse().map(rating =>
+        <div>{[...ratingsArray].reverse().map(rating =>
           <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key = {rating + 'techdebt2'}>
             <div>{rating.star} stars <progress value={rating.amount / totalRatings}></progress></div>
             <div>{rating.amount} ratings</div>

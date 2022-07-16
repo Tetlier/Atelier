@@ -99,26 +99,6 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
     getPageReviews();
   };
 
-  //submits form to server
-  // eslint-disable-next-line camelcase
-  let handleSubmit = (product_id, rating, summary, body, name, email, photos, recommended, characteristics) => {
-    axios.post('/reviews', {
-      params: {
-        // eslint-disable-next-line camelcase
-        product_id: product_id,
-        rating: rating,
-        summary: summary,
-        body: body,
-        name: name,
-        email: email,
-        photos: photos,
-        recommended: recommended,
-        characteristics: characteristics
-      }
-    }).then(console.log('post success')
-      .catch(err => console.log(err)));
-  };
-
   return (
     <Grid>
       <Row>
@@ -148,7 +128,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
                 filterRating={filterRating}
                 currentSearch={currentSearch}/> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} /></div>
+          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId}/></div>
           <div> {!noMoreResults ? <Button
             onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
             <Button
