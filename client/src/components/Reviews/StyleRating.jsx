@@ -83,40 +83,33 @@ const StyleRating = ({ metaReview, setCharRating }) => {
 
   return (
     <div>
-      <div>Characteristics:</div>
-      <div>
-        {Object.keys(metaReview.characteristics).map(characteristic => {
+      <div>Characteristics Rating:</div>
+      {Object.keys(metaReview.characteristics).map(characteristic => {
+        return (
+          <div> {characteristic} : {[...Array(5)].map((rating, index) => {
+              const thisRating = index + 1;
+              return (
+                <label
+                > {thisRating} <input
+                  type='radio'
+                  name={characteristic}
+                  value={thisRating}
+                  onClick={(event) => {
+                    selection(
+                      event.target.name,
+                      event.target.value,
+                      eval(`set${event.target.name}Rating`),
+                      eval(`set${event.target.name}RatingExplanation`));
 
-          return (
-            <div>
-              <div> {characteristic} : {[...Array(5)].map((rating, index) => {
-                const thisRating = index + 1;
-                return (
-                  <div>
-                    <div
-                    > {thisRating} <input
-                      type='radio'
-                      name={characteristic}
-                      value={thisRating}
-                      onClick={(event) => {
-                        selection(
-                          event.target.name,
-                          event.target.value,
-                          eval(`set${event.target.name}Rating`),
-                          eval(`set${event.target.name}RatingExplanation`));
-
-                      }}
-                      required></input>
-                    </div>
-                  </div>
-                );
-              })}
-              </div>
-              <div>This rating means: {eval(`${characteristic.toLowerCase()}RatingExplanation`)}</div>
-            </div>
-          );
-        })}
-      </div>
+                  }}
+                  required></input>
+                </label>
+              );
+            })}
+            <div>This rating means: {eval(`${characteristic.toLowerCase()}RatingExplanation`)}</div>
+          </div>
+        );
+      })}
     </div>
   );
 };

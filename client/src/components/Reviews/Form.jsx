@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
-import { FormModal, FormModalBackground, Star, FormGrid, FormRow, FormCol } from '../styles/reviewstyles/formStyles.styled.js';
+import { FormModal, FormModalBackground, Star, FormTitle, FormGrid, FormRow, FormCol } from '../styles/reviewstyles/formStyles.styled.js';
 import axios from 'axios';
 
 import StyleRating from './StyleRating.jsx';
 import StarRating from './StarRating.jsx';
 
-const Form = ({ closeForm, form, metaReview, currentProductId}) => {
+const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   //form values
   const [summary, setSummary] = useState('');
   const [name, setName] = useState('');
@@ -31,7 +31,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId}) => {
   };
 
   //test all inputs
-  useEffect(()=> {
+  useEffect(() => {
     console.log(
       'summary', summary,
       'name', name,
@@ -49,7 +49,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId}) => {
   let handleSubmit = (event) => {
     event.preventDefault;
     console.log('good to go');
-    formClick(true);
+    closeForm(true);
     // axios.post('/reviews', {
     //   params: {
     //     // eslint-disable-next-line camelcase
@@ -73,65 +73,72 @@ const Form = ({ closeForm, form, metaReview, currentProductId}) => {
   //left side for summary and review
   //rigt side for everything else
   return (form ?
-    <FormModalBackground onSubmit={() => handleSubmit()}>
+    <FormModalBackground onSubmit={(event) => handleSubmit(event)}>
       <FormModal>
-        {/* <h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> */}
-        <FormCol>
-          <div>Summary</div>
-          <textarea
-            rows='2'
-            cols='50'
-            maxLength={60}
-            id='summary'
-            value={summary}
-            onChange={event => handleChange(event, setSummary)}></textarea>
+        <FormTitle><h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> </FormTitle>
+        <FormGrid>
+          <FormRow>
+            <div>Summary</div>
+            <textarea
+              type="text"
+              rows='2'
+              cols='50'
+              maxLength={60}
+              id='summary'
+              value={summary}
+              onChange={event => handleChange(event, setSummary)}></textarea>
 
-          <div>Review: <div> <div>What did you like or dislike about this product?</div><textarea
-            rows='6'
-            cols='50'
-            maxLength='1000'
-            id='review'
-            value={review}
-            onChange={event => handleChange(event, setReview)}
-            minLength='50'
-            errorMessage='The review body is less than 50 characters'
-            //does minLength work
+            <div>Review: <div>
+              <textarea
+                rows='6'
+                cols='50'
+                minLength='50'
+                maxLength='1000'
+                id='review'
+                value={review}
+                onChange={event => handleChange(event, setReview)}
+                placeHolder='What did you like or dislike about this product?'
+                errorMessage='The review body is less than 50 characters'
 
-          ></textarea> </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}
-          </div>
-        </FormCol>
+              ></textarea> </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}
+            </div>
 
-        <FormCol>
-          <div>Name: <input
-            type='name'
-            id='name'
-            value={name}
-            minLength="1"
-            onChange={event => handleChange(event, setName)}
-            required></input>
-          </div>
-          <div>For privacy reasons, do not use your full name or email address</div>
+            <div>Name: <input
+              type='name'
+              id='name'
+              value={name}
+              onChange={event => handleChange(event, setName)}
+              required></input>
+            </div>
+            <div>For privacy reasons, do not use your full name or email address</div>
 
-          <div>Email: <input
-            type='email'
-            id='email'
-            minLength="1"
-            value={email}
-            onChange={event => handleChange(event, setEmail)}
-            required></input>
-          <div>For authentication reasons, you will not be emailed</div></div>
+            <div>Email: <input
+              type='email'
+              id='email'
+              value={email}
+              onChange={event => handleChange(event, setEmail)}
+              required></input>
+              <div>For authentication reasons, you will not be emailed</div></div>
 
-          <StarRating starRating={starRating} setStarRating={setStarRating} />
-          <input id='file' type='file' accept='image/png, image/jpeg'></input>
-          <div>Would you recommend this product?
+            <div>Attach up to 5 images: <input id='file' type='file' accept='image/png, image/jpeg' /></div>
+
             <div>
-              <div>Yes<input id='yes' name='selectOne' type='radio' onClick ={() => setRecommend(true) } required></input></div>
-              <div>No<input id='no' name='selectOne' type='radio' onClick ={() => setRecommend(false)}></input></div></div>
-          </div>
-          <StyleRating metaReview={metaReview} setCharRating ={setCharRating} />
+              <div>Would you recommend this product?</div>
+              <label>Yes <input id='yes' name='selectOne' type='radio' onClick={() => setRecommend(true)} required></input></label>
+              <label>No <input id='no' name='selectOne' type='radio' onClick={() => setRecommend(false)}></input></label>
+            </div>
+          </FormRow>
 
-        </FormCol>
-        <button type='submit'>Submit Review</button>
+          <FormRow>
+            <StarRating starRating={starRating} setStarRating={setStarRating} />
+            <StyleRating metaReview={metaReview} setCharRating={setCharRating} />
+
+            <button type='submit'>Submit Review</button>
+
+            <button onClick={() => closeForm(true)}> Cancel</button>
+          </FormRow>
+
+        </FormGrid>
       </FormModal>
     </FormModalBackground> : null
   );

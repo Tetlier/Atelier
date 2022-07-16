@@ -12,8 +12,9 @@ const Review = ({ review, StarReview }) => {
   const [clicked, setClicked] = useState(false);
   const [image, setImage] = useState(false);
 
-  //broken. Only gets the last photo
+  //broken. Shows ALL photos
   const enlargeThumbnail = (img) => {
+    console.log(img);
     return (
       <Background onClick={() => setImage(!image)}>
         <FullSize src={img} />
@@ -54,7 +55,7 @@ const Review = ({ review, StarReview }) => {
           onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
-      <ReviewRow>{review.photos.map(photo => <ReviewCol> {image ? enlargeThumbnail(photo.url) : <ThumbNail
+      <ReviewRow>{[...review.photos].map(photo => <ReviewCol> {image ? enlargeThumbnail(photo.url) : <ThumbNail
         onClick={() => setImage(!image)}
         src={photo.url}
         key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
