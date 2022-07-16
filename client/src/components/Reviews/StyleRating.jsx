@@ -17,6 +17,20 @@ const StyleRating = ({ metaReview, setCharRating }) => {
   const [lengthRatingExplanation, setLengthRatingExplanation] = useState(null);
   const [fitRatingExplanation, setFitRatingExplanation] = useState(null);
 
+  //updates rating collection for form every time a character rating is chosen
+  useEffect(() => {
+    setCharRating(
+      {
+        sizeRating: sizeRating,
+        widthRating: widthRating,
+        comfortRating: comfortRating,
+        qualityRating: qualityRating,
+        lengthRating: lengthRating,
+        fitRating: fitRating
+      }
+    );
+  }, [sizeRating, widthRating, comfortRating, qualityRating, lengthRating, fitRating]);
+
   //Updates rating and explanation on click for the characteristics
   let selection = (style, rating, setRating, setRatingExplanation) => {
     const obj = {
@@ -81,16 +95,17 @@ const StyleRating = ({ metaReview, setCharRating }) => {
                   <div>
                     <div
                     > {thisRating} <input
-                      type='radio'
-                      name={characteristic}
-                      value={thisRating}
-                      onClick={(event) => {
-                        selection(
-                          event.target.name,
-                          event.target.value,
-                          eval(`set${event.target.name}Rating`),
-                          eval(`set${event.target.name}RatingExplanation`));
-                      }}></input></div>
+                        type='radio'
+                        name={characteristic}
+                        value={thisRating}
+                        required
+                        onClick={(event) => {
+                          selection(
+                            event.target.name,
+                            event.target.value,
+                            eval(`set${event.target.name}Rating`),
+                            eval(`set${event.target.name}RatingExplanation`));
+                        }}></input></div>
                   </div>
                 );
               })}

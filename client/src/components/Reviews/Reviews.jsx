@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReviewMapper from './ReviewMapper.jsx';
 import MetaReview from './MetaReview.jsx';
 import Form from './Form.jsx';
+import SearchBar from './SearchBar.jsx';
 //styled components
 import { Button } from '../styles/Button.styled.js';
 import { Grid, Row, Col, Scroll } from '../styles/reviewstyles/reviewWidget.styled.js';
@@ -25,6 +26,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   const [metaReview, setMetaReview] = useState({});
   const [totalRatings, setTotalRatings] = useState(0);
   const [form, formClick] = useState(false);
+
+  //search hook
+  const [currentSearch, setCurrentSearch] = useState('');
 
   //Submits GET request to results and obtains 2 new reviews
   let getTwoReviews = () => {
@@ -76,14 +80,11 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
     }
   }, [startPoint]);
 
-
-
   //Monitors for changes in dropDownSort after initialization and gets new sorted info on change
   //tech debt-temporary fix?
   useEffect(() => {
     startPoint >= 2 ? getPageReviews() : null;
   }, [dropDownSort]);
-
 
   //Adds and removes rating filters
   let toggleFilter = async (rating) => {
@@ -96,6 +97,26 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
       setFilterRating(filterRating);
     }
     getPageReviews();
+  };
+
+  //submits form to server
+  // eslint-disable-next-line camelcase
+  let handleSubmit = (product_id, rating, summary, body, name, email, photos, recommended, characteristics) => {
+    axios.post('/reviews', {
+      params: {
+        // eslint-disable-next-line camelcase
+        product_id: product_id,
+        rating: rating,
+        summary: summary,
+        body: body,
+        name: name,
+        email: email,
+        photos: photos,
+        recommended: recommended,
+        characteristics: characteristics
+      }
+    }).then(console.log('post success')
+      .catch(err => console.log(err)));
   };
 
   return (
@@ -119,10 +140,13 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
             <option value='newest'>Newest</option>
             <option value='relevant'>Relevance</option>
           </select>
+          <SearchBar setCurrentSearch={setCurrentSearch} />
           <Scroll> {
             reviewList.length > 1 ?
-              <ReviewMapper reviewList={reviewList}
-                filterRating={filterRating} /> : null}
+              <ReviewMapper
+                reviewList={reviewList}
+                filterRating={filterRating}
+                currentSearch={currentSearch}/> : null}
           </Scroll>
           <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} /></div>
           <div> {!noMoreResults ? <Button

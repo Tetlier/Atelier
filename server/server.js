@@ -50,9 +50,27 @@ app.get('/meta', (req, res) => {
 });
 
 app.put('/reviews', (req, res) => {
-  controllers.putHelpful(req.body.review_id)
+  controllers.putHelpfulReview(req.body.review_id)
     .then((results) => {
       res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+app.post('/reviews', (req, res) => {
+  // eslint-disable-next-line camelcase
+  let product_id = req.body.product_id;
+  let rating = req.body.rating;
+  let summary = req.body.summary;
+  let body = req.body.body;
+  let name = req.body.name;
+  let email = req.body.email;
+  let photos = req.body.photos;
+  let recommended = req.body.recommended;
+  let characteristics = req.body.characteristics;
+  controllers.postReview(product_id, rating, summary, body, name, email, photos, recommended, characteristics)
+    .then((results) => {
+      res.send(results.data).status(201);
     })
     .catch(err => { console.log(err); res.sendStatus(500); });
 });

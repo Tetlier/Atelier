@@ -32,6 +32,7 @@ const StarRating = ({starRating, setStarRating}) => {
               id='star'
               value={starVal}
               onClick={() => setStarRating(starVal)}
+              required
             />
             <FaStar
               size='25'

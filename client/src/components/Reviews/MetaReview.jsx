@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import { MetaGrid, MetaRow, MetaCol, SummaryStar, Clickable } from '../styles/reviewstyles/metaReviewStyles.styled.js';
 

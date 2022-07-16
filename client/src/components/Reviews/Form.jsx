@@ -1,43 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
 import { FormModal, FormModalBackground, Star, FormGrid, FormRow, FormCol } from '../styles/reviewstyles/formStyles.styled.js';
+import axios from 'axios';
 
 import StyleRating from './StyleRating.jsx';
 import StarRating from './StarRating.jsx';
 
-const Form = ({ closeForm, form, metaReview }) => {
+const Form = ({ closeForm, form, metaReview, handleSubmit }) => {
   //form values
   const [summary, setSummary] = useState('');
   const [name, setName] = useState('');
   const [review, setReview] = useState('');
   const [email, setEmail] = useState('');
-  const [recommend, setrecommend] = useState(false);
-  //starrating values
+  const [recommend, setRecommend] = useState(null);
+  const [imageArray, setImageArray] = useState('');
+  //star rating values
   const [starRating, setStarRating] = useState(0);
-  //stylerating values
+  //style rating values
   const [charRating, setCharRating] = useState({});
+  //search hook
 
-
+  //universal input handler
   let handleChange = (event, setState) => {
     setState(event.target.value);
   };
 
-  let handleSubmit = (summary, name, review, rating, recommended) => {
-    axios.post('/reviews', {
-      params: {
-        summary: summary,
-        name: name,
-        review: review,
-        rating: rating,
-        recommended: recommended
-      }
-    });
-  };
+  //test all inputs
+  useEffect(()=> {
+    console.log(
+      'summary', summary,
+      'name', name,
+      'review', review,
+      'email', email,
+      'recommend', recommend,
+      'starRating', starRating,
+      'charRating', charRating,
+      'imageArray', imageArray,
+    );
+  });
 
   //2 sections
   //left side for summary and review
   //rigt side for everything else
-
   return (form ?
     <FormModalBackground >
       <FormModal>
@@ -72,7 +76,7 @@ const Form = ({ closeForm, form, metaReview }) => {
             minLength="1"
             onChange={event => handleChange(event, setName)}></input>
           </div>
-          <div>For privacy reasons, do not use your full name or email addres</div>
+          <div>For privacy reasons, do not use your full name or email address</div>
 
           <div>Email: <input
             type='email'
@@ -80,19 +84,18 @@ const Form = ({ closeForm, form, metaReview }) => {
             minLength="1"
             value={email}
             onChange={event => handleChange(event, setEmail)}></input>
-            <div>For authentication reasons, you will not be emailed</div></div>
+          <div>For authentication reasons, you will not be emailed</div></div>
 
           <StarRating starRating={starRating} setStarRating={setStarRating} />
           <input id='file' type='file' accept='image/png, image/jpeg'></input>
           <div>Would you recommend this product?
             <div>
-              <div>Yes<input id='yes' name='selectOne' type='radio' value={true}></input></div>
-              <div>No<input id='no' name='selectOne' type='radio' value={false}></input></div></div>
+              <div>Yes<input id='yes' name='selectOne' type='radio' onClick ={() => setRecommend(true)}></input></div>
+              <div>No<input id='no' name='selectOne' type='radio' onClick ={() => setRecommend(false)}></input></div></div>
           </div>
           <StyleRating metaReview={metaReview} setCharRating ={setCharRating} />
 
         </FormCol>
-
         <button
           type='submit'
           onClick={() => closeForm()}>Submit Review</button>
