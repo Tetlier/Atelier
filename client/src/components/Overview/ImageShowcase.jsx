@@ -41,10 +41,12 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   // https://codepen.io/elevadorstudio/pen/zYxyVVy
   // TODO: figure out the equation, right now, it's not correct.
   let handleMouseMove = (ev) => {
-    // console.log('ev.offsetX, ', ev.nativeEvent.offsetX);
-    // console.log('ev.offsetY, ', ev.nativeEvent.offsetY);
+
+
+
     setMousePosition({
       left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
+    // left: ev.nativeEvent.pageX, top: ev.nativeEvent.pageY });
     // left: (ev.pageX - ev.nativeEvent.offsetX), top: (ev.pageY - ev.nativeEvent.offsetY)});
   };
 
@@ -175,15 +177,19 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
           }}
           // https://stackoverflow.com/questions/58028788/how-to-add-a-mousemove-event-listener-to-a-component-cursor-which-is-moved-wit
           // https://www.freecodecamp.org/news/react-background-image-tutorial-how-to-set-backgroundimage-with-inline-css-style/
+          // !!! https://stackoverflow.com/questions/44612051/zoom-that-follows-mouse
+          // TODO: FIX THE BUG
           onMouseMove={(ev)=> handleMouseMove(ev)}
           style={{
             backgroundImage: `url(${productStyle.photos[selectedThumbnailIndex].url})`,
             backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
             // https://codepen.io/elevadorstudio/pen/zYxyVVy
             // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-            'transformOrigin': `${MousePosition.left}% ${MousePosition.top}%`
+            // transformOrigin: `${MousePosition.left}% ${MousePosition.top}%`
             // backgroundPositionX: MousePosition.left,
             // backgroundPositionY: MousePosition.top
+            // left: MousePosition.left, top: MousePosition.top
           }}
         />
       </div>

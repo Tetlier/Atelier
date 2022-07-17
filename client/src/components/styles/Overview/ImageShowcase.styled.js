@@ -116,13 +116,12 @@ export const StyledImgShowcase = styled.div`
   .zoomedImageView.active {
     top: 0;
     left: 0;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    align-items: center;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
   }
 
