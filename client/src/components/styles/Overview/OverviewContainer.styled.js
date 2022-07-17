@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const OverviewContainer = styled.div`
   max-width:100%;
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
   padding: 15px;
   height: 850px;
+  margin-bottom: 1em;
 
   // display: grid;
   // grid-template-columns: repeat(7, 1fr);

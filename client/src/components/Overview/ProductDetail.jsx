@@ -2,7 +2,7 @@ import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled';
 const ProductDetail = ({description, slogan, features}) => {
   return (
     <StyledProductDetail>
-      <h1 style={{'flexBasis': '40%'}}>Description: {description}</h1>
+      <h1 style={{'flexBasis': '50%'}}>Description: {description}</h1>
       <br/>
       <h1 style={{'flexBasis': '20%'}}>Slogan: {slogan}</h1>
       <ul style={{'flexBasis': '20%'}}>
@@ -12,7 +12,7 @@ const ProductDetail = ({description, slogan, features}) => {
           })
         }
       </ul>
-      <div className='social-links' style={{'flexBasis': '20%'}}>
+      <div className='social-links' style={{'flexBasis': '10%'}}>
         <p>Share At: </p>
         <a href='#'>
           <i className='fab fa-facebook-f'></i>

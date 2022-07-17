@@ -45,20 +45,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
     &&
     <div>
       <OverviewContainer>
-        {/* left panel */}
-        {/* https://robkendal.co.uk/blog/how-to-build-a-multi-image-carousel-in-react-and-tailwind
-            https://dev.to/rakumairu/how-to-show-multiple-item-in-simple-react-carousel-32dd
-        */}
-        {/* <ImageSelect className='imageSelect'>
-          {
-            currentProductStyle.results[selectedStyleIndex].photos.map((photo, i) => {
-              return ( (i === 0 || i === 1 || i === 2) &&
-                // https://reactjs.org/warnings/special-props.html
-                <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
-              );
-            })
-          }
-        </ImageSelect> */}
         <ImageCarousel
           productStyle={currentProductStyle.results[selectedStyleIndex]}
           thumbnailChange={handleThumbnailChange}

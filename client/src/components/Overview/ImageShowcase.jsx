@@ -60,33 +60,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
       </Background>
     );
   };
-  // let slideIndex = 0;
-
-  // const delay = 1250000;
-
-  // const [index, setIndex] = useState(0);
-  // const timeoutRef = useRef(null);
-
-  // const resetTimeout = () => {
-  //   if (timeoutRef.current) {
-  //     clearTimeout(timeoutRef.current);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   resetTimeout();
-  //   timeoutRef.current = setTimeout(
-  //     () =>
-  //       setIndex((prevIndex) =>
-  //         prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-  //       ),
-  //     delay
-  //   );
-
-  //   return () => {
-  //     resetTimeout();
-  //   };
-  // }, [index]);
 
   return (
     <StyledImgShowcase>

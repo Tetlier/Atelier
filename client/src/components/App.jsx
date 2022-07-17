@@ -102,7 +102,7 @@ class App extends React.Component {
               currentProductId={this.state.currentProductId}
               currentProductRating = {this.state.currentProductRating} />
             <br/>
-            <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
+            {/* <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div> */}
             <div><QA productId={this.state.currentProductId}
               sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
             </div>
