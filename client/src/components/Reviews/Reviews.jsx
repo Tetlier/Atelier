@@ -15,7 +15,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //hooks related to the review list and restrictions
   const [startPoint, setStart] = useState(0);
   const [filterRating, setFilterRating] = useState([]);
-  const [noMoreResults, setnoMoreResults] = useState(false);
+  const [noMoreResults, setNoMoreResults] = useState(false);
 
   //hooks related to controlling parameters for review GET requests
   const [count, setCount] = useState(10);
@@ -39,7 +39,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
           setReviewList(updatedPage);
           setStart(prevState => prevState += 2);
         } else {
-          setnoMoreResults(prevState => true);
+          setnoMoreResults(true);
         }
       })
       .catch(err => console.log(err));
