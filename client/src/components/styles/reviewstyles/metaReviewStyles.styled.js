@@ -1,5 +1,26 @@
 import styled from 'styled-components';
 
+export const MetaGrid = styled.div`
+display: flex;
+`;
+
+export const MetaRow = styled.div`
+text-align: center;
+`;
+
+export const MetaCol = styled.div`
+flex: ${props=> props.size}
+`;
+
+export const Clickable = styled.div`
+
+&:hover {
+  background-color: rgba(140, 140, 186, 140);
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+`;
+
 export const SummaryStar = styled.div`
   --percent: calc(${({rating}) => rating} / 5 * 100%);
   --star-size: 30px;

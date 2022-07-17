@@ -24,7 +24,7 @@ let getProduct = (productId, callback) => {
     .then((product) => {
       axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348/styles', options)
         .then((styles) => {
-          var result = {productInfo: product.data, styleInfo: styles.data};
+          var result = { productInfo: product.data, styleInfo: styles.data };
           callback(null, result);
         })
         .catch(stylesErr => {
@@ -36,12 +36,24 @@ let getProduct = (productId, callback) => {
     });
 };
 
-let getReviews = (id, page, sort ) => {
-  return (client.get(`/reviews/?product_id=${id}&page=${page}&count=10&sort=${sort}`));
+let getReviews = (id, count, sort) => {
+  return (client.get(`/reviews/?product_id=${id}&count=${count}&sort=${sort}`));
 };
 
 let getMetaReview = (id, page) => {
   return (client.get(`/reviews/meta?product_id=${id}`));
+};
+
+// eslint-disable-next-line camelcase
+let putHelpfulReview = (review_id) => {
+  // eslint-disable-next-line camelcase
+  return (client.put(`/reviews/${review_id}/helpful`));
+};
+
+// eslint-disable-next-line camelcase
+let postReview = (product_id, rating, summary, body, name, email, photos, recommended, characteristics) => {
+  // eslint-disable-next-line camelcase
+  return (client.post(`/reviews/${product_id}/${rating}/${summary}/${body}/${name}/${email}/${photos}/${recommended}/${characteristics}`));
 };
 
 // returns first ${count} number of questions that contains filter term, sorted by helpfulness
@@ -174,6 +186,8 @@ let postAnswer = (req, res) => {
     });
 };
 
+
+
 module.exports.getProducts = getProducts;
 module.exports.getProduct = getProduct;
 module.exports.getReviews = getReviews;
@@ -186,3 +200,5 @@ module.exports.reportAnswer = reportAnswer;
 module.exports.postQuestion = postQuestion;
 module.exports.postAnswer = postAnswer;
 module.exports.getMetaReview = getMetaReview;
+module.exports.putHelpfulReview = putHelpfulReview;
+module.exports.postReview = postReview;

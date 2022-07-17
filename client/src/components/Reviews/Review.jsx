@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
-import { SingleReviewStars } from '../styles/reviewstyles/SingleReviewStars.styled.js';
-import { ThumbNail } from '../styles/reviewstyles/ThumbNail.styled.js';
+import React, { useState, useEffect } from 'react';
+import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
-import { LargePhoto } from '../styles/reviewstyles/LargePhoto.styled.js';
+import { ReviewComponent } from '../styles/reviewstyles/ReviewComponent.styled.js';
+import axios from 'axios';
+
+import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
 
 const Review = ({ review, StarReview }) => {
 
-  const [restriction, toggle] = useState(false);
-  const [clicked, controlClicks] = useState(false);
-  const [image, togglePhoto] = useState(false);
+  const [restriction, setRestriction] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [image, setImage] = useState(false);
 
-  let toggleRestriction = () => {
-    toggle(prevState => !prevState);
-  };
-
-  let oneClick = () => {
-    controlClicks(prevState => !prevState);
-  };
-
-  let clickPhoto = () => {
-    togglePhoto(prevState => !prevState);
-  };
-
-  const enlargeThumbnail = (photo) => {
+  //broken. Shows ALL photos
+  const enlargeThumbnail = (img) => {
+    console.log(img);
     return (
-      <Background onClick={() => clickPhoto()}>
-        <LargePhoto src={photo.url} />
+      <Background onClick={() => setImage(!image)}>
+        <FullSize src={img} />
       </Background>
     );
   };
 
-  let submitHelpfulness = () => {
-    //will be an axios function to post the value
+  let submitHelpful = (id) => {
+    // eslint-disable-next-line camelcase
+    axios.put('/reviews', { review_id: id })
+      .then(() => setClicked(true))
+      .catch(err => err);
   };
 
   let getDate = () => {
@@ -43,30 +38,35 @@ const Review = ({ review, StarReview }) => {
   };
 
   return (
-    <div>
-      <div> <SingleReviewStars rating={review.rating} /></div>
-      <b> {review.summary}</b>
-      <div>{getDate()}</div>
+    <ReviewGrid>
+      <ReviewRow>
+        <ReviewCol size='4.25'>
+          <ReviewStars rating={review.rating} />
+        </ReviewCol>
+        <ReviewCol size='2'>
+          <div>By {review.reviewer_name} on {getDate()}</div>
+        </ReviewCol>
+      </ReviewRow>
+      <ReviewRow><b> {review.summary}</b></ReviewRow>
       {review.recommend ? <div> I recommend this product ✅</div> : null}
       {restriction ? <div maxLength={250}>{review.body}</div> : <div>{review.body}</div>}
       {review.body.length > 250 ?
         <button
-          onClick={() => toggleRestriction()}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
+          onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
-
-      <div>{review.photos.map(photo => <div> {image ? enlargeThumbnail(photo) : <ThumbNail
-        onClick={() => clickPhoto()}
+      <ReviewRow>{[...review.photos].map(photo => <ReviewCol> {image ? enlargeThumbnail(photo.url) : <ThumbNail
+        onClick={() => setImage(!image)}
         src={photo.url}
-        key={`${photo.url}`} />}</div>)}</div>
+        key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
 
 
       {!clicked ? <div>Was this review helpful?
         <button
-          onClick={() => oneClick()}>Yes</button>
+          onClick={() => submitHelpful(review.review_id)}>Yes</button>
         <button
-          onClick={() => oneClick()}>No</button></div> : 'Response Recorded'}
-    </div>
+          onClick={() => setClicked(true)}>No</button></div> : 'Response Recorded'}
+    </ReviewGrid>
   );
 };
 

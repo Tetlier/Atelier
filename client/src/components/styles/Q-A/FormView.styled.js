@@ -26,6 +26,7 @@ left: 0;
 
 export const FormTitle = styled.div`
   margin: 10px 0 0 0;
+  text-align: center
 `;
 
 export const FormSection = styled.div`
