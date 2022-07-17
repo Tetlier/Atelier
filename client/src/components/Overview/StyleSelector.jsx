@@ -10,11 +10,11 @@ const StyleSelector = ({productStyle, stlyeChange, selectedStyleIndex}) => {
   return (
     <StyledStyleSelector>
       <div className='product-price'>
-        <p>productStyle.results[selectedStyleIndex] is  {productStyle.results[selectedStyleIndex].name}</p>
-        <p className='last-price'>Price: <span>${productStyle.results[selectedStyleIndex]['original_price']}</span></p>
+        <h3 className='last-price'>Price: <span>${productStyle.results[selectedStyleIndex]['original_price']}</span></h3>
         {productStyle.results[selectedStyleIndex]['sale_price'] !== null && <p className='new-price'>Sell Price: <span>${productStyle.results[selectedStyleIndex]['sale_price']}</span></p>}
       </div>
-      <h1>Style : {productStyle.results[selectedStyleIndex].name}</h1>
+      <h3>Style &gt; {productStyle.results[selectedStyleIndex].name}</h3>
+      <br/>
       <StyleGrid>
         {
           productStyle.results.map((style, i) => {

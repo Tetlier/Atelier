@@ -77,10 +77,9 @@ const Overview = ({currentProductId, currentProductRating}) => {
         {/* right panel */}
         <ProductContent className='productContent'>
           {/* TODO: Link Read all review to review */}
-          <h3 style={{'textDecoration': 'underline'}}><StarReview rating={currentProductRating} /> Read all reviews </h3>
-          <br/>
-          <h2 className='product-category'>Category : {currentProduct.category}</h2>
-          <h1 className='product-title'>Name : {currentProduct.name}</h1>
+          <p ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></p>
+          <h2 className='product-category'>{currentProduct.category}</h2>
+          <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
             productStyle={currentProductStyle}
             stlyeChange={handleStlyeChange}
