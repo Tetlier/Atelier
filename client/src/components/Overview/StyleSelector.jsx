@@ -1,8 +1,7 @@
 
 import { StyledStyleSelector } from '../styles/Overview/StyleSelector.styled';
 import Cart from './Cart';
-import { StyleGrid } from '../styles/Overview/StyleGrid.styled';
-import { StyleGridItem } from '../styles/Overview/StyleGridItem.styled';
+import { StyleGrid, StyleGridItem } from '../styles/Overview/StyleGrid.styled';
 import { useState } from 'react';
 
 const StyleSelector = ({productStyle, stlyeChange, selectedStyleIndex}) => {
@@ -20,9 +19,8 @@ const StyleSelector = ({productStyle, stlyeChange, selectedStyleIndex}) => {
         {
           productStyle.results.map((style, i) => {
             return (
-              <img key={i} src={style.photos[0].thumbnail_url}
-                alt = 'shoe image' className={i === 0 ? 'active' : ''}
-                style = {{'borderRadius': '50%', 'width': '120px', 'height': '120px'}}
+              <StyleGridItem key={i} src={style.photos[0].thumbnail_url}
+                alt = 'shoe image'
                 // https://upmostly.com/tutorials/pass-a-parameter-through-onclick-in-react
                 onClick = {() => stlyeChange(i)}
               />

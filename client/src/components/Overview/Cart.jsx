@@ -1,6 +1,8 @@
 import { StyledCart } from '../styles/Overview/Cart.styled';
 import { Button } from '../styles/Button.styled';
+import { LargeButton } from '../styles/Q-A/InlineButton.styled.js';
 import { useState } from 'react';
+import {CustomSelect} from '../styles/Overview/Cart.styled.js';
 
 const Cart = ({selectedStyle}) => {
   // https://stackoverflow.com/questions/21733847/react-jsx-selecting-selected-on-selected-select-option
@@ -26,31 +28,27 @@ const Cart = ({selectedStyle}) => {
 
   return (
     <StyledCart>
-      <div className="custom-select" style={{'width': '200px'}} >
-        <select defaultValue={{label: 'SELECT SIZE:', value: 0}} onChange={handleChange}>
-          {
-            // TODO: If there is no remaining stock for the current style, the dropdown should become inactive and read “OUT OF STOCK”.
-            // TODO: Don't know why, chrome warning option needs key
-            Object.values(selectedStyle.skus).map((sku, i) => {
-              return ( sku.quantity > 0 &&
-                <option key={i} value={i}>{sku.size}</option>
-              );
-            })
-          }
-        </select>
-      </div>
-      <div className="custom-select" style={{'width': '200px'}}>
-        <select defaultValue={{label: 'SELECT QUANTITY:', value: 0}}>
-          {
-            // TODO: Don't know why, chrome warning option needs key
-            selectedSizeQuantity.map(item => {
-              return item.key <= 15 && <option key={item.key} value={item.key}>{item.key}</option>;
-            })
-          }
-        </select>
-      </div>
-      <Button>Add to Cart</Button>
-      <Button>★</Button>
+      <CustomSelect defaultValue={{label: 'SELECT SIZE:', value: 0}} onChange={handleChange}>
+        {
+          // TODO: If there is no remaining stock for the current style, the dropdown should become inactive and read “OUT OF STOCK”.
+          // TODO: Don't know why, chrome warning option needs key
+          Object.values(selectedStyle.skus).map((sku, i) => {
+            return ( sku.quantity > 0 &&
+              <option key={i} value={i}>{sku.size}</option>
+            );
+          })
+        }
+      </CustomSelect>
+      <CustomSelect defaultValue={{label: 'SELECT QUANTITY:', value: 0}}>
+        {
+          // TODO: Don't know why, chrome warning option needs key
+          selectedSizeQuantity.map(item => {
+            return item.key <= 15 && <option key={item.key} value={item.key}>{item.key}</option>;
+          })
+        }
+      </CustomSelect>
+      <LargeButton>Add to Cart</LargeButton>
+      <LargeButton>★</LargeButton>
     </StyledCart>
   );
 };

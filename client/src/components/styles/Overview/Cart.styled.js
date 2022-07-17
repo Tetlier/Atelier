@@ -3,16 +3,14 @@ import styled from 'styled-components';
 export const StyledCart = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  row-gap: 20px;
-  justify-content: space-around;
-  // .custom-select {
-  //   width: 150px;
-  //   height: 100px;
-  //   margin: 10px;
-  // }
-  // .custom-select:focus {
-  //   min-width: 150px;
-  //   width: auto;
-  //   height: 100px;
-  // }
+  row-gap: 10px;
+  column-gap: 20px;
+`;
+
+export const CustomSelect = styled.select`
+  flex: 30%;
+  padding: 5px;
+  height: 50px;
+  font-size: 1em;
+  width: 100%;
 `;
