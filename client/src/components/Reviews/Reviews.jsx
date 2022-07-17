@@ -126,9 +126,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
               <ReviewMapper
                 reviewList={reviewList}
                 filterRating={filterRating}
-                currentSearch={currentSearch}/> : null}
+                currentSearch={currentSearch} /> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId}/></div>
+          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
           <div> {!noMoreResults ? <Button
             onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
             <Button

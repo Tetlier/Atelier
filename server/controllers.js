@@ -53,7 +53,7 @@ let putHelpfulReview = (review_id) => {
 // eslint-disable-next-line camelcase
 let postReview = (product_id, rating, summary, body, name, email, photos, recommended, characteristics) => {
   // eslint-disable-next-line camelcase
-  return (client.post(`/reviews/${product_id}/${rating}/${summary}/${body}/${name}/${email}/${photos}/${recommended}/${characteristics}`));
+  return (client.post(`/reviews/?product_id=${product_id}&rating=${rating}&summary=${summary}&body=${body}&recommend=${recommended}&name=${name}&email=${email}&photos=${photos}&characteristics=${characteristics}`));
 };
 
 // returns first ${count} number of questions that contains filter term, sorted by helpfulness
@@ -81,7 +81,6 @@ let getQuestions = (req, res) => {
       console.log('server error getting questions');
       res.sendStatus(500);
     });
-
 };
 
 let getAnswers = (req, res) => {

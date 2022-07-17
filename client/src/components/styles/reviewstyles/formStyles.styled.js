@@ -25,11 +25,6 @@ z-index: 10;
 border-radius: 10px;
 `;
 
-export const HiddenRadio = styled.input`
-display: none;
-`;
-
-
 export const FormGrid = styled.div`
 margin: 20px 0 20px 0;
 width: 65%
@@ -37,10 +32,6 @@ background-color: green;
 display: flex;
 `;
 
-export const FormTitle = styled.div`
-margin: 10px 0 0 0;
-text-align: center;
-`;
 
 export const FormRow = styled.div`
 flex-direction: row
@@ -50,3 +41,38 @@ export const FormCol = styled.div`
 flex-direction: column;
 `;
 
+
+//components of the form
+export const HiddenRadio = styled.input`
+opacity: 0;
+`;
+
+export const Stars = styled.label`
+transition: 200ms;
+`;
+
+export const Title = styled.div`
+margin: 10px 0 0 0;
+text-align: center;
+`;
+
+export const SummaryInput = styled.textarea`
+  width: 80%;
+  height: 3em;
+  overflow: auto;
+  resize: none;
+  position: relative;
+  top: 0.5em;
+
+`;
+
+//must use input because textarea does not work with minLength
+export const ReviewInput = styled.input`
+  width: 80%;
+  height: 6em;
+  overflow: auto;
+  resize: none;
+  position: relative;
+  top: 0.5em;
+  justify-content: flex-start;
+`;

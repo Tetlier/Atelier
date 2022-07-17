@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const StyleRating = ({ metaReview, setCharRating }) => {
-  //style rating values
-  const [sizeRating, setSizeRating] = useState(null);
-  const [widthRating, setWidthRating] = useState(null);
-  const [comfortRating, setComfortRating] = useState(null);
-  const [qualityRating, setQualityRating] = useState(null);
-  const [lengthRating, setLengthRating] = useState(null);
-  const [fitRating, setFitRating] = useState(null);
+const StyleRating = ({ metaReview, setCharRating, charRating }) => {
+  //hooks to manage id and ratings
+  const [currentId, setCurrentId] = useState(0);
+  const [currentRating, setCurrentRating] = useState(null);
 
   //style rating explanations
   const [sizeRatingExplanation, setSizeRatingExplanation] = useState(null);
@@ -19,20 +15,14 @@ const StyleRating = ({ metaReview, setCharRating }) => {
 
   //updates rating collection for form every time a character rating is chosen
   useEffect(() => {
-    setCharRating(
-      {
-        sizeRating: sizeRating,
-        widthRating: widthRating,
-        comfortRating: comfortRating,
-        qualityRating: qualityRating,
-        lengthRating: lengthRating,
-        fitRating: fitRating
-      }
-    );
-  }, [sizeRating, widthRating, comfortRating, qualityRating, lengthRating, fitRating]);
+    if (currentId) {
+      charRating[currentId] = parseInt(currentRating);
+      setCharRating(charRating);
+    }
+  }, [currentId]);
 
   //Updates rating and explanation on click for the characteristics
-  let selection = (style, rating, setRating, setRatingExplanation) => {
+  let selection = (style, id, rating, setRatingExplanation) => {
     const obj = {
       Size: {
         1: 'A size too small',
@@ -77,7 +67,9 @@ const StyleRating = ({ metaReview, setCharRating }) => {
         5: 'Runs long',
       },
     };
-    setRating(rating);
+    console.log('this', id);
+    setCurrentId(id);
+    setCurrentRating(rating);
     setRatingExplanation(obj[style][rating]);
   };
 
@@ -86,23 +78,25 @@ const StyleRating = ({ metaReview, setCharRating }) => {
       <div>Characteristics Rating:</div>
       {Object.keys(metaReview.characteristics).map(characteristic => {
         return (
-          <div> {characteristic} : {[...Array(5)].map((rating, index) => {
+          <div key={characteristic}>
+            {characteristic} : {[...Array(Object.keys(metaReview.characteristics).length)].map((rating, index) => {
               const thisRating = index + 1;
               return (
-                <label
+                <label key={thisRating}
                 > {thisRating} <input
-                  type='radio'
-                  name={characteristic}
-                  value={thisRating}
-                  onClick={(event) => {
-                    selection(
-                      event.target.name,
-                      event.target.value,
-                      eval(`set${event.target.name}Rating`),
-                      eval(`set${event.target.name}RatingExplanation`));
-
-                  }}
-                  required></input>
+                    type='radio'
+                    id={metaReview.characteristics[characteristic].id}
+                    name={characteristic}
+                    value={thisRating}
+                    onClick={(event) => {
+                      console.log();
+                      selection(
+                        event.target.name,
+                        event.target.id,
+                        event.target.value,
+                        eval(`set${event.target.name}RatingExplanation`));
+                    }}
+                    required />
                 </label>
               );
             })}

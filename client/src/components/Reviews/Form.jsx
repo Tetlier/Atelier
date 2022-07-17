@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
-import { FormModal, FormModalBackground, Star, FormTitle, FormGrid, FormRow, FormCol } from '../styles/reviewstyles/formStyles.styled.js';
+import { ThumbNail, FullSize, ImageGallery } from '../styles/reviewstyles/imageStyles.styled.js';
+import { FormModal, FormModalBackground, Star, Title, FormGrid, FormRow, FormCol, ReviewInput, SummaryInput } from '../styles/reviewstyles/formStyles.styled.js';
 import axios from 'axios';
 
 import StyleRating from './StyleRating.jsx';
@@ -13,9 +13,9 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   const [review, setReview] = useState('');
   const [email, setEmail] = useState('');
   const [recommend, setRecommend] = useState(null);
-  const [photoArray, setPhotoArray] = useState('');
+  const [photoArray, setPhotoArray] = useState([]);
   //star rating values
-  const [starRating, setStarRating] = useState(0);
+  const [starRating, setStarRating] = useState(null);
   //style rating values
   const [charRating, setCharRating] = useState({});
   //form validator hook
@@ -26,82 +26,86 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
     setState(event.target.value);
   };
 
-  //validates that the mandatory fields have been filled
-  let validateForm = () => {
+  //adds image into photoArray
+  let addImage = (event) => {
+    event.preventDefault();
+    let reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onloadend = () => {
+      axios.post('/cloudinary', { img: reader.result })
+        .then(results => setPhotoArray([...photoArray, results.data]))
+        .catch(err => console.log(err));
+    };
+    // let img = URL.createObjectURL(event.target.files[0]);
+    // setPhotoArray([...photoArray, img]);
+    // axios.post('/cloudinary', { img: img })
+    //   .then(results => console.log(results, 'success'))
+    //   .catch(err => console.log(err));
+    // axios.post to cloudinary
+    // console.log('going in', event.target.files[0]);
+    // axios.post('/cloudinary', { img: img });
   };
 
-  //test all inputs
-  useEffect(() => {
-    console.log(
-      'summary', summary,
-      'name', name,
-      'review', review,
-      'email', email,
-      'recommend', recommend,
-      'starRating', starRating,
-      'charRating', charRating,
-      'photoArray', photoArray,
-    );
-  });
+  // //test all inputs
+  // useEffect(() => {
+  //   console.log(
+  //     'summary', summary,
+  //     'name', name,
+  //     'review', review,
+  //     'email', email,
+  //     'recommend', recommend,
+  //     'starRating', starRating,
+  //     'charRating', charRating,
+  //     'photoArray', photoArray,
+  //   );
+  // });
 
   //submits form to server
   // eslint-disable-next-line camelcase
   let handleSubmit = (event) => {
-    event.preventDefault;
-    console.log('good to go');
+    event.preventDefault();
     closeForm(true);
-    // axios.post('/reviews', {
-    //   params: {
-    //     // eslint-disable-next-line camelcase
-    //     product_id: currentProductId,
-    //     rating: starRating,
-    //     summary: summary,
-    //     body: review,
-    //     name: name,
-    //     email: email,
-    //     photos: photoArray,
-    //     recommended: recommend,
-    //     characteristics: charRating
-    //   }
-    // }).then(console.log('post success')
-    //   .catch(err => console.log(err)));
+    axios.post('/reviews', {
+      // eslint-disable-next-line camelcase
+      product_id: currentProductId,
+      rating: starRating,
+      summary: summary,
+      body: review,
+      name: name,
+      email: email,
+      photos: photoArray,
+      recommended: recommend,
+      characteristics: charRating
+    }).then(console.log('post success'))
+      .catch(err => console.log(err));
   };
 
 
-
-  //2 sections
-  //left side for summary and review
-  //rigt side for everything else
   return (form ?
     <FormModalBackground onSubmit={(event) => handleSubmit(event)}>
       <FormModal>
-        <FormTitle><h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> </FormTitle>
+        <Title><h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> </Title>
         <FormGrid>
           <FormRow>
             <div>Summary</div>
-            <textarea
+            <SummaryInput
               type="text"
-              rows='2'
-              cols='50'
               maxLength={60}
               id='summary'
               value={summary}
-              onChange={event => handleChange(event, setSummary)}></textarea>
+              onChange={event => handleChange(event, setSummary)}
+              required />
 
             <div>Review: <div>
-              <textarea
-                rows='6'
-                cols='50'
+              <ReviewInput
                 minLength='50'
                 maxLength='1000'
                 id='review'
                 value={review}
                 onChange={event => handleChange(event, setReview)}
                 placeHolder='What did you like or dislike about this product?'
-                errorMessage='The review body is less than 50 characters'
-
-              ></textarea> </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}
-            </div>
+                required />
+            </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}</div>
 
             <div>Name: <input
               type='name'
@@ -120,24 +124,32 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
               required></input>
               <div>For authentication reasons, you will not be emailed</div></div>
 
-            <div>Attach up to 5 images: <input id='file' type='file' accept='image/png, image/jpeg' /></div>
+            <div>Attach up to 5 images:
+              {photoArray.length < 5 ?
+                <input
+                  id='file'
+                  type='file'
+                  accept='image/png, image/jpeg'
+                  onChange={event => addImage(event)} />
+                : '5 images already input'}
+            </div>
+            <ImageGallery>{[...photoArray].map(photo => <label><ThumbNail src={photo} /></label>)}</ImageGallery>
+          </FormRow>
+
+
+          <FormRow>
+            <StarRating starRating={starRating} setStarRating={setStarRating} />
+            <StyleRating metaReview={metaReview} setCharRating={setCharRating} charRating={charRating} />
 
             <div>
               <div>Would you recommend this product?</div>
               <label>Yes <input id='yes' name='selectOne' type='radio' onClick={() => setRecommend(true)} required></input></label>
               <label>No <input id='no' name='selectOne' type='radio' onClick={() => setRecommend(false)}></input></label>
             </div>
-          </FormRow>
-
-          <FormRow>
-            <StarRating starRating={starRating} setStarRating={setStarRating} />
-            <StyleRating metaReview={metaReview} setCharRating={setCharRating} />
 
             <button type='submit'>Submit Review</button>
-
             <button onClick={() => closeForm(true)}> Cancel</button>
           </FormRow>
-
         </FormGrid>
       </FormModal>
     </FormModalBackground> : null

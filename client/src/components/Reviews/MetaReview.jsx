@@ -32,7 +32,6 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
       setRatingsArray(ratingsArray);
       total += parseInt(eachAmount[i]);
     }
-    console.log('fc', typeof setTotalRatings, 'val', totalRatings);
     setTotalRatings(total);
   };
 
@@ -45,12 +44,12 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
         <div>Rating Breakdown</div>
         <div> {filterRating.length !== 0 ? <button onClick={() => setFilterRating([])}> Remove all filters</button> : null}</div>
         <div>{[...ratingsArray].reverse().map(rating =>
-          <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key = {rating + 'techdebt2'}>
+          <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key = {ratingsArray.indexOf(rating)}>
             <div>{rating.star} stars <progress value={rating.amount / totalRatings}></progress></div>
             <div>{rating.amount} ratings</div>
           </Clickable>)}</div>
         <div>{Object.entries(metaReview.characteristics).map(character =>
-          <div key = {character + 'techdebt1'}>
+          <div key = {character}>
             <div>{character[0]}</div>
             <input type='range' value={character[1].value} min='0' max='5'></input> </div>)}
         </div>
