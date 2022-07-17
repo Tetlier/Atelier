@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { SearchStyle, SearchEntry } from '../styles/Q-A/QAList.styled.js';
 
 export default function Search({updateSearch}) {
 
@@ -24,13 +25,15 @@ export default function Search({updateSearch}) {
 
   return (
     <div className="search">
-      <form>
-        <input type="text"
-          value={term}
-          placeholder="Have a question? Search for answers..."
-          onChange={(e) => { handleChange(e); }}
-        />
-      </form>
+      <SearchStyle>
+        <form>
+          <SearchEntry
+            value={term}
+            placeholder=" HAVE A QUESTION? SEARCH FOR ANSWERS... "
+            onChange={(e) => { handleChange(e); }}
+          />
+        </form>
+      </SearchStyle>
     </div>
   );
 }
