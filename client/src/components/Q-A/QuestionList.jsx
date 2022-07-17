@@ -17,10 +17,6 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
 
   // when searchTerm is updated, will update list of questions
   useEffect(() => {
-<<<<<<< HEAD
-    // console.log('search term: ', searchTerm);
-=======
->>>>>>> main
     let config = { params: {
       id: productId,
       count: questionCount + 1, // gets one more question to see if there are more
