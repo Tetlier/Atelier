@@ -44,8 +44,10 @@ const Overview = ({currentProductId, currentProductRating}) => {
     && Object.keys(currentProductStyle).length !== 0
     &&
     <div>
+      {/* upper panel */}
       <OverviewContainer>
         <ImageCarousel
+          className='imageCarousel'
           productStyle={currentProductStyle.results[selectedStyleIndex]}
           thumbnailChange={handleThumbnailChange}
           selectedThumbnailIndex={selectedThumbnailIndex}
@@ -59,11 +61,9 @@ const Overview = ({currentProductId, currentProductRating}) => {
           />
         </ImageGallery>
 
-
-        {/* right panel */}
         <ProductContent className='productContent'>
           {/* TODO: Link Read all review to review */}
-          <p ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></p>
+          <h4 ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></h4>
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
@@ -72,6 +72,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
             selectedStyleIndex={selectedStyleIndex}/>
         </ProductContent>
       </OverviewContainer>
+
       {/* down panel */}
       <ProductDetail className='productDetail'
         description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features}/>

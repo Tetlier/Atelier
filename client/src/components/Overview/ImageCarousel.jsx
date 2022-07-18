@@ -50,9 +50,8 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
           >
             <i className="fa-solid fa-angles-up"></i>
           </button>
-          <div
-            className='carousel-container'
-          >
+
+          <div className='carousel-container'>
             {productStyle.photos.map((photo, index) => {
               return (
                 <img
@@ -66,6 +65,7 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               );
             })}
           </div>
+
           <button
             onClick={() => {
               scroll(1);

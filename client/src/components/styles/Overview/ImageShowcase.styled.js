@@ -1,22 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledImgShowcase = styled.div`
-  // overflow: hidden;
-  // display: flex;
-  // width: 100%;
-  // transition: all 0.5s ease;
-  // margin-right: 50px;
-  // img {
-  //   width: 100%;
-  //   position: relative;
-  //   left: 0;
-  //   top: 0;
-  //   opacity: 0;
-  //   transition: all 0.3s ease;
-  // }
-  // img.active {
-  //   opacity: 1;
-  // }
+
+  margin-right: 2em;
+  margin-left: 2em;
+
   .slideshow {
     margin: 0 auto;
     overflow: hidden;
@@ -28,6 +16,7 @@ export const StyledImgShowcase = styled.div`
     transition: ease 1000ms;
     display: flex;
     align-items: center;
+
     // If the user hovers over the main image
     // the mouse icon should change to show a magnifying glass
     // https://stackoverflow.com/questions/13171968/magnifying-glass-zoom-cursor-over-image
@@ -40,7 +29,6 @@ export const StyledImgShowcase = styled.div`
 
   .slide {
     display: inline-block;
-
     height: 100%;
     width: 100%;
     max-width: 100%;
@@ -56,14 +44,14 @@ export const StyledImgShowcase = styled.div`
 
   .slideshowDot {
     display: inline-block;
-    height: 20px;
-    width: 20px;
+    height: 1em;
+    width: 1em;
     border-radius: 50%;
 
     cursor: pointer;
     margin: 15px 7px 0px;
 
-    background-color: #c4c4c4;
+    background-color: #6E6D70;
   }
 
   .slideshowDot.active {

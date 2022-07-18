@@ -41,9 +41,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   // https://codepen.io/elevadorstudio/pen/zYxyVVy
   // TODO: figure out the equation, right now, it's not correct.
   let handleMouseMove = (ev) => {
-
-
-
     setMousePosition({
       left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
     // left: ev.nativeEvent.pageX, top: ev.nativeEvent.pageY });
@@ -63,14 +60,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   return (
     <StyledImgShowcase>
-      {
-        // productStyle.results[0].photos.map((photo, i) => {
-        //   return ( i === 0 &&
-        //     <img key={i} src={photo.thumbnail_url} alt = 'shoe image' className= {i === 0 ? 'active' : ''}/>
-        //   );
-        // })
-      // <img src={productStyle.photos[0].thumbnail_url} alt = 'shoe image' className='active'/>
-      }
       <div className="slideshow">
         {/* TODO: ADD LEFT AND RIGHT ARROWS!!!!! */}
         <div
@@ -87,7 +76,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               }}/>
           ))}
         </div>
-
         <div className="slideshowDots">
           {imageUrls.map((_, idx) => (
             <div
@@ -100,7 +88,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
           ))}
         </div>
       </div>
-
       <div
         className={`expandedView${expandedView === true ? ' active' : ''}`}
         onClick={() => {

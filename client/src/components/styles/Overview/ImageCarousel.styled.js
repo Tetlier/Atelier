@@ -3,20 +3,19 @@ import styled from 'styled-components';
 export const StyledImageCarousel = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 150px;
-  margin-top: 20px;
 
   .container {
     position: relative;
     overflow: hidden;
     height: 750px;
-    width: 150px;
+    width: 120px;
+    background-color:yellow;
   }
   .buttonContainer {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: absolute;
     height: 100%;
     width: 100%;
   }
