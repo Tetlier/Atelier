@@ -93,23 +93,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <>
-          <GlobalStyles/>
-          <Container>
-            <h1>Welcome to Atelier!</h1>
-            <Overview currentProductId={this.state.currentProductId}></Overview>
-            {/* <div> <input type = 'radio'></input></div>
-            <Button>Normal</Button>
-            <div><Reviews id = '40344'/></div> */}
-            <StarReview rating='3.75'/>
-            <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
-            <div><QA productId={this.state.currentProductId}
-              sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
-            </div>
-          </Container>
-        </>
-      </ThemeProvider>
+      <div>
+        <ThemeProvider theme={theme}>
+          <>
+            <GlobalStyles/>
+            <Container>
+              <h1>Welcome to Atelier!</h1>
+              <Overview currentProductId={this.state.currentProductId}></Overview>
+              {/* <div> <input type = 'radio'></input></div>
+              <Button>Normal</Button>
+              <div><Reviews id = '40344'/></div> */}
+              <StarReview rating='3.75'/>
+              <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
+              <div><QA productId={this.state.currentProductId}
+                sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
+              </div>
+            </Container>
+          </>
+        </ThemeProvider>
+      </div>
     );
   }
 }

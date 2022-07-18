@@ -1,3 +1,3 @@
 **/node_modules
 **/client/dist/bundle.js
-**/spec/unit tests/exampleData.js
+**/spec/unit tests/QA widget/exampleData.js

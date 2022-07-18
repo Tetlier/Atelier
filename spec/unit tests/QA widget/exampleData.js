@@ -1,6 +1,6 @@
 
-
-export const getProduct40344 = {
+// data from GET request to /product with product_id=40344
+module.exports.getProduct40344 = {
   data: {
     "productInfo": {
       "id": 40348,
@@ -433,4 +433,46 @@ export const getProduct40344 = {
       ]
     }
   }
+};
+
+// data from GET request to /qa/questions with product_id=40344, count=3, filter=''
+module.exports.getQuestions40344 = {
+    data: [
+        {
+            "question_id": 573573,
+            "question_body": "Where is the foretold chainmail?? I've looked everywhere!!",
+            "question_date": "2022-02-23T00:00:00.000Z",
+            "asker_name": "Din",
+            "question_helpfulness": 2,
+            "reported": false,
+            "answers": {
+                "5360956": {
+                    "id": 5360956,
+                    "body": "dfsdf",
+                    "date": "2022-02-24T00:00:00.000Z",
+                    "answerer_name": "sfsdfs",
+                    "helpfulness": 1,
+                    "photos": []
+                }
+            }
+        },
+        {
+            "question_id": 642071,
+            "question_body": "where is my question?",
+            "question_date": "2022-07-16T00:00:00.000Z",
+            "asker_name": "test",
+            "question_helpfulness": 0,
+            "reported": false,
+            "answers": {}
+        },
+        {
+            "question_id": 642070,
+            "question_body": "this is a test because page 1-7 is empty",
+            "question_date": "2022-07-16T00:00:00.000Z",
+            "asker_name": "test",
+            "question_helpfulness": 0,
+            "reported": false,
+            "answers": {}
+        }
+    ]
 };
