@@ -6,6 +6,7 @@ export const StyledProductDetail = styled.div`
   display: flex;
   column-gap: 20px;
   justify-content: center;
+  align-items:start;
   margin-bottom: 3em;
   margin-top: 3em;
 
