@@ -26,6 +26,7 @@ left: 0;
 
 export const FormTitle = styled.div`
   margin: 10px 0 0 0;
+  text-align: center
 `;
 
 export const FormSection = styled.div`
@@ -49,7 +50,7 @@ export const FormQuestionEntry = styled.textarea`
   top: 0.5em;
 `;
 
-export const FormLabel = styled.label`
+export const FormLabel = styled.div`
   width: 150px;
   display: inline-block;
   vertical-align: top;

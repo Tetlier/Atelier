@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const controllers = require('./controllers.js');
+const cloudinary = require('./cloudinary.js');
 // const cors = require('cors');
 
 const app = express();
@@ -32,7 +33,7 @@ app.get('/product', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  controllers.getReviews(req.query.id, req.query.page, req.query.sort)
+  controllers.getReviews(req.query.id, req.query.count, req.query.sort)
     .then((results) => {
       res.send(results.data).status(200);
     })
@@ -48,6 +49,42 @@ app.get('/meta', (req, res) => {
     })
     .catch(err => { console.log(err); res.sendStatus(500); });
 });
+
+app.put('/reviews', (req, res) => {
+  controllers.putHelpfulReview(req.body.review_id)
+    .then((results) => {
+      res.send(results.data).status(200);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+app.post('/reviews', (req, res) => {
+  // eslint-disable-next-line camelcase
+  let product_id = req.body.product_id;
+  let rating = req.body.rating;
+  let summary = req.body.summary;
+  let body = req.body.body;
+  let name = req.body.name;
+  let email = req.body.email;
+  let photos = req.body.photos;
+  let recommended = req.body.recommended;
+  let characteristics = req.body.characteristics;
+  controllers.postReview(product_id, rating, summary, body, name, email, photos, recommended, characteristics)
+    .then((results) => {
+      res.send(results.data).status(201);
+    })
+    .catch(err => { console.log(err); res.sendStatus(500); });
+});
+
+//posts image to cloudinary and retrieves the cloudinary URL
+app.post('/cloudinary', (req, res) => {
+  var link = '';
+  cloudinary.uploadImage(req.body.img,
+    function (error, result) { console.log(result, error); })
+    .then(results => { link = results.url; res.send(link); })
+    .catch(err => console.log(err));
+}
+);
 
 const router = express.Router();
 
