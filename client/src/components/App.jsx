@@ -64,12 +64,6 @@ class App extends React.Component {
         //Rounding down and converting to quarter percentages
         avg = Math.floor(ratingsum / total * 4) / 4;
         this.setState({ currentProductRating: avg });
-<<<<<<< HEAD
-
-        // console.log('current Product Rating:', this.state.currentProductRating);
-
-=======
->>>>>>> main
       }
       )
       .catch(err => console.log(err));
@@ -101,13 +95,9 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
-<<<<<<< HEAD
             <Overview
               currentProductId={this.state.currentProductId}
               currentProductRating = {this.state.currentProductRating} />
-=======
-            <Overview currentProductId={this.state.currentProductId}></Overview>
->>>>>>> main
             <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
             <br/>
             <div><QA productId={this.state.currentProductId}

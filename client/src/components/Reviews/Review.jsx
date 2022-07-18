@@ -15,13 +15,8 @@ const Review = ({ review, StarReview }) => {
   const enlargeThumbnail = (img) => {
     console.log(img);
     return (
-<<<<<<< HEAD
-      <Background key={`${photo.url}`} onClick={() => clickPhoto()}>
-        <LargePhoto src={photo.url} />
-=======
       <Background onClick={() => setImage(!image)}>
         <FullSize src={img} />
->>>>>>> main
       </Background>
     );
   };
