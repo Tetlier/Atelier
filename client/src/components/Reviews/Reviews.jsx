@@ -15,7 +15,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //hooks related to the review list and restrictions
   const [startPoint, setStart] = useState(0);
   const [filterRating, setFilterRating] = useState([]);
-  const [noMoreResults, setnoMoreResults] = useState(false);
+  const [noMoreResults, setNoMoreResults] = useState(false);
 
   //hooks related to controlling parameters for review GET requests
   const [count, setCount] = useState(10);
@@ -39,7 +39,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
           setReviewList(updatedPage);
           setStart(prevState => prevState += 2);
         } else {
-          setnoMoreResults(prevState => true);
+          setnoMoreResults(true);
         }
       })
       .catch(err => console.log(err));
@@ -126,9 +126,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
               <ReviewMapper
                 reviewList={reviewList}
                 filterRating={filterRating}
-                currentSearch={currentSearch}/> : null}
+                currentSearch={currentSearch} /> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId}/></div>
+          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
           <div> {!noMoreResults ? <Button
             onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
             <Button

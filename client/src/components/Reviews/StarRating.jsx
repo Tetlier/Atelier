@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { HiddenRadio } from '../styles/reviewstyles/formStyles.styled.js';
+import { HiddenRadio, Stars } from '../styles/reviewstyles/formStyles.styled.js';
 
 const StarRating = ({starRating, setStarRating}) => {
 
@@ -20,26 +20,30 @@ const StarRating = ({starRating, setStarRating}) => {
     return setStarExplanation(obj[starRating]);
   }, [starRating]);
 
+  useEffect(()=> {
+    console.log(starRating, hover);
+  }, [starRating, hover]);
 
   return (
     <div>Rating: {starExplanation ? starExplanation : null}<div>
       {[...Array(5)].map((star, index) => {
         const starVal = index + 1;
         return (
-          <label>
+          <Stars key = {starVal}>
             <HiddenRadio
               type='radio'
-              id='star'
+              name='star'
               value={starVal}
               onClick={() => setStarRating(starVal)}
               required
             />
             <FaStar
               size='25'
-              color={(starVal <= starRating || hover) ? '#ffc107' : '#w4w5e9'}
+              color={(starVal <= hover || starVal <= starRating) ? '#ffc107' : '#w4w5e9' }
               onMouseEnter={() => setHover(starVal)}
               onMouseLeave={() => setHover(null)} />
-          </label>
+
+          </Stars>
         );
       })}
     </div>

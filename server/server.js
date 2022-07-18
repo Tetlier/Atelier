@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const controllers = require('./controllers.js');
+const cloudinary = require('./cloudinary.js');
 // const cors = require('cors');
 
 const app = express();
@@ -74,6 +75,16 @@ app.post('/reviews', (req, res) => {
     })
     .catch(err => { console.log(err); res.sendStatus(500); });
 });
+
+//posts image to cloudinary and retrieves the cloudinary URL
+app.post('/cloudinary', (req, res) => {
+  var link = '';
+  cloudinary.uploadImage(req.body.img,
+    function (error, result) { console.log(result, error); })
+    .then(results => { link = results.url; res.send(link); })
+    .catch(err => console.log(err));
+}
+);
 
 const router = express.Router();
 

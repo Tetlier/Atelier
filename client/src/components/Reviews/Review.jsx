@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
-import { ReviewComponent } from '../styles/reviewstyles/ReviewComponent.styled.js';
 import axios from 'axios';
 
 import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
@@ -12,7 +11,7 @@ const Review = ({ review, StarReview }) => {
   const [clicked, setClicked] = useState(false);
   const [image, setImage] = useState(false);
 
-  //broken. Shows ALL photos
+  //broken. Shows ALL images
   const enlargeThumbnail = (img) => {
     console.log(img);
     return (

@@ -50,7 +50,7 @@ export const FormQuestionEntry = styled.textarea`
   top: 0.5em;
 `;
 
-export const FormLabel = styled.label`
+export const FormLabel = styled.div`
   width: 150px;
   display: inline-block;
   vertical-align: top;
