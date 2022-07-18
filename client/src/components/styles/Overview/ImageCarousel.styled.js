@@ -8,7 +8,7 @@ export const StyledImageCarousel = styled.div`
     position: relative;
     overflow: hidden;
     height: 750px;
-    width: 120px;
+    width: 150px;
   }
   .buttonContainer {
     position: absolute;
