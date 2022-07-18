@@ -32,8 +32,6 @@ const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch }) =
       } else if (filterRating.length === 0 && !currentSearch) {
         return <Review review={review} key={reviewList.indexOf(review)} StarReview={StarReview} />;
       } else {
-        console.log( filterRating.includes(review.rating) === true);
-        console.log(filterRating, review.rating);
         null;
       }
     })

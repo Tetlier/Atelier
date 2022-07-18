@@ -14,6 +14,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   const [email, setEmail] = useState('');
   const [recommend, setRecommend] = useState(null);
   const [photoArray, setPhotoArray] = useState([]);
+  const [convertedPhotos, setConvertedPhotos] = useState([]);
   //star rating values
   const [starRating, setStarRating] = useState(null);
   //style rating values
@@ -26,59 +27,55 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
     setState(event.target.value);
   };
 
-  //adds image into photoArray
+  //adds generated URL image into photoArray
   let addImage = (event) => {
     event.preventDefault();
     let reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onloadend = () => {
-      axios.post('/cloudinary', { img: reader.result })
-        .then(results => setPhotoArray([...photoArray, results.data]))
-        .catch(err => console.log(err));
+      setPhotoArray([...photoArray, reader.result]);
     };
-    // let img = URL.createObjectURL(event.target.files[0]);
-    // setPhotoArray([...photoArray, img]);
-    // axios.post('/cloudinary', { img: img })
-    //   .then(results => console.log(results, 'success'))
-    //   .catch(err => console.log(err));
-    // axios.post to cloudinary
-    // console.log('going in', event.target.files[0]);
-    // axios.post('/cloudinary', { img: img });
   };
 
-  // //test all inputs
-  // useEffect(() => {
-  //   console.log(
-  //     'summary', summary,
-  //     'name', name,
-  //     'review', review,
-  //     'email', email,
-  //     'recommend', recommend,
-  //     'starRating', starRating,
-  //     'charRating', charRating,
-  //     'photoArray', photoArray,
-  //   );
-  // });
+  //upload photos to cloudinary and get the link
+  let convertCloudinary = () => {
+    if (photoArray) {
+      photoArray.map(photo =>
+        axios.post('/cloudinary', { img: photo })
+          .then(results => setConvertedPhotos([...convertedPhotos, results.data]))
+          // .then(results => { convertedPhotos.push(results.data); setConvertedPhotos(convertedPhotos); })
+          .catch(err => console.log(err))
+      );
+    }
+  };
 
-  //submits form to server
-  // eslint-disable-next-line camelcase
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    closeForm(true);
+  //upload results to server
+  let submitResults = () => {
+    console.log('this', convertedPhotos);
     axios.post('/reviews', {
       // eslint-disable-next-line camelcase
-      product_id: currentProductId,
+      product_id: parseInt(currentProductId),
       rating: starRating,
       summary: summary,
       body: review,
       name: name,
       email: email,
-      photos: photoArray,
+      photos: convertedPhotos,
       recommended: recommend,
       characteristics: charRating
     }).then(console.log('post success'))
       .catch(err => console.log(err));
   };
+
+  //submits form to server
+  // eslint-disable-next-line camelcase
+  let handleSubmit = async (event) => {
+    event.preventDefault();
+    closeForm(true);
+    await convertCloudinary();
+    await submitResults();
+  };
+
 
 
   return (form ?

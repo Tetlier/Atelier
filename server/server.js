@@ -69,6 +69,7 @@ app.post('/reviews', (req, res) => {
   let photos = req.body.photos;
   let recommended = req.body.recommended;
   let characteristics = req.body.characteristics;
+  console.log('hello', req.body, req.body.photos);
   controllers.postReview(product_id, rating, summary, body, name, email, photos, recommended, characteristics)
     .then((results) => {
       res.send(results.data).status(201);

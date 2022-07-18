@@ -9,7 +9,6 @@ import SearchBar from './SearchBar.jsx';
 import { Button } from '../styles/Button.styled.js';
 import { Grid, Row, Col, Scroll } from '../styles/reviewstyles/reviewWidget.styled.js';
 
-
 const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
 
   //hooks related to the review list and restrictions

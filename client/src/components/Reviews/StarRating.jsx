@@ -21,7 +21,6 @@ const StarRating = ({starRating, setStarRating}) => {
   }, [starRating]);
 
   useEffect(()=> {
-    console.log(starRating, hover);
   }, [starRating, hover]);
 
   return (
@@ -39,10 +38,9 @@ const StarRating = ({starRating, setStarRating}) => {
             />
             <FaStar
               size='25'
-              color={(starVal <= hover || starVal <= starRating) ? '#ffc107' : '#w4w5e9' }
+              color={(starVal <= hover || starVal <= starRating) ? '#ffc107' : '#000' }
               onMouseEnter={() => setHover(starVal)}
               onMouseLeave={() => setHover(null)} />
-
           </Stars>
         );
       })}

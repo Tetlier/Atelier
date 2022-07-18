@@ -67,7 +67,6 @@ const StyleRating = ({ metaReview, setCharRating, charRating }) => {
         5: 'Runs long',
       },
     };
-    console.log('this', id);
     setCurrentId(id);
     setCurrentRating(rating);
     setRatingExplanation(obj[style][rating]);

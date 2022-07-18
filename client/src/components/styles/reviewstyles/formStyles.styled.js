@@ -48,7 +48,7 @@ opacity: 0;
 `;
 
 export const Stars = styled.label`
-transition: 200ms;
+> * {transition: 200ms;}
 `;
 
 export const Title = styled.div`

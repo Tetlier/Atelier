@@ -71,7 +71,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getProducts();
-
     //below is a test. remove when testing complete
     this.getAverageRating(40344); // gives us 3.75
   }

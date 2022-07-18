@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { MetaGrid, MetaRow, MetaCol, SummaryStar, Clickable } from '../styles/reviewstyles/metaReviewStyles.styled.js';
 
-const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings }) => {
+const MetaReview = ({ metaReview, currentProductRating,filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings }) => {
   const [recommended, setRecommended] = useState(0);
   const [ratingsArray, setRatingsArray] = useState([]);
 
