@@ -9,7 +9,6 @@ export const StyledImageCarousel = styled.div`
     overflow: hidden;
     height: 750px;
     width: 120px;
-    background-color:yellow;
   }
   .buttonContainer {
     position: absolute;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledProductDetail = styled.div`
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   column-gap: 20px;

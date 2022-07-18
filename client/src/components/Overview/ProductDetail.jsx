@@ -2,9 +2,9 @@ import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled';
 const ProductDetail = ({description, slogan, features}) => {
   return (
     <StyledProductDetail>
-      <h1 style={{'flexBasis': '50%'}}>Description: {description}</h1>
+      <h3 style={{'flexBasis': '50%'}}>Description: {description}</h3>
       <br/>
-      <h1 style={{'flexBasis': '20%'}}>Slogan: {slogan}</h1>
+      <h3 style={{'flexBasis': '20%'}}>Slogan: {slogan}</h3>
       <ul style={{'flexBasis': '20%'}}>
         {
           features.map((item, i) => {
@@ -14,15 +14,19 @@ const ProductDetail = ({description, slogan, features}) => {
       </ul>
       <div className='social-links' style={{'flexBasis': '10%'}}>
         <p>Share At: </p>
+        &nbsp;
         <a href='#'>
           <i className='fab fa-facebook-f'></i>
         </a>
+        &nbsp;
         <a href='#'>
           <i className='fab fa-twitter'></i>
         </a>
+        &nbsp;
         <a href='#'>
           <i className='fab fa-instagram'></i>
         </a>
+        &nbsp;
         <a href='#'>
           <i className='fab fa-whatsapp'></i>
         </a>
