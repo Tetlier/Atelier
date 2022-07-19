@@ -18,6 +18,8 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
   const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
+  const [selectedSku, setSelectedSku] = useState('default');
+  const [selectedQuantity, setSelectedQuantity] = useState(0);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
@@ -33,7 +35,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
           // styles.results[i].skus = {'000001': {quantity: 1, size: 'SELECT SIZE'}, ...styles.results[i].skus};
           styles.results[i].skusArr = Object.entries(styles.results[i].skus);
           styles.results[i].skusArr.unshift(['000001', {quantity: 0, size: 'SELECT SIZE'}]);
-          console.log(':::: ', styles.results[i].skusArr);
         }
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(styles);
@@ -45,9 +46,12 @@ const Overview = ({currentProductId, currentProductRating}) => {
   }, [currentProductStyle]);
 
   // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
-  const handleStyleChange = (key) => {
+  const handleStyleChange = (event, key) => {
+    event.preventDefault();
     setSelectedStyleIndex(key);
     setSelectedSizeQuantity([]);
+    setSelectedSku('default');
+    setSelectedQuantity(0);
   };
 
   const handleThumbnailChange = (key) => {
@@ -55,8 +59,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
   };
 
   const handleSkuChange = (text) => {
-    // console.log('called ', text);
-    // console.log('currentProductStyle.skus ', currentProductStyle.results[selectedStyleIndex].skus);
+    setSelectedSku(text);
     for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
       if (value.size === text) {
         var quantityArr = [];
@@ -66,6 +69,10 @@ const Overview = ({currentProductId, currentProductRating}) => {
       }
     }
     setSelectedSizeQuantity(quantityArr);
+  }
+
+  const handleQuantityChange = (text) => {
+    setSelectedQuantity(text);
   }
 
 
@@ -101,7 +108,11 @@ const Overview = ({currentProductId, currentProductRating}) => {
             styleChange={handleStyleChange}
             skuChange={handleSkuChange}
             selectedStyleIndex={selectedStyleIndex}
-            selectedSizeQuantity={selectedSizeQuantity}/>
+            selectedSizeQuantity={selectedSizeQuantity}
+            selectedSku={selectedSku}
+            selectedQuantity={selectedQuantity}
+            quantityChange={handleQuantityChange}
+          />
         </ProductContent>
       </OverviewContainer>
 

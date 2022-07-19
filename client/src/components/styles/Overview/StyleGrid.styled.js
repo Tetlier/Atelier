@@ -22,4 +22,9 @@ export const StyleGridItem = styled.img`
     opacity: 0.8;
     background: #000;
   }
+
+  &.active {
+    opacity: 0.3;
+    background: #000;
+  }
 `;
