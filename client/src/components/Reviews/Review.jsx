@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbNail, FullSize, VerySmallButton } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
+import { ReviewArea} from '../styles/reviewstyles/ReviewStyles.styled.js'
 import { FcCheckmark } from 'react-icons/fc';
 import axios from 'axios';
 
@@ -52,7 +53,7 @@ const Review = ({ review, StarReview }) => {
       </ReviewRow>
       <ReviewRow><b> {review.summary}</b></ReviewRow>
       {review.recommend ? <p><small> I recommend this product </small><FcCheckmark/></p> : null}
-      {restriction ? <div maxLength={250}>{review.body}</div> : <div>{review.body}</div>}
+      {restriction ? <ReviewArea maxLength={250}>{review.body}</ReviewArea> : <ReviewArea>{review.body}</ReviewArea>}
       {review.body.length > 250 ?
         <button
           onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}

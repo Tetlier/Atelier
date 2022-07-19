@@ -78,7 +78,7 @@ const StyleRating = ({ metaReview, setCharRating, charRating }) => {
       {Object.keys(metaReview.characteristics).map(characteristic => {
         return (
           <div key={characteristic}>
-            {characteristic} : {[...Array(Object.keys(metaReview.characteristics).length)].map((rating, index) => {
+            {characteristic} : {[...Array(5)].map((rating, index) => {
               const thisRating = index + 1;
               return (
                 <label key={thisRating}

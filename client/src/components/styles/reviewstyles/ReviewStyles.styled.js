@@ -32,3 +32,8 @@ export const ReviewStars = styled.div`
     -webkit-text-fill-color: transparent;
   }
 `;
+
+export const ReviewArea = styled.div`
+inline-size: 40em;
+overflow-wrap: break-word;
+`
