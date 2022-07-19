@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import { MetaGrid, MetaRow, MetaCol, SummaryStar, Clickable, Styles, RateSpace, StyleSpace, SmallButton } from '../styles/reviewstyles/metaReviewStyles.styled.js';
 
-const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings, reviewList, form }) => {
+const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings}) => {
   const [recommended, setRecommended] = useState(0);
   const [ratingsArray, setRatingsArray] = useState([]);
 
@@ -11,8 +10,9 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
     if (metaReview.recommended) {
       getRecommended(parseInt(metaReview.recommended.true), parseInt(metaReview.recommended.false));
       getRatings();
+      console.log('here', totalRatings);
     }
-  }, [metaReview, filterRating, reviewList, form]);
+  }, [metaReview]);
 
   //gets the overall recommendation of the product
   let getRecommended = (recommended, notRecommended) => {

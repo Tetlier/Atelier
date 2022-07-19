@@ -67,7 +67,7 @@ export const SummaryInput = styled.textarea`
 `;
 
 //must use input because textarea does not work with minLength
-export const ReviewInput = styled.input`
+export const ReviewInput = styled.textarea`
   width: 80%;
   height: 6em;
   overflow: auto;

@@ -7,11 +7,15 @@ import axios from 'axios';
 
 import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
 
-const Review = ({ review, StarReview }) => {
+const Review = ({ review, StarReview, setRefresh }) => {
 
   const [restriction, setRestriction] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [enlarged, setEnlarged] = useState(new Array(review.photos.length).fill(false));
+
+  useEffect(() => {
+    console.log('changed');
+  }, [clicked])
 
   //broken. Shows ALL images
   const enlargeThumbnail = (img, index) => {
@@ -29,7 +33,7 @@ const Review = ({ review, StarReview }) => {
   let submitHelpful = (id) => {
     // eslint-disable-next-line camelcase
     axios.put('/reviews', { review_id: id })
-      .then(() => setClicked(true))
+      .then(() => {setClicked(true); setRefresh(prevState => !prevState)})
       .catch(err => err);
   };
 

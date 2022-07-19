@@ -15,10 +15,11 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   const [filterRating, setFilterRating] = useState([]);
   const [noMoreResults, setNoMoreResults] = useState(false);
 
-  //hooks related to controlling parameters for review GET requests
+  //hooks related to controlling parameters for review GET requests and refreshing states
   const [count, setCount] = useState(10);
   const [reviewList, setReviewList] = useState([]);
   const [dropDownSort, setDropDownSort] = useState('relevant');
+  const [refresh, setRefresh] = useState(false);
 
   //metaReview and form hooks
   const [metaReview, setMetaReview] = useState({});
@@ -63,6 +64,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //toggles opening and closing of form
   let closeForm = () => {
     setForm(false);
+    setRefresh(!refresh);
   };
 
   //On initialization, gets metareview and two reviews
@@ -81,7 +83,8 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //Monitors for changes in dropDownSort and posts after pressing and gets new sorted info on change
   useEffect(() => {
     startPoint >= 2 ? getPageReviews() : null;
-  }, [dropDownSort, form]);
+    getMetaReview(currentProductId);
+  }, [dropDownSort, refresh]);
 
   //Adds and removes rating filters
   let toggleFilter = async (rating) => {
@@ -125,7 +128,8 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
               <ReviewMapper
                 reviewList={reviewList}
                 filterRating={filterRating}
-                currentSearch={currentSearch} /> : null}
+                currentSearch={currentSearch}
+                setRefresh = {setRefresh}/> : null}
           </Scroll>
           <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
 

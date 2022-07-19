@@ -24,6 +24,7 @@ class App extends React.Component {
     this.state = {
       currentProductId: 40344,
       currentProductRating: 0,
+      currentProductName: '',
       sessionCookie: {
         's_id': document.cookie.slice(5),
         actions: []
@@ -98,7 +99,7 @@ class App extends React.Component {
               <Overview
                 currentProductId={this.state.currentProductId}
                 currentProductRating = {this.state.currentProductRating} />
-              <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
+              <div><Reviews currentProductId = '40344' currentProductRating = {this.state.currentProductRating}/></div>
               <br/>
               <div><QA productId={this.state.currentProductId}
                 sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>

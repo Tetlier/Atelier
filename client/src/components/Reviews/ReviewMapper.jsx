@@ -2,7 +2,7 @@ import React from 'react';
 import Review from './Review.jsx';
 
 
-const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch }) => {
+const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch, setRefresh }) => {
 
   // //requirement variables
 
@@ -22,15 +22,15 @@ const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch }) =
   //mapper with filterRating and currentSearch filters applied
 
   return (
-    <div>{reviewList.map(review => {
+    <div>{reviewList.map((review, index) => {
       if (filterRating.includes(review.rating) && currentSearch && review.summary.toLowerCase().includes(currentSearch.toLowerCase())) {
-        return <Review review={review} key={reviewList.indexOf(review)} StarReview={StarReview} />;
+        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
       } else if (filterRating.includes(review.rating) && !currentSearch) {
-        return <Review review={review} key={reviewList.indexOf(review)} StarReview={StarReview} />;
+        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
       } else if (filterRating.length === 0 && currentSearch && review.summary.toLowerCase().includes(currentSearch.toLowerCase())) {
-        return <Review review={review} key={reviewList.indexOf(review)} StarReview={StarReview} />;
+        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
       } else if (filterRating.length === 0 && !currentSearch) {
-        return <Review review={review} key={reviewList.indexOf(review)} StarReview={StarReview} />;
+        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
       } else {
         null;
       }

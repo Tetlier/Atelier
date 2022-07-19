@@ -20,7 +20,7 @@ width: 100%;
 `;
 
 export const Scroll = styled.div`
-  max-height: 310px;
+  max-height: 320px;
   overflow-y: auto;
   max-width: 700px;
   overflow-x: auto;

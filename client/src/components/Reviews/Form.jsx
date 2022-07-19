@@ -106,12 +106,13 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
 
             <div>Review: <div>
               <ReviewInput
-                minLength='50'
-                maxLength='1000'
                 id='review'
                 value={review}
                 onChange={event => handleChange(event, setReview)}
                 placeHolder='What did you like or dislike about this product?'
+                name='review'
+                minLength='50'
+                maxLength='1000'
                 required />
             </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}</div>
 
