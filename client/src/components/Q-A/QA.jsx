@@ -14,7 +14,7 @@ export default function QA ({productId, sessionCookie, addToCookie, productName}
 
   useEffect(() => {
     setSearchTerm('');
-  }, [productId])
+  }, [productId]);
 
   return (
     <div>

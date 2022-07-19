@@ -43,7 +43,7 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
 
   useEffect(() => {
     setQuestionCount(2);
-  }, [productId])
+  }, [productId]);
 
   return (
     <div className="questionList">
