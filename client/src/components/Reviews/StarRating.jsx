@@ -24,7 +24,7 @@ const StarRating = ({starRating, setStarRating}) => {
   }, [starRating, hover]);
 
   return (
-    <div>Rating: {starExplanation ? starExplanation : null}<div>
+    <div>Overall Rating<sup><font color="#ff0000">*</font></sup> {starExplanation ? starExplanation : null}<div>
       {[...Array(5)].map((star, index) => {
         const starVal = index + 1;
         return (

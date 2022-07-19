@@ -74,11 +74,11 @@ const StyleRating = ({ metaReview, setCharRating, charRating }) => {
 
   return (
     <div>
-      <div>Characteristics Rating:</div>
+      {/* <div>Characteristics Rating:</div> */}
       {Object.keys(metaReview.characteristics).map(characteristic => {
         return (
           <div key={characteristic}>
-            {characteristic} : {[...Array(5)].map((rating, index) => {
+            {characteristic}<sup><font color="#ff0000">*</font></sup>:&nbsp; {[...Array(5)].map((rating, index) => {
               const thisRating = index + 1;
               return (
                 <label key={thisRating}
@@ -99,7 +99,7 @@ const StyleRating = ({ metaReview, setCharRating, charRating }) => {
                 </label>
               );
             })}
-            <div>This rating means: {eval(`${characteristic.toLowerCase()}RatingExplanation`)}</div>
+            <div>The {characteristic}: {eval(`${characteristic.toLowerCase()}RatingExplanation`)}</div>
           </div>
         );
       })}

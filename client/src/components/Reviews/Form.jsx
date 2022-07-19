@@ -81,12 +81,17 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   // eslint-disable-next-line camelcase
   let handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (review.length < 50) {
+      alert('The review length must be greater than 50 characters.')
+    } else {
+
     closeForm(true);
     convertCloudinary()
     .then((photoURLs)=> submitResults(photoURLs))
     .catch(err => console.log(err))
+    }
   };
-
 
 
   return (form ?
@@ -95,7 +100,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
         <Title><h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> </Title>
         <FormGrid>
           <FormRow>
-            <div>Summary</div>
+            <div>Summary<sup><font color="#ff0000">*</font></sup></div>
             <SummaryInput
               type="text"
               maxLength={60}
@@ -104,7 +109,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
               onChange={event => handleChange(event, setSummary)}
               required />
 
-            <div>Review: <div>
+            <div>Review<sup><font color="#ff0000">*</font></sup><div>
               <ReviewInput
                 id='review'
                 value={review}
@@ -116,7 +121,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
                 required />
             </div> {review.length < 50 ? `${review.length}/50 characters` : 'Minimum reached'}</div>
 
-            <div>Name: <input
+            <div>Name<sup><font color="#ff0000">*</font></sup>:&nbsp;<input
               type='name'
               id='name'
               value={name}
@@ -125,7 +130,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
             </div>
             <div>For privacy reasons, do not use your full name or email address</div>
 
-            <div>Email: <input
+            <div>Email<sup><font color="#ff0000">*</font></sup>:&nbsp;<input
               type='email'
               id='email'
               value={email}
@@ -133,7 +138,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
               required></input>
             <div>For authentication reasons, you will not be emailed</div></div>
 
-            <div>Attach up to 5 images:
+            <div>Attach up to 5 images
               {photoArray.length < 5 ?
                 <input
                   id='file'
@@ -151,7 +156,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
             <StyleRating metaReview={metaReview} setCharRating={setCharRating} charRating={charRating} />
 
             <div>
-              <div>Would you recommend this product?</div>
+              <div>Would you recommend this product?<sup><font color="#ff0000">*</font></sup></div>
               <label>Yes <input id='yes' name='selectOne' type='radio' onClick={() => setRecommend(true)} required></input></label>
               <label>No <input id='no' name='selectOne' type='radio' onClick={() => setRecommend(false)}></input></label>
             </div>

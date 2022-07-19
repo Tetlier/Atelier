@@ -23,8 +23,9 @@ padding: 5px;
 }
 `;
 
-export const ImageGallery = styled.div`
-display: inline-block;
+export const ImageGallery = styled.label`
+display: flex;
+flex-direction: row;
 `;
 
 export const VerySmallButton = styled.button`
