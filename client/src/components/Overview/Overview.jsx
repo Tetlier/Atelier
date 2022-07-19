@@ -66,7 +66,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
       }
     }
     setSelectedSizeQuantity(quantityArr);
-  }
+  };
 
 
   return (

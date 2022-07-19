@@ -12,7 +12,7 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
 
   useEffect(() => {
     getProducts();
-  }, [])
+  }, []);
 
   useEffect(() => {
     for (let i = 0; i < productList.length; i++) {
@@ -20,7 +20,7 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
         setIndex(i);
       }
     }
-  }, [currentProductId])
+  }, [currentProductId]);
 
   // gets product info and styles of all products
   const getProducts = function() {
@@ -41,7 +41,7 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
             .catch((err) => {
               console.log('Error getting product info: ', err);
               return err;
-            })
+            });
         }));
       })
       .catch((err) => {
@@ -60,16 +60,13 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
           <OtherProductsList>
             {productList &&
               productList.map((product, index) => {
-                if (index != indexOfProduct) {
-                  return <Product
-                  key={product.productInfo.id}
-                  productInfo={product.productInfo}
-                  styles={product.styles}
-                  setCurrentId={setCurrentId}
-                />
-                } else {
-                  return null;
-                }
+                index !== indexOfProduct ?
+                  <Product
+                    key={product.productInfo.id}
+                    productInfo={product.productInfo}
+                    styles={product.styles}
+                    setCurrentId={setCurrentId}
+                  /> : null;
               })
             }
           </OtherProductsList>
