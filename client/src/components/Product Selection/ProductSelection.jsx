@@ -10,6 +10,7 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
   // index of currentProduct in productList
   const [indexOfProduct, setIndex] = useState(0);
 
+  // should only get the productList once
   useEffect(() => {
     getProducts();
   }, []);
@@ -60,13 +61,16 @@ export default function ProductSelection ({currentProductId, setCurrentId}) {
           <OtherProductsList>
             {productList &&
               productList.map((product, index) => {
-                index !== indexOfProduct ?
-                  <Product
+                if (index !== indexOfProduct) {
+                  return <Product
                     key={product.productInfo.id}
                     productInfo={product.productInfo}
                     styles={product.styles}
                     setCurrentId={setCurrentId}
-                  /> : null;
+                  />;
+                } else {
+                  return null;
+                }
               })
             }
           </OtherProductsList>
