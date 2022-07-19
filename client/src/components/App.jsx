@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './Reviews/Reviews.jsx';
@@ -10,6 +10,7 @@ import GlobalStyles from './styles/Global.js';
 import {Button} from './styles/Button.styled.js';
 import Overview from './Overview/Overview';
 import StarReview from './styles/StarReview.styled.js';
+import ProductSelection from './Product Selection/ProductSelection';
 
 const theme = {
   colors: {
@@ -18,35 +19,28 @@ const theme = {
   }
 };
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentProductId: 40344,
-      currentProductRating: 0,
-      sessionCookie: {
-        's_id': document.cookie.slice(5),
-        actions: []
-      }
-    };
-    this.getProducts = this.getProducts.bind(this);
-    this.addToCookie = this.addToCookie.bind(this);
-  }
+export default function App () {
+  const [currentProductId, setCurrentId] = useState(40344);
+  const [currentProductRating, setRating] = useState(0);
+  let sessionCookie = {
+    's_id': document.cookie.slice(5),
+    actions: []
+  };
+  const [productName, setProductName] = useState('Camo Onesie');
 
-  getProducts() {
-    axios.get('http://localhost:3000/products')
-      .then(response => {
-        this.setState({ productList: response.data }, () => {
-          return this.state.productList;
-        });
-
+  useEffect(() => {
+    getAverageRating(currentProductId);
+    // get product name
+    axios.get(`/product/${currentProductId}`)
+      .then((res) => {
+        setProductName(res.data.productInfo.name);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Error: ', err);
       });
-  }
+  }, [currentProductId]);
 
-  getAverageRating(id) {
+  const getAverageRating = function(id) {
     axios.get('/meta', { params: { id: id } })
       .then(results => {
         let avg = 0;
@@ -63,53 +57,53 @@ class App extends React.Component {
 
         //Rounding down and converting to quarter percentages
         avg = Math.floor(ratingsum / total * 4) / 4;
-        this.setState({ currentProductRating: avg });
+        setRating(avg);
       }
       )
       .catch(err => console.log(err));
-  }
-
-  componentDidMount() {
-    this.getProducts();
-
-    //below is a test. remove when testing complete
-    this.getAverageRating(40344); // gives us 3.75
-  }
+  };
 
   // takes in id (question or answer) and action (helpful or reported) to add to cookie
-  addToCookie(id, action) {
+  const addToCookie = function(id, action) {
     action = action.toLowerCase();
     // adds id number + h or r for helpful or reported
-    this.state.sessionCookie.actions.push(id + action.slice(0, 1));
-  }
+    sessionCookie.actions.push(id + action.slice(0, 1));
+  };
 
   //first div should be the current item and its details
   //second div should be the rest of the products (related products) -if have enough time
   //third div should be questions and answers
   //fourth div should be reviews
 
-  render() {
-    return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyles/>
-            <Container>
-              <h1>Welcome to Atelier!</h1>
-              <Overview
-                currentProductId={this.state.currentProductId}
-                currentProductRating = {this.state.currentProductRating} />
-              <div id={'review'}><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
-              <br/>
-              <div><QA productId={this.state.currentProductId}
-                sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
-              </div>
-            </Container>
-          </>
-        </ThemeProvider>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyles/>
+          <Container>
+            <h1>Welcome to Atelier!</h1>
+            <Overview
+              currentProductId={currentProductId}
+              currentProductRating={currentProductRating} />
+            <ProductSelection
+              currentProductId={currentProductId}
+              setCurrentId={setCurrentId}
+            />
+            <Reviews
+              currentProductId={currentProductId}
+              currentProductRating={currentProductRating}
+              productName={productName}
+            />
+            <br/>
+            <QA
+              productId={currentProductId}
+              sessionCookie={sessionCookie}
+              addToCookie={addToCookie}
+              productName={productName}
+            />
+          </Container>
+        </>
+      </ThemeProvider>
+    </div>
+  );
 }
-
-export default App;

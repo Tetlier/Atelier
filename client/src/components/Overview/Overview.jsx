@@ -22,7 +22,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [skuAlert, setSkuAlert] = useState(false);
   useEffect(() => {
-    axios.get('/product', {productId: 40344})
+    axios.get(`/product/${currentProductId}`)
       .then((response => {
         // TODO: this is a test, to test sku select in cart shows out of stock, need to delete once done.
         var styles = response.data.styleInfo;
