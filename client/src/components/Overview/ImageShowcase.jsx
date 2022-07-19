@@ -42,7 +42,9 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   // TODO: figure out the equation, right now, it's not correct.
   let handleMouseMove = (ev) => {
     setMousePosition({
-      left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
+      // left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 80, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 80});
+      left: ev.nativeEvent.offsetX / windowSize.width * 100, top: ev.nativeEvent.offsetY / windowSize.height * 100});
+
     // left: ev.nativeEvent.pageX, top: ev.nativeEvent.pageY });
     // left: (ev.pageX - ev.nativeEvent.offsetX), top: (ev.pageY - ev.nativeEvent.offsetY)});
     // left: (-ev.nativeEvent.offsetX), top: (-ev.nativeEvent.offsetY)});
