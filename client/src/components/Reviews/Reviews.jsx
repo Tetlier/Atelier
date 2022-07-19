@@ -131,9 +131,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
           <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
           <div> {!noMoreResults ? <Button
             onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-            <Button
-              data-testid='addReview'
-              onClick={() => formClick(true)}>Add a Review + </Button></div>
+          <Button
+            data-testid='addReview'
+            onClick={() => formClick(true)}>Add a Review + </Button></div>
         </Col>
       </Row>
     </Grid>
