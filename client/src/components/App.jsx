@@ -19,13 +19,9 @@ const theme = {
   }
 };
 
-export default function App () {
+export default function App ({sessionCookie, addToCookie}) {
   const [currentProductId, setCurrentId] = useState(40344);
   const [currentProductRating, setRating] = useState(0);
-  let sessionCookie = {
-    's_id': document.cookie.slice(5),
-    actions: []
-  };
   const [productName, setProductName] = useState('Camo Onesie');
 
   useEffect(() => {
@@ -61,13 +57,6 @@ export default function App () {
       }
       )
       .catch(err => console.log(err));
-  };
-
-  // takes in id (question or answer) and action (helpful or reported) to add to cookie
-  const addToCookie = function(id, action) {
-    action = action.toLowerCase();
-    // adds id number + h or r for helpful or reported
-    sessionCookie.actions.push(id + action.slice(0, 1));
   };
 
   //first div should be the current item and its details
