@@ -22,4 +22,4 @@ export const OtherProducts = styled.aside`
 
 export const OtherProductsList = styled.section`
   display: flex;
-`
+`;
