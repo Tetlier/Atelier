@@ -17,11 +17,26 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [currentProductStyle, setCurrentProductStyle] = useState({});
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
+  const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
+        // TODO: this is a test, to test sku select in cart shows out of stock, need to delete once done.
+        var styles = response.data.styleInfo;
+        styles.results[0].skus = {};
+        styles.results[1]['sale_price'] = 50;
+        styles.results[1]['original_price'] = 777;
+        styles.results[2]['original_price'] = 888;
+        styles.results[3]['original_price'] = 999;
+        for (let i = 0; i < styles.results.length; i++) {
+          // styles.results[i].skus.unshift({size: 'Select Size'});
+          // styles.results[i].skus = {'000001': {quantity: 1, size: 'SELECT SIZE'}, ...styles.results[i].skus};
+          styles.results[i].skusArr = Object.entries(styles.results[i].skus);
+          styles.results[i].skusArr.unshift(['000001', {quantity: 0, size: 'SELECT SIZE'}]);
+          console.log(':::: ', styles.results[i].skusArr);
+        }
         setCurrentProduct(response.data.productInfo);
-        setCurrentProductStyle(response.data.styleInfo);
+        setCurrentProductStyle(styles);
       }));
   }, []);
 
@@ -30,13 +45,28 @@ const Overview = ({currentProductId, currentProductRating}) => {
   }, [currentProductStyle]);
 
   // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
-  const handleStlyeChange = (key) => {
+  const handleStyleChange = (key) => {
     setSelectedStyleIndex(key);
+    setSelectedSizeQuantity([]);
   };
 
   const handleThumbnailChange = (key) => {
     setSelectedThumbnailIndex(key);
   };
+
+  const handleSkuChange = (text) => {
+    // console.log('called ', text);
+    // console.log('currentProductStyle.skus ', currentProductStyle.results[selectedStyleIndex].skus);
+    for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
+      if (value.size === text) {
+        var quantityArr = [];
+        for (let i = 0; i < value.quantity; i++) {
+          quantityArr.push({key: i + 1});
+        }
+      }
+    }
+    setSelectedSizeQuantity(quantityArr);
+  }
 
 
   return (
@@ -68,8 +98,10 @@ const Overview = ({currentProductId, currentProductRating}) => {
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
             productStyle={currentProductStyle}
-            stlyeChange={handleStlyeChange}
-            selectedStyleIndex={selectedStyleIndex}/>
+            styleChange={handleStyleChange}
+            skuChange={handleSkuChange}
+            selectedStyleIndex={selectedStyleIndex}
+            selectedSizeQuantity={selectedSizeQuantity}/>
         </ProductContent>
       </OverviewContainer>
 
