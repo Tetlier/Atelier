@@ -3,7 +3,7 @@ export const FormView = styled.div`
   margin: 10px 10px 10px 10px;
   padding: 30px 30px 30px 30px;
   width: 75%;
-  height: 60%;
+  height: 75%;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;

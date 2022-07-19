@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { AnswerStyle, AnswerFooter, LinkHover, ClickedLink } from '../styles/Q-A/QAList.styled';
+import { ThumbNail, FullSizeImage, ImageList } from '../styles/Q-A/ImageViews.styled';
+import { FormBackground } from '../styles/Q-A/FormView.styled';
+
 
 export default function Answer ({answer, answers, setAnswers, sessionCookie, addToCookie, sellerName}) {
   const [reported, setReported] = useState(false);
@@ -12,6 +15,7 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
   let month = monthArr[answerDate.getMonth()];
   let day = answerDate.getDate();
   let year = answerDate.getFullYear();
+  const [enlarged, setEnlarged] = useState(new Array(answer.photos.length).fill(false));
 
   const markHelpful = function() {
     // adds answer to cookie
@@ -53,11 +57,31 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
     }
   };
 
-  // need to account for seller name being bolded
   return (
     <AnswerStyle>
       <div className="answer">
         <div className="answer-body">{answer.body}</div>
+        <ImageList>
+          {answer.photos.map((photo, index) =>
+            <div key={photo.url}>
+              { enlarged[index] ? (
+                <FormBackground onClick={() => setEnlarged(new Array(answer.photos.length).fill(false))}>
+                  <FullSizeImage src={photo.url} alt='answer photo'/>
+                </FormBackground>
+              )
+                :
+                <ThumbNail
+                  onClick={() => {
+                    let newEnlargedState = enlarged.slice();
+                    newEnlargedState[index] = true;
+                    setEnlarged(newEnlargedState);
+                  }}
+                  src={photo.url}
+                  alt='answer photo'
+                />
+              }
+            </div>)}
+        </ImageList>
         <AnswerFooter>
           <div className="answer-footer">by&nbsp;
             {answer.answerer_name.toLowerCase() === sellerName && <b>Seller</b>}

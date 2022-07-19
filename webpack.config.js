@@ -27,6 +27,7 @@ module.exports = {
   // node: {
   //   fs: 'empty'
   // },
+
   plugins: [
     // Can refer to process.env variables within client-side files
     new webpack.DefinePlugin({
