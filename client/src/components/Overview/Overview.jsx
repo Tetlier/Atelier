@@ -20,6 +20,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
   const [selectedSku, setSelectedSku] = useState('default');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
+  const [skuAlert, setSkuAlert] = useState(false);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
@@ -52,6 +53,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
     setSelectedSizeQuantity([]);
     setSelectedSku('default');
     setSelectedQuantity(0);
+    setSkuAlert(false);
   };
 
   const handleThumbnailChange = (key) => {
@@ -60,6 +62,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
 
   const handleSkuChange = (text) => {
     setSelectedSku(text);
+    setSkuAlert(false);
     for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
       if (value.size === text) {
         var quantityArr = [];
@@ -72,7 +75,12 @@ const Overview = ({currentProductId, currentProductRating}) => {
   }
 
   const handleQuantityChange = (text) => {
+    setSkuAlert(false);
     setSelectedQuantity(text);
+  }
+
+  const handleSkuAlertChange = (value) => {
+    setSkuAlert(value);
   }
 
 
@@ -112,6 +120,8 @@ const Overview = ({currentProductId, currentProductRating}) => {
             selectedSku={selectedSku}
             selectedQuantity={selectedQuantity}
             quantityChange={handleQuantityChange}
+            skuAlert={skuAlert}
+            skuAlertChange={handleSkuAlertChange}
           />
         </ProductContent>
       </OverviewContainer>

@@ -4,7 +4,7 @@ import Cart from './Cart';
 import { StyleGrid, StyleGridItem } from '../styles/Overview/StyleGrid.styled';
 import { useState } from 'react';
 
-const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex, selectedSizeQuantity, selectedSku, selectedQuantity, quantityChange}) => {
+const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex, selectedSizeQuantity, selectedSku, selectedQuantity, quantityChange, skuAlert, skuAlertChange}) => {
   const [selectedStyle, setSelectedStyle] = useState(productStyle.results[0]);
 
   return (
@@ -49,7 +49,9 @@ const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex
       selectedSizeQuantity={selectedSizeQuantity}
       selectedSku={selectedSku}
       selectedQuantity={selectedQuantity}
-      quantityChange={quantityChange}/>
+      quantityChange={quantityChange}
+      skuAlert={skuAlert}
+      skuAlertChange={skuAlertChange}/>
     </StyledStyleSelector>
   );
 };
