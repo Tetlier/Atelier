@@ -20,9 +20,9 @@ let getProduct = (productId, callback) => {
       'Authorization': `${process.env.TOKEN}`
     }
   };
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40347', options)
+  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348', options)
     .then((product) => {
-      axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40347/styles', options)
+      axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348/styles', options)
         .then((styles) => {
           var result = { productInfo: product.data, styleInfo: styles.data };
           callback(null, result);
