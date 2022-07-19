@@ -25,7 +25,7 @@ const Cart = ({selectedStyle, skuChange, selectedSizeQuantity, selectedSku, sele
      skuAlertChange(true);
      console.log(skuSelectRef.current);
      // TODO: not working
-     skuSelectRef.current.click();
+     skuSelectRef.current.focus();
     } else {
 
     }
