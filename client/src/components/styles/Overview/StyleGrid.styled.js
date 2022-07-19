@@ -20,11 +20,10 @@ export const StyleGridItem = styled.img`
   max-width:100%;
   &:hover {
     opacity: 0.8;
-    background: #000;
   }
 
   &.active {
-    opacity: 0.3;
-    background: #000;
+    border-style: solid;
+    border-color: coral;
   }
 `;

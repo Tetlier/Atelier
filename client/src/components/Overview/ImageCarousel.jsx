@@ -15,11 +15,9 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   const isDisabled = (direction) => {
     if (productStyle.photos.length <= 7) {
       return true;
-    }
-    else if (direction === 'prev') {
+    } else if (direction === 'prev') {
       return currentIndex <= 0;
-    }
-    else if (direction === 'next' ) {
+    } else if (direction === 'next' ) {
       return currentIndex >= $( '.carousel-container' ).height();
     }
     return false;

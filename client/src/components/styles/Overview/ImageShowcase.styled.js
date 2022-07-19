@@ -114,8 +114,12 @@ export const StyledImgShowcase = styled.div`
   }
 
   .zoomedImageView.active div {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 600px;
     transform: scale(2.5);
+
+    &:hover {
+      cursor: zoom-out;
+    }
   }
 `;

@@ -10,19 +10,19 @@ const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex
   return (
     <StyledStyleSelector>
       <div className='product-price'>
-      {
-        productStyle.results[selectedStyleIndex]['sale_price'] !== null
-        &&
-        <h3 className='new-price'>
-          Sell Price: <span style={{color: 'red'}}>${productStyle.results[selectedStyleIndex]['sale_price']}</span>
+        {
+          productStyle.results[selectedStyleIndex]['sale_price'] !== null
+          &&
+          <h3 className='new-price'>
+            Sell Price: <span style={{color: 'red'}}>${productStyle.results[selectedStyleIndex]['sale_price']}</span>
+          </h3>
+        }
+        <h3 className='last-price'>
+          Price:
+          <span style={{'textDecoration': productStyle.results[selectedStyleIndex]['sale_price'] !== null ? 'line-through' : 'none'}}>
+            ${productStyle.results[selectedStyleIndex]['original_price']}
+          </span>
         </h3>
-      }
-      <h3 className='last-price'>
-        Price:
-        <span style={{'textDecoration' : productStyle.results[selectedStyleIndex]['sale_price'] !== null ? 'line-through' : 'none'}}>
-          ${productStyle.results[selectedStyleIndex]['original_price']}
-        </span>
-      </h3>
       </div>
       <h3>Style &gt; {productStyle.results[selectedStyleIndex].name}</h3>
       <br/>
@@ -44,14 +44,14 @@ const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex
       </StyleGrid>
       <br/>
       <Cart
-      selectedStyle={productStyle.results[selectedStyleIndex]}
-      skuChange={skuChange}
-      selectedSizeQuantity={selectedSizeQuantity}
-      selectedSku={selectedSku}
-      selectedQuantity={selectedQuantity}
-      quantityChange={quantityChange}
-      skuAlert={skuAlert}
-      skuAlertChange={skuAlertChange}/>
+        selectedStyle={productStyle.results[selectedStyleIndex]}
+        skuChange={skuChange}
+        selectedSizeQuantity={selectedSizeQuantity}
+        selectedSku={selectedSku}
+        selectedQuantity={selectedQuantity}
+        quantityChange={quantityChange}
+        skuAlert={skuAlert}
+        skuAlertChange={skuAlertChange}/>
     </StyledStyleSelector>
   );
 };
