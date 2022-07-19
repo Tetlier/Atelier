@@ -16,6 +16,7 @@ export const OtherProducts = styled.aside`
   img {
     display: block;
     object-fit: cover;
+    border-radius: 20px;
   }
 `;
 
