@@ -23,7 +23,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //metaReview and form hooks
   const [metaReview, setMetaReview] = useState({});
   const [totalRatings, setTotalRatings] = useState(0);
-  const [form, formClick] = useState(false);
+  const [form, setForm] = useState(false);
 
   //search hook
   const [currentSearch, setCurrentSearch] = useState('');
@@ -62,7 +62,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
 
   //toggles opening and closing of form
   let closeForm = () => {
-    formClick(false);
+    setForm(false);
   };
 
   //On initialization, gets metareview and two reviews
@@ -78,11 +78,10 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
     }
   }, [startPoint]);
 
-  //Monitors for changes in dropDownSort after initialization and gets new sorted info on change
-  //tech debt-temporary fix?
+  //Monitors for changes in dropDownSort and posts after pressing and gets new sorted info on change
   useEffect(() => {
     startPoint >= 2 ? getPageReviews() : null;
-  }, [dropDownSort]);
+  }, [dropDownSort, form]);
 
   //Adds and removes rating filters
   let toggleFilter = async (rating) => {
@@ -109,7 +108,9 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
             setFilterRating={setFilterRating}
             filterRating={filterRating}
             setTotalRatings={setTotalRatings}
-            totalRatings={totalRatings} />
+            totalRatings={totalRatings}
+            reviewList ={reviewList}
+            form = {form} />
         </Meta>
         <ReviewArea>
           <label> {totalRatings} reviews, sorted by: </label>
@@ -131,7 +132,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
           <ButtonPosition>
             <Button
               data-testid='addReview'
-              onClick={() => formClick(true)}>Add a Review + </Button>
+              onClick={() => setForm(true)}>Add a Review + </Button>
             {!noMoreResults ? <Button
               onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
           </ButtonPosition>

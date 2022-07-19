@@ -75,4 +75,6 @@ export const ReviewInput = styled.input`
   position: relative;
   top: 0.5em;
   justify-content: flex-start;
+
 `;
+

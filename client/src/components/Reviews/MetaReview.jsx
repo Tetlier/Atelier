@@ -2,36 +2,36 @@ import React, { useState, useEffect } from 'react';
 
 import { MetaGrid, MetaRow, MetaCol, SummaryStar, Clickable, Styles, RateSpace, StyleSpace, SmallButton } from '../styles/reviewstyles/metaReviewStyles.styled.js';
 
-const MetaReview = ({ metaReview, currentProductRating,filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings }) => {
+const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterRating, toggleFilter, setTotalRatings, totalRatings, reviewList, form }) => {
   const [recommended, setRecommended] = useState(0);
   const [ratingsArray, setRatingsArray] = useState([]);
 
-
+//refreshes metaReview info when information to metareview, filterRating, and reviewList, form (post) are updated
   useEffect(() => {
     if (metaReview.recommended) {
       getRecommended(parseInt(metaReview.recommended.true), parseInt(metaReview.recommended.false));
       getRatings();
     }
-  }, [metaReview]);
+  }, [metaReview, filterRating, reviewList, form]);
 
+  //gets the overall recommendation of the product
   let getRecommended = (recommended, notRecommended) => {
     setRecommended(Math.round(100 * (recommended / (recommended + notRecommended))));
   };
 
   //obtains the count for each individual star rating, and the total count
   let getRatings = () => {
-    let eachStar = Object.keys(metaReview.ratings);
-    let eachAmount = Object.values(metaReview.ratings);
+    let ratings = Object.entries(metaReview.ratings);
     let total = 0;
-    for (let i = 0; i < eachStar.length; i++) {
+    let container = [];
+    for (let i = 0; i < ratings.length; i++) {
       let starRatings = {};
-      starRatings.star = eachStar[i];
-      starRatings.amount = eachAmount[i];
-      ratingsArray.push(starRatings);
-
-      setRatingsArray(ratingsArray);
-      total += parseInt(eachAmount[i]);
+      starRatings.star = ratings[i][0];
+      starRatings.amount = ratings[i][1];
+      container.push(starRatings);
+      total += parseInt(ratings[i][1]);
     }
+    setRatingsArray(container);
     setTotalRatings(total);
   };
 
