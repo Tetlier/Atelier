@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ThumbNail, FullSize } from '../styles/reviewstyles/imageStyles.styled.js';
+import { ThumbNail, FullSize, VerySmallButton } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
+import { FcCheckmark } from 'react-icons/fc';
 import axios from 'axios';
 
 import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
@@ -46,11 +47,11 @@ const Review = ({ review, StarReview }) => {
           <ReviewStars rating={review.rating} />
         </ReviewCol>
         <ReviewCol size='2'>
-          <div>By {review.reviewer_name} on {getDate()}</div>
+          <p><small>by {review.reviewer_name} on {getDate()}</small></p>
         </ReviewCol>
       </ReviewRow>
       <ReviewRow><b> {review.summary}</b></ReviewRow>
-      {review.recommend ? <div> I recommend this product ✅</div> : null}
+      {review.recommend ? <p><small> I recommend this product </small><FcCheckmark/></p> : null}
       {restriction ? <div maxLength={250}>{review.body}</div> : <div>{review.body}</div>}
       {review.body.length > 250 ?
         <button
@@ -67,11 +68,11 @@ const Review = ({ review, StarReview }) => {
 
 
       {!clicked ? <div>Was this review helpful?
-        <button
-          onClick={() => submitHelpful(review.review_id)}>Yes</button>
-        <button
-          onClick={() => setClicked(true)}>No</button></div> : 'Response Recorded'}
-          <div>{review.helpfulness} people found this review helpful.</div>
+        <VerySmallButton
+          onClick={() => submitHelpful(review.review_id)}>Yes</VerySmallButton>
+        <VerySmallButton
+          onClick={() => setClicked(true)}>No</VerySmallButton></div> : <b><small>Response Recorded</small></b>}
+          <p><small>{review.helpfulness} person(s) found this review helpful.</small></p>
     </ReviewGrid>
   );
 };

@@ -26,3 +26,22 @@ padding: 5px;
 export const ImageGallery = styled.div`
 display: inline-block;
 `;
+
+export const VerySmallButton = styled.button`
+align-items: center;
+padding: 3px 7px;
+border-radius: 3px;
+border: none;
+cursor: pointer;
+margin-left: 0.25em;
+
+background: #6E6D70;
+box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+color: #DFDEDF;
+
+&:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+  background: #000;
+}
+`;

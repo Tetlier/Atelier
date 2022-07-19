@@ -6,8 +6,7 @@ import MetaReview from './MetaReview.jsx';
 import Form from './Form.jsx';
 import SearchBar from './SearchBar.jsx';
 //styled components
-import { Button } from '../styles/Button.styled.js';
-import { Grid, Row, Col, Scroll } from '../styles/reviewstyles/reviewWidget.styled.js';
+import { Grid, Row, Meta, ReviewArea, Scroll, Button, ButtonPosition } from '../styles/reviewstyles/reviewWidget.styled.js';
 
 const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
 
@@ -101,7 +100,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   return (
     <Grid>
       <Row>
-        <Col>
+        <Meta>
           <MetaReview
             metaReview={metaReview}
             currentProductRating={currentProductRating}
@@ -111,8 +110,8 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
             filterRating={filterRating}
             setTotalRatings={setTotalRatings}
             totalRatings={totalRatings} />
-        </Col>
-        <Col size='1.8'>
+        </Meta>
+        <ReviewArea>
           <label> {totalRatings} reviews, sorted by: </label>
           <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
             <option value='helpful'>Helpfulness</option>
@@ -128,12 +127,15 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
                 currentSearch={currentSearch} /> : null}
           </Scroll>
           <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
-          <div> {!noMoreResults ? <Button
-            onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-          <Button
-            data-testid='addReview'
-            onClick={() => formClick(true)}>Add a Review + </Button></div>
-        </Col>
+
+          <ButtonPosition>
+            <Button
+              data-testid='addReview'
+              onClick={() => formClick(true)}>Add a Review + </Button>
+            {!noMoreResults ? <Button
+              onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
+          </ButtonPosition>
+        </ReviewArea>
       </Row>
     </Grid>
   );
