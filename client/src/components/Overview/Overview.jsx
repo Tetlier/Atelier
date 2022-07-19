@@ -72,16 +72,16 @@ const Overview = ({currentProductId, currentProductRating}) => {
       }
     }
     setSelectedSizeQuantity(quantityArr);
-  }
+  };
 
   const handleQuantityChange = (text) => {
     setSkuAlert(false);
     setSelectedQuantity(text);
-  }
+  };
 
   const handleSkuAlertChange = (value) => {
     setSkuAlert(value);
-  }
+  };
 
 
   return (
@@ -108,7 +108,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
 
         <ProductContent className='productContent'>
           {/* TODO: Link Read all review to review */}
-          <h4 ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></h4>
+          <h4 ><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
