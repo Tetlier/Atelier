@@ -6,6 +6,6 @@ export const QAContainer = styled.div`
 `;
 
 export const QAChild = styled.div`
-  width: 75%;
+  width: 100%;
   margin: auto;
 `;
