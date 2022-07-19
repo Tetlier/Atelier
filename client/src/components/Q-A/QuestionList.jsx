@@ -39,14 +39,18 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
       });
     // limits refresh to every 1 s
     setTimeout(() => {}, 1000);
-  }, [searchTerm, questionCount]);
+  }, [searchTerm, questionCount, productId]);
+
+  useEffect(() => {
+    setQuestionCount(2);
+  }, [productId]);
 
   return (
     <div className="questionList">
       <ScrollList>
         {questions.length > 0 &&
           <div>
-            {questions.map((question, index) =>
+            {questions.map((question) =>
               <Question
                 key={question.question_id}
                 productId={productId}
