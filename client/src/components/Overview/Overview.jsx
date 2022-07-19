@@ -18,6 +18,9 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
   const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
+  const [selectedSku, setSelectedSku] = useState('default');
+  const [selectedQuantity, setSelectedQuantity] = useState(0);
+  const [skuAlert, setSkuAlert] = useState(false);
   useEffect(() => {
     axios.get(`/product/${currentProductId}`)
       .then((response => {
@@ -33,7 +36,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
           // styles.results[i].skus = {'000001': {quantity: 1, size: 'SELECT SIZE'}, ...styles.results[i].skus};
           styles.results[i].skusArr = Object.entries(styles.results[i].skus);
           styles.results[i].skusArr.unshift(['000001', {quantity: 0, size: 'SELECT SIZE'}]);
-          console.log(':::: ', styles.results[i].skusArr);
         }
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(styles);
@@ -45,9 +47,13 @@ const Overview = ({currentProductId, currentProductRating}) => {
   }, [currentProductStyle]);
 
   // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
-  const handleStyleChange = (key) => {
+  const handleStyleChange = (event, key) => {
+    event.preventDefault();
     setSelectedStyleIndex(key);
     setSelectedSizeQuantity([]);
+    setSelectedSku('default');
+    setSelectedQuantity(0);
+    setSkuAlert(false);
   };
 
   const handleThumbnailChange = (key) => {
@@ -55,8 +61,8 @@ const Overview = ({currentProductId, currentProductRating}) => {
   };
 
   const handleSkuChange = (text) => {
-    // console.log('called ', text);
-    // console.log('currentProductStyle.skus ', currentProductStyle.results[selectedStyleIndex].skus);
+    setSelectedSku(text);
+    setSkuAlert(false);
     for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
       if (value.size === text) {
         var quantityArr = [];
@@ -66,6 +72,15 @@ const Overview = ({currentProductId, currentProductRating}) => {
       }
     }
     setSelectedSizeQuantity(quantityArr);
+  };
+
+  const handleQuantityChange = (text) => {
+    setSkuAlert(false);
+    setSelectedQuantity(text);
+  };
+
+  const handleSkuAlertChange = (value) => {
+    setSkuAlert(value);
   };
 
 
@@ -93,7 +108,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
 
         <ProductContent className='productContent'>
           {/* TODO: Link Read all review to review */}
-          <h4 ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></h4>
+          <h4 ><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
@@ -101,7 +116,13 @@ const Overview = ({currentProductId, currentProductRating}) => {
             styleChange={handleStyleChange}
             skuChange={handleSkuChange}
             selectedStyleIndex={selectedStyleIndex}
-            selectedSizeQuantity={selectedSizeQuantity}/>
+            selectedSizeQuantity={selectedSizeQuantity}
+            selectedSku={selectedSku}
+            selectedQuantity={selectedQuantity}
+            quantityChange={handleQuantityChange}
+            skuAlert={skuAlert}
+            skuAlertChange={handleSkuAlertChange}
+          />
         </ProductContent>
       </OverviewContainer>
 

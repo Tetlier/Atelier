@@ -45,17 +45,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
       left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
     // left: ev.nativeEvent.pageX, top: ev.nativeEvent.pageY });
     // left: (ev.pageX - ev.nativeEvent.offsetX), top: (ev.pageY - ev.nativeEvent.offsetY)});
-  };
-
-  const showExpandedView = (imageUrl, index) => {
-    return (
-      <Background key={index} onClick={() => clickPhoto()}>
-        <LargePhoto
-          src={imageUrl.url}
-          onClick={() => console.log('::::::::::::')}
-        />
-      </Background>
-    );
+    // left: (-ev.nativeEvent.offsetX), top: (-ev.nativeEvent.offsetY)});
   };
 
   return (
@@ -147,8 +137,8 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             // https://codepen.io/elevadorstudio/pen/zYxyVVy
             // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
             // transformOrigin: `${MousePosition.left}% ${MousePosition.top}%`
-            // backgroundPositionX: MousePosition.left,
-            // backgroundPositionY: MousePosition.top
+            backgroundPositionX: MousePosition.left + '%',
+            backgroundPositionY: MousePosition.top + '%'
             // left: MousePosition.left, top: MousePosition.top
           }}
         />

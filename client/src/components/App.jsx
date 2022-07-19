@@ -93,7 +93,7 @@ export default function App () {
               currentProductId={currentProductId}
               currentProductRating={currentProductRating}
               productName={productName}
-              />
+            />
             <br/>
             <QA
               productId={currentProductId}
