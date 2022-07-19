@@ -24,12 +24,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-<<<<<<< HEAD
-=======
-  // node: {
-  //   fs: 'empty'
-  // },
->>>>>>> e82ac3c7710db1158e84cafa8d834eedc5d39172
 
   plugins: [
     // Can refer to process.env variables within client-side files

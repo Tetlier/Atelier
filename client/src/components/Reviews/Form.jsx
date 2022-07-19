@@ -14,7 +14,6 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   const [email, setEmail] = useState('');
   const [recommend, setRecommend] = useState(null);
   const [photoArray, setPhotoArray] = useState([]);
-  const [convertedPhotos, setConvertedPhotos] = useState([]);
   //star rating values
   const [starRating, setStarRating] = useState(null);
   //style rating values
@@ -39,19 +38,30 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
 
   //upload photos to cloudinary and get the link
   let convertCloudinary = () => {
-    if (photoArray) {
-      photoArray.map(photo =>
-        axios.post('/cloudinary', { img: photo })
-          .then(results => setConvertedPhotos([...convertedPhotos, results.data]))
-          // .then(results => { convertedPhotos.push(results.data); setConvertedPhotos(convertedPhotos); })
-          .catch(err => console.log(err))
-      );
-    }
+    return Promise.all(photoArray.map((photo) => {
+      return axios.post('/cloudinary', {img: photo})
+        .then((photoURL) => {
+          return photoURL.data;
+        })
+        .catch((err) => console.log(err));
+    }))
+      .then((photoURLs) => {
+        return new Promise((resolve, reject) => {
+          if (!photoURLs) {
+            reject(photoURLs);
+          } else {
+            resolve(photoURLs);
+          }
+        });
+      })
+      .then((photoURLs) => {
+        return photoURLs;
+      });
   };
 
   //upload results to server
-  let submitResults = () => {
-    console.log('this', convertedPhotos);
+  let submitResults = (photoURLs) => {
+    console.log('received', photoURLs);
     axios.post('/reviews', {
       // eslint-disable-next-line camelcase
       product_id: parseInt(currentProductId),
@@ -60,10 +70,10 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
       body: review,
       name: name,
       email: email,
-      photos: convertedPhotos,
+      photos: photoURLs,
       recommended: recommend,
       characteristics: charRating
-    }).then(console.log('post success'))
+    }).then(console.log('posted'))
       .catch(err => console.log(err));
   };
 
@@ -72,8 +82,9 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   let handleSubmit = async (event) => {
     event.preventDefault();
     closeForm(true);
-    await convertCloudinary();
-    await submitResults();
+    convertCloudinary()
+    .then((photoURLs)=> submitResults(photoURLs))
+    .catch(err => console.log(err))
   };
 
 

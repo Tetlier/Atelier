@@ -9,13 +9,16 @@ const Review = ({ review, StarReview }) => {
 
   const [restriction, setRestriction] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [image, setImage] = useState(false);
+  const [enlarged, setEnlarged] = useState(new Array(review.photos.length).fill(false));
 
   //broken. Shows ALL images
-  const enlargeThumbnail = (img) => {
+  const enlargeThumbnail = (img, index) => {
     console.log(img);
     return (
-      <Background onClick={() => setImage(!image)}>
+      <Background onClick={() => {
+        let newDecreasedState = enlarged.slice();
+        newDecreasedState[index] = false;
+        setEnlarged(newDecreasedState);}}>
         <FullSize src={img} />
       </Background>
     );
@@ -54,8 +57,11 @@ const Review = ({ review, StarReview }) => {
           onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
-      <ReviewRow>{[...review.photos].map(photo => <ReviewCol> {image ? enlargeThumbnail(photo.url) : <ThumbNail
-        onClick={() => setImage(!image)}
+      <ReviewRow>{[...review.photos].map((photo, index) => <ReviewCol> {enlarged[index] ? enlargeThumbnail(photo.url, index) : <ThumbNail
+        onClick={() => {
+          let newEnlargedState = enlarged.slice();
+          newEnlargedState[index] = true;
+          setEnlarged(newEnlargedState);}}
         src={photo.url}
         key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
 
@@ -65,6 +71,7 @@ const Review = ({ review, StarReview }) => {
           onClick={() => submitHelpful(review.review_id)}>Yes</button>
         <button
           onClick={() => setClicked(true)}>No</button></div> : 'Response Recorded'}
+          <div>{review.helpfulness} people found this review helpful.</div>
     </ReviewGrid>
   );
 };
