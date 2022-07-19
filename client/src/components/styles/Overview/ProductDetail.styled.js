@@ -15,7 +15,7 @@ export const StyledProductDetail = styled.div`
     align-items: center;
   }
 
-  .social-links a {
+  .social-links button {
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -31,7 +31,7 @@ export const StyledProductDetail = styled.div`
     transition: all 0.5s ease;
   }
 
-  .social-links a:hover {
+  .social-links button:hover {
     background: black;
     border-color: transparent;
     color: white;

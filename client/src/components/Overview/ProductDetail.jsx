@@ -1,5 +1,10 @@
 import { StyledProductDetail } from '../styles/Overview/ProductDetail.styled';
 const ProductDetail = ({description, slogan, features}) => {
+
+  const shareToSocialMedia = (socialMedia) => {
+    alert(`Shared to ${socialMedia}`);
+  }
+
   return (
     <StyledProductDetail>
       <h3 style={{'flexBasis': '40%'}}>Description: {description}</h3>
@@ -14,20 +19,26 @@ const ProductDetail = ({description, slogan, features}) => {
       </ul>
 
       <div className='social-links' style={{'flexBasis': '20%'}}>
-        <p>Share At: </p>
+        <p>Share At: &nbsp;&nbsp;&nbsp;</p>
         <div className='social-links'>
-          <a href='#'>
-            <i className='fab fa-facebook-f'></i>
-          </a>
-          <a href='#'>
-            <i className='fab fa-twitter'></i>
-          </a>
-          <a href='#'>
-            <i className='fab fa-instagram'></i>
-          </a>
-          <a href='#'>
-            <i className='fab fa-whatsapp'></i>
-          </a>
+        <button
+          onClick={() => {
+            shareToSocialMedia('facebook');
+        }}>
+          <i className='fab fa-facebook-f'></i>
+        </button>
+        <button
+        onClick={() => {
+          shareToSocialMedia('twitter');
+        }}>
+          <i className='fab fa-twitter'></i>
+          </button>
+        <button
+        onClick={() => {
+          shareToSocialMedia('pinterest');
+        }}>
+            <i class="fab fa-pinterest"></i>
+        </button>
         </div>
       </div>
     </StyledProductDetail>

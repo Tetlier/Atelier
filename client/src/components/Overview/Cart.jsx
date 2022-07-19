@@ -22,6 +22,8 @@ const Cart = ({selectedStyle, skuChange, selectedSizeQuantity}) => {
     <StyledCart>
       <CustomSelect defaultValue={0} onChange={handleChange}>
         {
+          // TODO: FIX THE LOGIC, right now, change style won't change the sku selected, need to set sku to default
+          // after style changed.
           selectedStyle.skusArr.length === 1 ?
             <option key={0} value={0} disabled selected>OUT OF STOCK</option> :
             selectedStyle.skusArr.map((sku, i) => {
