@@ -37,7 +37,7 @@ const ProductDetail = ({description, slogan, features}) => {
         onClick={() => {
           shareToSocialMedia('pinterest');
         }}>
-            <i class="fab fa-pinterest"></i>
+            <i className="fab fa-pinterest"></i>
         </button>
         </div>
       </div>

@@ -4,9 +4,8 @@ import Search from './Search';
 import axios from 'axios';
 import { QAContainer, QAChild } from '../styles/Q-A/QAContainer.styled';
 
-export default function QA ({productId, sessionCookie, addToCookie}) {
+export default function QA ({productId, sessionCookie, addToCookie, productName}) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [productName, setProductName] = useState('');
   const sellerName = 'atelier';
 
   const updateSearch = function(searchTerm) {
@@ -14,15 +13,8 @@ export default function QA ({productId, sessionCookie, addToCookie}) {
   };
 
   useEffect(() => {
-    // get product name
-    axios.get('/product', {productId: productId})
-      .then((res) => {
-        setProductName(res.data.productInfo.name);
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      });
-  });
+    setSearchTerm('');
+  }, [productId])
 
   return (
     <div>

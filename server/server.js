@@ -29,17 +29,6 @@ app.get('/products', (req, res) => {
     });
 });
 
-app.get('/product', (req, res) => {
-  controllers.getProduct(40344, (err, data) => {
-    if (err) {
-      console.log('err for /product : ', err);
-      res.status(500).send();
-    } else {
-      res.send(data);
-    }
-  });
-});
-
 app.get('/reviews', (req, res) => {
   controllers.getReviews(req.query.id, req.query.count, req.query.sort)
     .then((results) => {
@@ -96,6 +85,8 @@ app.post('/cloudinary', (req, res) => {
 const router = express.Router();
 
 app.use('/', router);
+
+router.get('/product/:product_id', controllers.getProduct);
 
 router.get('/qa/questions/:question_id/answers', controllers.getAnswers);
 

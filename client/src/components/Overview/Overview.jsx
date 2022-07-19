@@ -19,7 +19,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
   const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
   useEffect(() => {
-    axios.get('/product', {productId: 40344})
+    axios.get(`/product/${currentProductId}`)
       .then((response => {
         // TODO: this is a test, to test sku select in cart shows out of stock, need to delete once done.
         var styles = response.data.styleInfo;
