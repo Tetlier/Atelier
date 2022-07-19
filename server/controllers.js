@@ -61,7 +61,7 @@ let getQuestions = (req, res) => {
   let params = req.query;
   let id = params.id;
   let count = params.count;
-  let filter = params.filter;
+  let filter = params.filter || '';
 
   // can update to include filter for answers too
   client.get(`/qa/questions/?product_id=${id}&count=100`)
@@ -184,7 +184,6 @@ let postAnswer = (req, res) => {
       res.sendStatus(500);
     });
 };
-
 
 
 module.exports.getProducts = getProducts;
