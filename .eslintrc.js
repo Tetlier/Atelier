@@ -17,6 +17,7 @@ module.exports = {
       'jsx': true
     }
   },
+  parser: '@babel/eslint-parser',
   rules: {
     /* Indentation */
     'no-mixed-spaces-and-tabs': 2,

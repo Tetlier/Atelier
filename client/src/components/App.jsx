@@ -95,8 +95,11 @@ class App extends React.Component {
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
-            <Overview currentProductId={this.state.currentProductId}></Overview>
-            <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div>
+            <Overview
+              currentProductId={this.state.currentProductId}
+              currentProductRating = {this.state.currentProductRating} />
+            {/* <div><Reviews currentProductId = '40344'currentProductRating = {this.state.currentProductRating}/></div> */}
+            <br/>
             <div><QA productId={this.state.currentProductId}
               sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
             </div>
