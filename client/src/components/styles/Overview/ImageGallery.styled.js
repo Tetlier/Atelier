@@ -9,8 +9,8 @@ export const ImageGallery = styled.div`
   // img {
   //   min-width: 100%
   //   height: 200 px;
-  width: 65%;
-  position: relative
-  margin-right: 50px;
+  // width: 65%;
+  // position: relative
+  // margin-right: 50px;
   }
 `;

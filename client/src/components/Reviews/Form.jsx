@@ -119,7 +119,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
               value={email}
               onChange={event => handleChange(event, setEmail)}
               required></input>
-              <div>For authentication reasons, you will not be emailed</div></div>
+            <div>For authentication reasons, you will not be emailed</div></div>
 
             <div>Attach up to 5 images:
               {photoArray.length < 5 ?

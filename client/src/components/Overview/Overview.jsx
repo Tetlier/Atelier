@@ -7,22 +7,66 @@ import ProductDetail from './ProductDetail';
 import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
 import { Panel } from '../styles/Overview/Panel.styled';
 import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
-import { ImageSelect } from '../styles/Overview/ImageSelect.styled';
 import { ProductContent } from '../styles/Overview/ProductContent.styled';
+import ProductFeatures from './ProductFeatures';
+import ImageCarousel from './ImageCarousel';
+import StarReview from '../styles/StarReview.styled';
 
-const Overview = ({currentProductId}) => {
+const Overview = ({currentProductId, currentProductRating}) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [currentProductStyle, setCurrentProductStyle] = useState({});
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
+  const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
   useEffect(() => {
     axios.get('/product', {productId: 40344})
       .then((response => {
+        // TODO: this is a test, to test sku select in cart shows out of stock, need to delete once done.
+        var styles = response.data.styleInfo;
+        styles.results[0].skus = {};
+        styles.results[1]['sale_price'] = 50;
+        styles.results[1]['original_price'] = 777;
+        styles.results[2]['original_price'] = 888;
+        styles.results[3]['original_price'] = 999;
+        for (let i = 0; i < styles.results.length; i++) {
+          // styles.results[i].skus.unshift({size: 'Select Size'});
+          // styles.results[i].skus = {'000001': {quantity: 1, size: 'SELECT SIZE'}, ...styles.results[i].skus};
+          styles.results[i].skusArr = Object.entries(styles.results[i].skus);
+          styles.results[i].skusArr.unshift(['000001', {quantity: 0, size: 'SELECT SIZE'}]);
+          console.log(':::: ', styles.results[i].skusArr);
+        }
         setCurrentProduct(response.data.productInfo);
-        setCurrentProductStyle(response.data.styleInfo);
-        // console.log(response.data.productInfo);
-        // console.log(response.data.styleInfo);
-        // console.log('API called');
+        setCurrentProductStyle(styles);
       }));
   }, []);
+
+  // https://stackoverflow.com/questions/64191896/usestate-in-useeffect-does-not-update-state
+  useEffect(() => {
+  }, [currentProductStyle]);
+
+  // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
+  const handleStyleChange = (key) => {
+    setSelectedStyleIndex(key);
+    setSelectedSizeQuantity([]);
+  };
+
+  const handleThumbnailChange = (key) => {
+    setSelectedThumbnailIndex(key);
+  };
+
+  const handleSkuChange = (text) => {
+    // console.log('called ', text);
+    // console.log('currentProductStyle.skus ', currentProductStyle.results[selectedStyleIndex].skus);
+    for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
+      if (value.size === text) {
+        var quantityArr = [];
+        for (let i = 0; i < value.quantity; i++) {
+          quantityArr.push({key: i + 1});
+        }
+      }
+    }
+    setSelectedSizeQuantity(quantityArr);
+  }
 
 
   return (
@@ -30,89 +74,42 @@ const Overview = ({currentProductId}) => {
     && Object.keys(currentProductStyle).length !== 0
     &&
     <div>
+      {/* upper panel */}
       <OverviewContainer>
-        <Panel>
-          {/* left panel */}
-          <ImageGallery>
-            <ImageShowcase productStyle={currentProductStyle} />
-            <ImageSelect>
-              {
-                currentProductStyle.results[0].photos.map((photo, i) => {
-                  return ( (i === 0 || i === 1 || i === 2) &&
-                    // https://reactjs.org/warnings/special-props.html
-                    <ImageItem key={i} src={photo.thumbnail_url} alt = 'shoe image'/>
-                  );
-                })
-              }
-            </ImageSelect>
-          </ImageGallery>
+        <ImageCarousel
+          className='imageCarousel'
+          productStyle={currentProductStyle.results[selectedStyleIndex]}
+          thumbnailChange={handleThumbnailChange}
+          selectedThumbnailIndex={selectedThumbnailIndex}
+        />
 
-          {/* right panel */}
-          <ProductContent>
-            {/* <Review></Review> will be added once review branch is merged */}
-            <h2 className='product-category'>{currentProduct.category}</h2>
-            <h1 className='product-title'>{currentProduct.name}</h1>
-            <StyleSelector productStyle={currentProductStyle}/>
-          </ProductContent>
-        </Panel>
-        {/* down panel */}
-        <ProductDetail description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features} />
+        <ImageGallery className='imageGallery'>
+          <ImageShowcase
+            productStyle={currentProductStyle.results[selectedStyleIndex]}
+            thumbnailChange={handleThumbnailChange}
+            selectedThumbnailIndex={selectedThumbnailIndex}
+          />
+        </ImageGallery>
+
+        <ProductContent className='productContent'>
+          {/* TODO: Link Read all review to review */}
+          <h4 ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></h4>
+          <h2 className='product-category'>{currentProduct.category}</h2>
+          <h1 className='product-title'>{currentProduct.name}</h1>
+          <StyleSelector
+            productStyle={currentProductStyle}
+            styleChange={handleStyleChange}
+            skuChange={handleSkuChange}
+            selectedStyleIndex={selectedStyleIndex}
+            selectedSizeQuantity={selectedSizeQuantity}/>
+        </ProductContent>
       </OverviewContainer>
+
+      {/* down panel */}
+      <ProductDetail className='productDetail'
+        description={currentProduct.description} slogan={currentProduct.slogan} features={currentProduct.features}/>
     </div>
   );
 };
 
 export default Overview;
-
-
-/**
- * <div>
-      <div>name: {currentProduct.name}</div>
-      <br/>
-      <div>category: {currentProduct.category}</div>
-      <br/>
-      <div>description: {currentProduct.description}</div>
-      <br/>
-      <div>default_price: {currentProduct.default_price}</div>
-      <br/>
-      <div>slogan: {currentProduct.slogan}</div>
-      <br/>
-      <ul>
-        {
-          currentProduct.features.map((item, i) => {
-            return (<li key={i}>feature: {item.feature},  value: {item.value} </li>);
-          })
-        }
-      </ul>
-      <h1>Styles ::::::::::: </h1>
-      <ul>
-        {
-          currentProductStyle.results.map((style, i) => {
-            return (
-              <li key={i}>
-                default: {style.default},
-                name: {style.name},
-                original_price: {style.original_price},
-                sale_price: {style.sale_price},
-                style_id: {style.style_id},
-                value: {style.value},
-              </li>);
-          })
-        }
-      </ul>
-      <ul>
-        {
-          currentProductStyle.results[0].photos.map((photo, i) => {
-            return (
-              <li key={i}>
-                thumbnail_url: {photo.thumbnail_url}
-                <br/>
-                url: {photo.url}
-              </li>
-            );
-          })
-        }
-      </ul>
-      <br/>
-    </div>
- */
