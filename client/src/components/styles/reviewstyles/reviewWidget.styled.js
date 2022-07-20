@@ -50,8 +50,8 @@ color: #DFDEDF;
   opacity: 0.9;
   transform: scale(0.98);
   background: #000;
-}`
+}`;
 
 export const ButtonPosition = styled.div`
 margin-left: 50%;
-`
+`;

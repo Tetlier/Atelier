@@ -6,7 +6,7 @@ import axios from 'axios';
 import StyleRating from './StyleRating.jsx';
 import StarRating from './StarRating.jsx';
 
-const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
+const Form = ({ closeForm, form, metaReview, currentProductId, productName }) => {
   //form values
   const [summary, setSummary] = useState('');
   const [name, setName] = useState('');
@@ -96,7 +96,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   return (form ?
     <FormModalBackground onSubmit={(event) => handleSubmit(event)}>
       <FormModal>
-        <Title><h2 data-testid='form'>Write Your Review about the 'THIS PRODUCT NAME HERE'</h2> </Title>
+        <Title><h2 data-testid='form'>Write Your Review about the {productName}</h2> </Title>
         <FormGrid>
           <FormRow>
             <div>Summary<sup><font color="#ff0000">*</font></sup></div>

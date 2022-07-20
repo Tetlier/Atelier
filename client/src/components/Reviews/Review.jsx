@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import { ReviewGrid, ReviewRow, ReviewCol, ReviewStars } from '../styles/reviewstyles/ReviewStyles.styled.js';
 
-const Review = ({ review, StarReview, setRefresh }) => {
+const Review = ({ review, setRefresh }) => {
 
   const [restriction, setRestriction] = useState(false);
   const [clicked, setClicked] = useState(false);

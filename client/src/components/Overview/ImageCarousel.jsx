@@ -25,12 +25,8 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   // scroll the thumbnails up and down based on the direction
   const scroll = (direction) => {
-    console.log('.carousel-container height is',  $( '.carousel-container' ).height());
-    let far = $( '.carousel-container' ).height() / 1.05 * direction;
-    console.log('far is ', far);
-    console.log('.carousel-container).scrollTop() is ', $('.carousel-container').scrollTop());
+    let far = $( '.carousel-container' ).height() * direction;
     let pos = $('.carousel-container').scrollTop() + far;
-    console.log('pos is ', pos);
     if (pos <= 0) {
       setCurrentIndex(0);
     } else if (pos >= $( '.carousel-container' ).height()) {
@@ -88,8 +84,3 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 };
 
 export default ImageCarousel;
-
-// Helpful links:
-// https://robkendal.co.uk/blog/how-to-build-a-multi-image-carousel-in-react-and-tailwind
-// https://medium.com/@RahulTMody/create-a-scrolling-image-slider-in-react-1e4eddcd407b
-// https://codepen.io/rmody3/pen/EXObmR
