@@ -109,7 +109,7 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
             <h3>Submit your Answer</h3>
             <h4>{productName}: {questionBody}</h4>
           </FormTitle>
-          <form onSubmit={(e) => submitAnswer(e)}>
+          <form>
             <FormSection>
               <FormLabel>Your Answer<sup><font color="#ff0000">*</font></sup>:&nbsp;</FormLabel>
               <FormQuestionEntry
@@ -164,7 +164,7 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
                 {photos.map((photo) => <ThumbNail key={photo} src={photo}/>)}
               </ImageList>
             </FormSection>
-            <SmallButton type="submit">Submit
+            <SmallButton onClick={(e) => submitAnswer(e)}>Submit
             </SmallButton>
             <SmallButton onClick={() => setTrigger(false)}>Cancel</SmallButton>
           </form>

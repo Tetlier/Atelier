@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Searchbar} from '../styles/reviewstyles/reviewWidget.styled.js';
 
 const SearchBar = ({ setCurrentSearch }) => {
 
@@ -17,7 +18,7 @@ const SearchBar = ({ setCurrentSearch }) => {
 
   return (
     <div>
-      <input
+      <Searchbar
         type='text'
         value={search}
         onChange={event => handleChange(event)}
