@@ -17,7 +17,14 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
     top: 0
   });
 
-  const [windowSize, setWindowSize] = useState({width: window.innerWidth, height: window.innerHeight});
+  const isDisabled = (direction) => {
+    if (direction === 'prev') {
+      return selectedThumbnailIndex <= 0;
+    } else if (direction === 'next' ) {
+      return selectedThumbnailIndex >= (imageUrls.length - 1);
+    }
+    return false;
+  };
 
   let changeView = () => {
     setExpandedView(!expandedView);
@@ -34,12 +41,10 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
     setMousePosition({left: 0, top: 0});
   };
 
-
   let handleMouseMove = (ev) => {
     let height = $( '#zoomedImage' ).height();
     let width = $( '#zoomedImage' ).width();
     setMousePosition({left: ev.nativeEvent.offsetX / width * 100, top: ev.nativeEvent.offsetY / height * 100});
-
   };
 
   return (
@@ -59,6 +64,18 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               }}/>
           ))}
         </div>
+      </div>
+      <div className='buttonContainer'>
+        <button
+          className='buttonHolder'
+          onClick={() => {
+            thumbnailChange(selectedThumbnailIndex - 1);
+          }}
+          disabled={isDisabled('prev')}
+          style={{visibility: isDisabled('prev') ? 'hidden' : 'visible'}}
+        >
+          <i className="fa-solid fa-angles-left"></i>
+        </button>
         <div className="slideshowDots">
           {imageUrls.map((_, idx) => (
             <div
@@ -70,6 +87,16 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             ></div>
           ))}
         </div>
+        <button
+          className='buttonHolder'
+          onClick={() => {
+            thumbnailChange(selectedThumbnailIndex + 1);
+          }}
+          disabled={isDisabled('next')}
+          style={{visibility: isDisabled('next') ? 'hidden' : 'visible'}}
+        >
+          <i className="fa-solid fa-angles-right"></i>
+        </button>
       </div>
       <div
         className={`expandedView${expandedView === true ? ' active' : ''}`}

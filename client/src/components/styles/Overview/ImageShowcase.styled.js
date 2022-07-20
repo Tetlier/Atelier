@@ -11,6 +11,26 @@ export const StyledImgShowcase = styled.div`
     max-width: 500px;
   }
 
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    // background-color: yellow;
+    height: 100%;
+    width: 100%;
+  }
+
+  .buttonHolder {
+    margin: 10px;
+    color: #000000;
+    text-align: center;
+    opacity: 0.75;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   .slideshowSlider {
     white-space: nowrap;
     transition: ease 1000ms;
