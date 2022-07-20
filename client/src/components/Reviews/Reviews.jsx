@@ -84,7 +84,7 @@ const Reviews = ({ currentProductId, currentProductRating, productName }) => {
   useEffect(() => {
     startPoint >= 2 ? getPageReviews() : null;
     getMetaReview(currentProductId);
-  }, [dropDownSort, refresh]);
+  }, [dropDownSort, refresh, currentProductId ]);
 
   //Adds and removes rating filters
   let toggleFilter = async (rating) => {
@@ -132,7 +132,7 @@ const Reviews = ({ currentProductId, currentProductRating, productName }) => {
                 setRefresh={setRefresh} /> : null}
           </Scroll>
           <div><Form
-            closeForm={closeForm.bind(this)}
+            closeForm={closeForm}
             form={form}
             metaReview={metaReview}
             currentProductId={currentProductId}
