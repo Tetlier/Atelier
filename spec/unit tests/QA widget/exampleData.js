@@ -476,3 +476,139 @@ module.exports.getQuestions40344 = {
         }
     ]
 };
+
+// data from GET request to /meta with id=40344
+module.exports.getMeta40344 = {
+    data: {
+    "product_id": "40344",
+    "ratings": {
+        "1": "82",
+        "2": "89",
+        "3": "218",
+        "4": "174",
+        "5": "363"
+    },
+    "recommended": {
+        "false": "208",
+        "true": "718"
+    },
+    "characteristics": {
+        "Fit": {
+            "id": 135219,
+            "value": "3.2625215889464594"
+        },
+        "Length": {
+            "id": 135220,
+            "value": "3.3193717277486911"
+        },
+        "Comfort": {
+            "id": 135221,
+            "value": "3.1965317919075145"
+        },
+        "Quality": {
+            "id": 135222,
+            "value": "3.2055555555555556"
+        }
+    }
+}};
+
+// data from GET request for /products
+module.exports.getProducts = {
+    data: [
+    {
+        "id": 40344,
+        "campus": "hr-rfp",
+        "name": "Camo Onesie",
+        "slogan": "Blend in to your crowd",
+        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+        "category": "Jackets",
+        "default_price": "140.00",
+        "created_at": "2021-08-13T14:38:44.509Z",
+        "updated_at": "2021-08-13T14:38:44.509Z"
+    },
+    {
+        "id": 40345,
+        "campus": "hr-rfp",
+        "name": "Bright Future Sunglasses",
+        "slogan": "You've got to wear shades",
+        "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+        "category": "Accessories",
+        "default_price": "69.00",
+        "created_at": "2021-08-13T14:38:44.509Z",
+        "updated_at": "2021-08-13T14:38:44.509Z"
+    },
+    {
+        "id": 40346,
+        "campus": "hr-rfp",
+        "name": "Morning Joggers",
+        "slogan": "Make yourself a morning person",
+        "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+        "category": "Pants",
+        "default_price": "40.00",
+        "created_at": "2021-08-13T14:38:44.509Z",
+        "updated_at": "2021-08-13T14:38:44.509Z"
+    },
+    {
+        "id": 40347,
+        "campus": "hr-rfp",
+        "name": "Slacker's Slacks",
+        "slogan": "Comfortable for everything, or nothing",
+        "description": "I'll tell you how great they are after I nap for a bit.",
+        "category": "Pants",
+        "default_price": "65.00",
+        "created_at": "2021-08-13T14:38:44.509Z",
+        "updated_at": "2021-08-13T14:38:44.509Z"
+    },
+    {
+        "id": 40348,
+        "campus": "hr-rfp",
+        "name": "Heir Force Ones",
+        "slogan": "A sneaker dynasty",
+        "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+        "category": "Kicks",
+        "default_price": "99.00",
+        "created_at": "2021-08-13T14:38:44.509Z",
+        "updated_at": "2021-08-13T14:38:44.509Z"
+    }
+]
+};
+
+// data from GET request for /qa/questions/question_id/answers
+module.exports.getAnswers = {
+    data: [
+        {
+            answer_id: 5986728,
+            answerer_name: "Santa Titan",
+            body: "I should've been the founding titan",
+            date: "2022-07-18T00:00:00.000Z",
+            helpfulness: 13,
+            photos: [
+                {
+                id: 5341432,
+                url: "http://res.cloudinary.com/dtoqwbb6x/image/upload/v1658182584/klz62ifp0ha9u3ssqrnc.webp"
+                }
+            ]
+        },
+        {
+            answer_id: 5986748,
+            answerer_name: "Levi Ackerman",
+            body: "I am the Cleaning Titan",
+            date: "2022-07-19T00:00:00.000Z",
+            helpfulness: 12,
+            photos: [
+                {
+                id: 5341438,
+                url: "http://res.cloudinary.com/dkzeszwgm/image/upload/v1658194421/FEC_folder/fkthckhcsgwuzzd7mjxk.jpg"
+                }
+            ]
+        },
+        {
+            answer_id: 5986719,
+            answerer_name: "Armin Alert",
+            body: "Who is it Eren?",
+            date: "2022-07-18T00:00:00.000Z",
+            helpfulness: 9,
+            photos: []
+        },
+    ]
+};

@@ -44,6 +44,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "jest": "^28.1.2",
     "jest-environment-jsdom": "^28.1.2",
+    "msw": "^0.44.2",
     "nodemon": "^2.0.19",
     "react-test-renderer": "^18.2.0",
     "webpack": "^5.73.0",
