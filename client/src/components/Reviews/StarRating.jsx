@@ -21,11 +21,10 @@ const StarRating = ({starRating, setStarRating}) => {
   }, [starRating]);
 
   useEffect(()=> {
-    console.log(starRating, hover);
   }, [starRating, hover]);
 
   return (
-    <div>Rating: {starExplanation ? starExplanation : null}<div>
+    <div>Overall Rating<sup><font color="#ff0000">*</font></sup> {starExplanation ? starExplanation : null}<div>
       {[...Array(5)].map((star, index) => {
         const starVal = index + 1;
         return (
@@ -39,10 +38,9 @@ const StarRating = ({starRating, setStarRating}) => {
             />
             <FaStar
               size='25'
-              color={(starVal <= hover || starVal <= starRating) ? '#ffc107' : '#w4w5e9' }
+              color={(starVal <= hover || starVal <= starRating) ? '#ffc107' : '#000' }
               onMouseEnter={() => setHover(starVal)}
               onMouseLeave={() => setHover(null)} />
-
           </Stars>
         );
       })}
