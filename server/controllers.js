@@ -15,7 +15,7 @@ let getProducts = () => {
 };
 
 let getProduct = (req, res) => {
-  let productId = req.params.product_id
+  let productId = req.params.product_id;
 
   client.get(`products/${productId}`)
     .then((product) => {
@@ -94,7 +94,7 @@ let getQuestions = (req, res) => {
 let getAnswers = (req, res) => {
   let questionId = req.params.question_id;
   let count = req.query.count;
-  let sellerName = req.query.sellerName.toLowerCase();
+  let sellerName = req.query.sellerName.toLowerCase() || '';
 
   client.get(`/qa/questions/${questionId}/answers?count=${count}`)
     .then((result) => {
