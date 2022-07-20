@@ -57,7 +57,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   //Submits GET request to meta and obtains meta information for the product
   let getMetaReview = (id) => {
     axios.get('/meta', { params: { id: id } })
-      .then(results => { setMetaReview(prevState => results.data); })
+      .then(results => { setMetaReview(results.data); })
       .catch(err => console.log(err));
   };
 
@@ -113,7 +113,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
             setTotalRatings={setTotalRatings}
             totalRatings={totalRatings}
             reviewList ={reviewList}
-            form = {form} />
+            setRefresh={setRefresh}/>
         </Meta>
         <ReviewArea>
           <label> {totalRatings} reviews, sorted by: </label>

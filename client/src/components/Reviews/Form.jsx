@@ -39,7 +39,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
   //upload photos to cloudinary and get the link
   let convertCloudinary = () => {
     return Promise.all(photoArray.map((photo) => {
-      return axios.post('/cloudinary', {img: photo})
+      return axios.post('/cloudinary', { img: photo })
         .then((photoURL) => {
           return photoURL.data;
         })
@@ -73,7 +73,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
       photos: photoURLs,
       recommended: recommend,
       characteristics: charRating
-    }).then(console.log('posted'))
+    }).then(()=>console.log('posted'))
       .catch(err => console.log(err));
   };
 
@@ -83,13 +83,12 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
     event.preventDefault();
 
     if (review.length < 50) {
-      alert('The review length must be greater than 50 characters.')
+      alert('The review length must be greater than 50 characters.');
     } else {
-
-    closeForm(true);
-    convertCloudinary()
-    .then((photoURLs)=> submitResults(photoURLs))
-    .catch(err => console.log(err))
+      closeForm(true);
+      convertCloudinary()
+        .then((photoURLs) => submitResults(photoURLs))
+        .catch(err => console.log(err));
     }
   };
 
@@ -136,7 +135,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, }) => {
               value={email}
               onChange={event => handleChange(event, setEmail)}
               required></input>
-            <div>For authentication reasons, you will not be emailed</div></div>
+              <div>For authentication reasons, you will not be emailed</div></div>
 
             <div>Attach up to 5 images
               {photoArray.length < 5 ?

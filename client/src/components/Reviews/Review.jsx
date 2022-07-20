@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ThumbNail, FullSize, VerySmallButton } from '../styles/reviewstyles/imageStyles.styled.js';
 import { Background } from '../styles/reviewstyles/FormBackground.styled.js';
-import { ReviewArea} from '../styles/reviewstyles/ReviewStyles.styled.js'
+import { ReviewArea } from '../styles/reviewstyles/ReviewStyles.styled.js';
 import { FcCheckmark } from 'react-icons/fc';
 import axios from 'axios';
 
@@ -13,18 +13,15 @@ const Review = ({ review, StarReview, setRefresh }) => {
   const [clicked, setClicked] = useState(false);
   const [enlarged, setEnlarged] = useState(new Array(review.photos.length).fill(false));
 
-  useEffect(() => {
-    console.log('changed');
-  }, [clicked])
-
-  //broken. Shows ALL images
+  //enlarges thumbnail and changes array values of true and false for each image
   const enlargeThumbnail = (img, index) => {
     console.log(img);
     return (
       <Background onClick={() => {
         let newDecreasedState = enlarged.slice();
         newDecreasedState[index] = false;
-        setEnlarged(newDecreasedState);}}>
+        setEnlarged(newDecreasedState);
+      }}>
         <FullSize src={img} />
       </Background>
     );
@@ -33,7 +30,7 @@ const Review = ({ review, StarReview, setRefresh }) => {
   let submitHelpful = (id) => {
     // eslint-disable-next-line camelcase
     axios.put('/reviews', { review_id: id })
-      .then(() => {setClicked(true); setRefresh(prevState => !prevState)})
+      .then(() => { setClicked(true); setRefresh(prevState => !prevState); })
       .catch(err => err);
   };
 
@@ -56,7 +53,7 @@ const Review = ({ review, StarReview, setRefresh }) => {
         </ReviewCol>
       </ReviewRow>
       <ReviewRow><b> {review.summary}</b></ReviewRow>
-      {review.recommend ? <p><small> I recommend this product </small><FcCheckmark/></p> : null}
+      {review.recommend ? <p><small> I recommend this product </small><FcCheckmark /></p> : null}
       {restriction ? <ReviewArea maxLength={250}>{review.body}</ReviewArea> : <ReviewArea>{review.body}</ReviewArea>}
       {review.body.length > 250 ?
         <button
@@ -67,7 +64,8 @@ const Review = ({ review, StarReview, setRefresh }) => {
         onClick={() => {
           let newEnlargedState = enlarged.slice();
           newEnlargedState[index] = true;
-          setEnlarged(newEnlargedState);}}
+          setEnlarged(newEnlargedState);
+        }}
         src={photo.url}
         key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
 
@@ -77,7 +75,7 @@ const Review = ({ review, StarReview, setRefresh }) => {
           onClick={() => submitHelpful(review.review_id)}>Yes</VerySmallButton>
         <VerySmallButton
           onClick={() => setClicked(true)}>No</VerySmallButton></div> : <b><small>Response Recorded</small></b>}
-          <p><small>{review.helpfulness} person(s) found this review helpful.</small></p>
+      <p><small>{review.helpfulness} person(s) found this review helpful.</small></p>
     </ReviewGrid>
   );
 };

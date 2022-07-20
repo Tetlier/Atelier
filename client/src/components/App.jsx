@@ -4,10 +4,10 @@ import axios from 'axios';
 import Reviews from './Reviews/Reviews.jsx';
 import QA from './Q-A/QA.jsx';
 import styled from 'styled-components';
-import {Container} from './styles/Container.styled.js';
-import {ThemeProvider} from 'styled-components';
+import { Container } from './styles/Container.styled.js';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/Global.js';
-import {Button} from './styles/Button.styled.js';
+import { Button } from './styles/Button.styled.js';
 import Overview from './Overview/Overview';
 import StarReview from './styles/StarReview.styled.js';
 
@@ -15,8 +15,21 @@ const theme = {
   colors: {
     header: '#ebfbff',
     body: '#fff'
-  }
+  },
+  fontColor: '#000000'
 };
+
+const darkTheme = {
+  colors: {
+    header: '#fff',
+    body: '#343434',
+  },
+  fontColor: '#dfe3de'
+};
+
+const ThemeSetter = styled.div`
+color : ${props => props.theme.fontColor}
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +38,7 @@ class App extends React.Component {
       currentProductId: 40344,
       currentProductRating: 0,
       currentProductName: '',
+      darkMode: true,
       sessionCookie: {
         's_id': document.cookie.slice(5),
         actions: []
@@ -90,24 +104,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyles/>
-            <Container>
-              <h1>Welcome to Atelier!</h1>
-              <Overview
-                currentProductId={this.state.currentProductId}
-                currentProductRating = {this.state.currentProductRating} />
-              <div><Reviews currentProductId = '40344' currentProductRating = {this.state.currentProductRating}/></div>
-              <br/>
-              <div><QA productId={this.state.currentProductId}
-                sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie}/>
-              </div>
-            </Container>
-          </>
-        </ThemeProvider>
-      </div>
+      <ThemeProvider theme= {this.state.darkMode ? darkTheme : theme}>
+        <ThemeSetter>
+          <GlobalStyles />
+          <Container>
+            <h1>Welcome to Atelier!</h1>
+            <Overview
+              currentProductId={this.state.currentProductId}
+              currentProductRating={this.state.currentProductRating} />
+            <div><Reviews currentProductId='40344' currentProductRating={this.state.currentProductRating} /></div>
+            <br />
+            <div><QA productId={this.state.currentProductId}
+              sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie} />
+            </div>
+          </Container>
+        </ThemeSetter>
+      </ThemeProvider>
     );
   }
 }
