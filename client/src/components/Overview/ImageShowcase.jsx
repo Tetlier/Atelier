@@ -91,7 +91,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               className={`slideshowDot${selectedThumbnailIndex === idx ? ' active' : ''}`}
               onClick={() => {
                 thumbnailChange(idx);
-                console.log(idx);
               }}
             ></div>
           ))}
