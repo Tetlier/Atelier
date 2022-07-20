@@ -3,11 +3,7 @@ const ProductDetail = ({description, slogan, features}) => {
 
   const shareToSocialMedia = (socialMedia) => {
     alert(`Shared to ${socialMedia}`);
-<<<<<<< HEAD
-  }
-=======
   };
->>>>>>> main
 
   return (
     <StyledProductDetail>
@@ -25,26 +21,6 @@ const ProductDetail = ({description, slogan, features}) => {
       <div className='social-links' style={{'flexBasis': '20%'}}>
         <p>Share At: &nbsp;&nbsp;&nbsp;</p>
         <div className='social-links'>
-<<<<<<< HEAD
-        <button
-          onClick={() => {
-            shareToSocialMedia('facebook');
-        }}>
-          <i className='fab fa-facebook-f'></i>
-        </button>
-        <button
-        onClick={() => {
-          shareToSocialMedia('twitter');
-        }}>
-          <i className='fab fa-twitter'></i>
-          </button>
-        <button
-        onClick={() => {
-          shareToSocialMedia('pinterest');
-        }}>
-            <i class="fab fa-pinterest"></i>
-        </button>
-=======
           <button
             onClick={() => {
               shareToSocialMedia('facebook');
@@ -63,7 +39,6 @@ const ProductDetail = ({description, slogan, features}) => {
             }}>
             <i className="fab fa-pinterest"></i>
           </button>
->>>>>>> main
         </div>
       </div>
     </StyledProductDetail>

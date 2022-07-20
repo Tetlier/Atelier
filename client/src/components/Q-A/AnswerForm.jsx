@@ -161,11 +161,7 @@ export default function AnswerForm ({triggered, setTrigger, questionBody, questi
               }
               <AnswerFooter>{'(optional, JPEG or PNG)'}</AnswerFooter>
               <ImageList>
-<<<<<<< HEAD
-                {photos.map((photo) => <ThumbNail src={photo}/>)}
-=======
                 {photos.map((photo) => <ThumbNail key={photo} src={photo}/>)}
->>>>>>> main
               </ImageList>
             </FormSection>
             <SmallButton onClick={(e) => submitAnswer(e)}>Submit

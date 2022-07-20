@@ -193,10 +193,6 @@ let postAnswer = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 module.exports.getProducts = getProducts;
 module.exports.getProduct = getProduct;
 module.exports.getReviews = getReviews;
