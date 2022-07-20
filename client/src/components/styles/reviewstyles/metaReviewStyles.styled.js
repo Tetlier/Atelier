@@ -15,7 +15,7 @@ flex: ${props=> props.size};
 export const Clickable = styled.div`
 
 &:hover {
-  background-color: rgba(140, 140, 186, 140);
+  background-color: #6E6D70;
   opacity: 0.9;
   transform: scale(0.98);
 }
@@ -46,17 +46,17 @@ outline: none;
 background: #000;
 height: 5px;
 border-radius: 1em;
-`
+`;
 
 export const RateSpace = styled.label`
 > * {margin-left:1em;}
-`
+`;
 
 export const StyleSpace = styled.label`
 > * { margin-right: 10em;
       margin-top: 1em;
       float:right;}
-`
+`;
 
 export const SmallButton = styled.button`
 display: flex;

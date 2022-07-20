@@ -7,8 +7,10 @@ export const StyledProductDetail = styled.div`
   column-gap: 20px;
   justify-content: center;
   align-items:start;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   margin-top: 3em;
+  padding: 0 0 2em 0;
+  border-bottom: 1px #ccc solid;
 
   .social-links {
     display: flex;
@@ -23,7 +25,7 @@ export const StyledProductDetail = styled.div`
     width:2em;
     height: 2em;
     margin: 0 0.2rem;
-    color: black;
+    color: white;
     border: 1px solid black;
     border-radius: 50%;
     text-decoration: none;
@@ -32,8 +34,21 @@ export const StyledProductDetail = styled.div`
   }
 
   .social-links button:hover {
-    background: black;
-    border-color: transparent;
-    color: white;
+    background: white;
+    color: black;
+    cursor: pointer;
   }
+
+  .facebook {
+    background: #4267B2;
+  }
+
+  .twitter {
+    background: #00acee;
+  }
+
+  .pinterest {
+    background: #E60023;
+  }
+
 `;

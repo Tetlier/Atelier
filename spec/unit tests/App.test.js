@@ -1,4 +1,7 @@
 // tests App.jsx functions
+/**
+* @jest-environment puppeteer
+*/
 
 import ReactDom from 'react-dom';
 import React, {useState, useEffect} from 'react';

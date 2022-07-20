@@ -60,14 +60,14 @@ const Review = ({ review, setRefresh }) => {
           onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
-      <ReviewRow>{[...review.photos].map((photo, index) => <ReviewCol> {enlarged[index] ? enlargeThumbnail(photo.url, index) : <ThumbNail
+      <ReviewRow>{[...review.photos].map((photo, index) => <ReviewCol key={photo.url}> {enlarged[index] ? enlargeThumbnail(photo.url, index) : <ThumbNail
         onClick={() => {
           let newEnlargedState = enlarged.slice();
           newEnlargedState[index] = true;
           setEnlarged(newEnlargedState);
         }}
         src={photo.url}
-        key={`${photo.url}`} />}</ReviewCol>)}</ReviewRow>
+        key={photo.url} />}</ReviewCol>)}</ReviewRow>
 
 
       {!clicked ? <div>Was this review helpful?

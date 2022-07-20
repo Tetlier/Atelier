@@ -21,15 +21,15 @@ export const Button = styled.button`
 `;
 
 export const SideButton = styled.button`
-display: flex;
-align-items: center;
-padding: 6px 14px;
-border-radius: 6px;
-border: none;
-cursor: pointer;
-position: fixed;
-top: 0px;
-right: 0px;
+  display: flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 0px;
+  right: 0px;
 
   background: #6E6D70;
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);

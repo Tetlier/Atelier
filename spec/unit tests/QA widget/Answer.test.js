@@ -11,7 +11,7 @@ describe('Answer component', () => {
   it('should increase an answer\'s helpfulness', async () => {
     let answers = exampleData.getAnswers.data;
     const setAnswers = (newAnswers) => { answers = newAnswers; };
-    const sessionCookie = {s_id: 'cookiestring', actions: []};
+    const sessionCookie = {'s_id': 'cookiestring', actions: []};
     const addToCookie = (id, action) => {
       sessionCookie.actions.push(id + action.slice(0, 1));
     };

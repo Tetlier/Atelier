@@ -21,6 +21,10 @@ export const LargeButton = styled.button`
   }
 `;
 
+export const ButtonPosition = styled.div`
+  text-align: center;
+`;
+
 export const SmallButton = styled.button`
 align-items: center;
   padding: 6px 14px;

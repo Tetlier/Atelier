@@ -16,15 +16,7 @@ export const StyledImageCarousel = styled.div`
     height: 100%;
     width: 100%;
   }
-  .buttonHolder {
-    margin: 10px;
-    color: #000000;
-    text-align: center;
-    opacity: 0.75;
-    &:hover {
-      opacity: 1;
-    }
-  }
+
   .carousel-container {
     display: flex;
     flex-direction: column;
@@ -43,6 +35,8 @@ export const StyledImageCarousel = styled.div`
     height: 60px;
     opacity: 1;
     transition: all 0.3s ease;
+    object-fit: cover;
+    border-radius: 10px;
   }
 
   .carousel-container img.active {

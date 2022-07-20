@@ -37,26 +37,25 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
 
   return (
     <MetaGrid> {metaReview.recommended ?
-      <MetaRow>
-        <div>< SummaryStar rating={currentProductRating} /></div>
-        <h2>Average Review: {currentProductRating}</h2>
-        <div> {recommended}% of reviewers recommend this product.</div>
-        {/* <div>Rating Breakdown</div> */}
-        <div> {filterRating.length !== 0 ? <SmallButton onClick={() => setFilterRating([])}> Remove all filters</SmallButton> : null}</div>
-        <div>{[...ratingsArray].reverse().map(rating =>
-          <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key={ratingsArray.indexOf(rating)}>
-            <label>{rating.star} stars <RateSpace><progress value={rating.amount / totalRatings} /></RateSpace></label>
-            <p><small>{rating.amount} ratings</small></p>
-          </Clickable>)}</div>
-
-
+      <div>
+        <MetaRow>
+          <div>< SummaryStar rating={currentProductRating} /></div>
+          <h2>Average Review: {currentProductRating}</h2>
+          <div> {recommended}% of reviewers recommend this product.</div>
+          {/* <div>Rating Breakdown</div> */}
+          <div> {filterRating.length !== 0 ? <SmallButton onClick={() => setFilterRating([])}> Remove all filters</SmallButton> : null}</div>
+          <div>{[...ratingsArray].reverse().map(rating =>
+            <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key={ratingsArray.indexOf(rating)}>
+              <label>{rating.star} stars <RateSpace><progress value={rating.amount / totalRatings} /></RateSpace></label>
+              <p><small>{rating.amount} ratings</small></p>
+            </Clickable>)}</div>
+        </MetaRow>
         <MetaRow>{Object.entries(metaReview.characteristics).map(character =>
           <div key={character}>
             {character[0]}
-            <StyleSpace><Styles type='range' value={character[1].value} min='0' max='5' /></StyleSpace> </div>)}
+            <StyleSpace><Styles type='range' readOnly value={character[1].value} min='0' max='5' /></StyleSpace> </div>)}
         </MetaRow>
-
-      </MetaRow> : 'Loading'
+      </div> : 'Loading'
     }
     </MetaGrid >
   );
