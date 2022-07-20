@@ -8,7 +8,7 @@ import SearchBar from './SearchBar.jsx';
 //styled components
 import { Grid, Row, Meta, ReviewArea, Scroll, Button, ButtonPosition } from '../styles/reviewstyles/reviewWidget.styled.js';
 
-const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
+const Reviews = ({ currentProductId, currentProductRating, productName }) => {
 
   //hooks related to the review list and restrictions
   const [startPoint, setStart] = useState(0);
@@ -84,7 +84,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
   useEffect(() => {
     startPoint >= 2 ? getPageReviews() : null;
     getMetaReview(currentProductId);
-  }, [dropDownSort, refresh]);
+  }, [dropDownSort, refresh, currentProductId ]);
 
   //Adds and removes rating filters
   let toggleFilter = async (rating) => {
@@ -112,8 +112,8 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
             filterRating={filterRating}
             setTotalRatings={setTotalRatings}
             totalRatings={totalRatings}
-            reviewList ={reviewList}
-            setRefresh={setRefresh}/>
+            reviewList={reviewList}
+            setRefresh={setRefresh} />
         </Meta>
         <ReviewArea>
           <label> {totalRatings} reviews, sorted by: </label>
@@ -129,10 +129,15 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
                 reviewList={reviewList}
                 filterRating={filterRating}
                 currentSearch={currentSearch}
-                setRefresh = {setRefresh}/> : null}
+                setRefresh={setRefresh} /> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
-
+          <div><Form
+            closeForm={closeForm}
+            form={form}
+            metaReview={metaReview}
+            currentProductId={currentProductId}
+            productName={productName} />
+          </div>
           <ButtonPosition>
             <Button
               data-testid='addReview'
