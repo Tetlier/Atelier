@@ -14,7 +14,7 @@ let getProducts = () => {
 };
 
 let getProduct = (req, res) => {
-  let productId = req.params.product_id
+  let productId = req.params.product_id;
 
   client.get(`products/${productId}`)
     .then((product) => {
@@ -29,6 +29,18 @@ let getProduct = (req, res) => {
     })
     .catch(err => {
       res.status(500).send(err);
+    });
+};
+
+let addToCart = (req, res) => {
+  let skuId = req.body.data;
+  client.post('/cart', skuId)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server error adding to cart');
+      res.sendStatus(500);
     });
 };
 
@@ -183,6 +195,7 @@ let postAnswer = (req, res) => {
 
 module.exports.getProducts = getProducts;
 module.exports.getProduct = getProduct;
+module.exports.addToCart = addToCart;
 module.exports.getReviews = getReviews;
 module.exports.getQuestions = getQuestions;
 module.exports.getAnswers = getAnswers;

@@ -88,6 +88,8 @@ app.use('/', router);
 
 router.get('/product/:product_id', controllers.getProduct);
 
+router.post('/cart', controllers.addToCart);
+
 router.get('/qa/questions/:question_id/answers', controllers.getAnswers);
 
 router.get('/qa/questions', controllers.getQuestions);
