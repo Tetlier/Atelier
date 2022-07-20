@@ -111,8 +111,8 @@ export const StyledImgShowcase = styled.div`
   }
 
   .zoomedImageView.active  div {
-    width: 400px;
-    height: 400px;
+    width: 800px;
+    height: 600px;
     &:hover {
       cursor: zoom-out;
     }

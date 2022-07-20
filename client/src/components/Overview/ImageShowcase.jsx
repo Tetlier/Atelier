@@ -108,28 +108,18 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
         }}
       >
         <div id='zoomedImage'
-          // className='zoomedImageViewPhoto'
-          // src={productStyle.photos[selectedThumbnailIndex].url}
           onClick={(e) => {
             e.stopPropagation();
             changeToExpandedView();
           }}
-          // https://stackoverflow.com/questions/58028788/how-to-add-a-mousemove-event-listener-to-a-component-cursor-which-is-moved-wit
-          // https://www.freecodecamp.org/news/react-background-image-tutorial-how-to-set-backgroundimage-with-inline-css-style/
-          // !!! https://stackoverflow.com/questions/44612051/zoom-that-follows-mouse
-          // TODO: FIX THE BUG
           onMouseMove={(ev)=> handleMouseMove(ev)}
           style={{
             backgroundImage: `url(${productStyle.photos[selectedThumbnailIndex].url})`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundSize: '250%',
-            // https://codepen.io/elevadorstudio/pen/zYxyVVy
-            // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-            // transformOrigin: `${MousePosition.left}% ${MousePosition.top}%`
             backgroundPositionX: MousePosition.left + '%',
             backgroundPositionY: MousePosition.top + '%'
-            // left: MousePosition.left, top: MousePosition.top
           }}
         />
       </div>
