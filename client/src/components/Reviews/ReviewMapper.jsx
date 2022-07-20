@@ -2,7 +2,7 @@ import React from 'react';
 import Review from './Review.jsx';
 
 
-const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch, setRefresh }) => {
+const ReviewMapper = ({ reviewList, filterRating, currentSearch, setRefresh }) => {
 
   // //requirement variables
 
@@ -24,13 +24,13 @@ const ReviewMapper = ({ reviewList, StarReview, filterRating, currentSearch, set
   return (
     <div>{reviewList.map((review, index) => {
       if (filterRating.includes(review.rating) && currentSearch && review.summary.toLowerCase().includes(currentSearch.toLowerCase())) {
-        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
+        return <Review review={review} key={index} setRefresh={setRefresh} />;
       } else if (filterRating.includes(review.rating) && !currentSearch) {
-        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
+        return <Review review={review} key={index} setRefresh={setRefresh} />;
       } else if (filterRating.length === 0 && currentSearch && review.summary.toLowerCase().includes(currentSearch.toLowerCase())) {
-        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
+        return <Review review={review} key={index} setRefresh={setRefresh} />;
       } else if (filterRating.length === 0 && !currentSearch) {
-        return <Review review={review} key={index} StarReview={StarReview} setRefresh={setRefresh} />;
+        return <Review review={review} key={index} setRefresh={setRefresh} />;
       } else {
         null;
       }

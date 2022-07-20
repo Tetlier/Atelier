@@ -75,6 +75,44 @@ export const StyledImgShowcase = styled.div`
     background-color: #000000;
   }
 
+  .leftArrow {
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  float:left;
+
+  background: #6E6D70;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #DFDEDF;
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+    background: #000;
+  }
+}
+
+.rightArrow {
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  float:right;
+
+  background: #6E6D70;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #DFDEDF;
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+    background: #000;
+  }
+}
+
   .expandedView {
     display: none;
   }

@@ -13,7 +13,7 @@ const ProductDetail = ({description, slogan, features}) => {
       <ul style={{'flexBasis': '20%'}}>
         {
           features.map((item, i) => {
-            return (<li key={i}>feature: {item.feature},  value: {item.value} </li>);
+            return (<li key={i}> {item.feature}, {item.value} </li>);
           })
         }
       </ul>

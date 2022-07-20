@@ -7,7 +7,7 @@ import $ from 'jquery';
 const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) => {
   let imageUrls = [];
   for (let i = 0; i < productStyle.photos.length; i++) {
-    imageUrls.push({index: i, url: productStyle.photos[i].url});
+    imageUrls.push({ index: i, url: productStyle.photos[i].url });
   }
 
   const [expandedView, setExpandedView] = useState(false);
@@ -38,7 +38,15 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   let changeToExpandedView = () => {
     setZoomedImageView(false);
     setExpandedView(true);
-    setMousePosition({left: 0, top: 0});
+    setMousePosition({ left: 0, top: 0 });
+  };
+
+  let nextProduct = (direction) => {
+    if (direction === 'left') {
+      imageUrls[selectedThumbnailIndex - 1] ? thumbnailChange(selectedThumbnailIndex - 1) : null;
+    } else {
+      imageUrls[selectedThumbnailIndex + 1] ? thumbnailChange(selectedThumbnailIndex + 1) : null;
+    }
   };
 
   let handleMouseMove = (ev) => {
@@ -61,7 +69,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               src={imageUrl.url}
               onClick={() => {
                 changeView();
-              }}/>
+              }} />
           ))}
         </div>
       </div>
@@ -83,6 +91,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               className={`slideshowDot${selectedThumbnailIndex === idx ? ' active' : ''}`}
               onClick={() => {
                 thumbnailChange(idx);
+                console.log(idx);
               }}
             ></div>
           ))}
@@ -122,7 +131,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               onClick={(e) => {
                 e.stopPropagation();
                 thumbnailChange(index);
-              }}/>
+              }} />
           ))}
         </div>
       </div>
