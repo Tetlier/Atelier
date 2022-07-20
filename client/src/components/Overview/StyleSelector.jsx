@@ -12,19 +12,20 @@ const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex
       <div className='product-price'>
         {
           productStyle.results[selectedStyleIndex]['sale_price'] !== null
-          &&
-          <h3 className='new-price'>
-            Sell Price: <span style={{color: 'red'}}>${productStyle.results[selectedStyleIndex]['sale_price']}</span>
-          </h3>
+            ?
+            <h3 className='new-price'>
+              Sale Price: <span style={{color: 'red'}}>${productStyle.results[selectedStyleIndex]['sale_price']}</span>
+            </h3>
+            :
+            <h3><br></br></h3>
         }
         <h3 className='last-price'>
-          Price:
           <span style={{'textDecoration': productStyle.results[selectedStyleIndex]['sale_price'] !== null ? 'line-through' : 'none'}}>
             ${productStyle.results[selectedStyleIndex]['original_price']}
           </span>
         </h3>
       </div>
-      <h3>Style &gt; {productStyle.results[selectedStyleIndex].name}</h3>
+      <h3>{productStyle.results[selectedStyleIndex].name}</h3>
       <br/>
       <StyleGrid>
         {

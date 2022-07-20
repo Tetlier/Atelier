@@ -32,7 +32,7 @@ const darkTheme = {
 };
 
 const ThemeSetter = styled.div`
-color : ${props => props.theme.fontColor}
+  color: ${props => props.theme.fontColor}
 `;
 
 export default function App({ sessionCookie, addToCookie }) {
@@ -95,7 +95,6 @@ export default function App({ sessionCookie, addToCookie }) {
               currentProductId={currentProductId}
               setCurrentId={setCurrentId}
             />
-            <br />
             <div id='review'>
               <Reviews
                 currentProductId={currentProductId}
@@ -103,7 +102,6 @@ export default function App({ sessionCookie, addToCookie }) {
                 productName={productName}
               />
             </div>
-            <br />
             <QA
               productId={currentProductId}
               sessionCookie={sessionCookie}

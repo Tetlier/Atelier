@@ -7,9 +7,9 @@ const ProductDetail = ({description, slogan, features}) => {
 
   return (
     <StyledProductDetail>
-      <h3 style={{'flexBasis': '40%'}}>Description: {description}</h3>
+      <b style={{'flexBasis': '40%'}}>{description}</b>
       <br/>
-      <h3 style={{'flexBasis': '20%'}}>Slogan: {slogan}</h3>
+      <i style={{'flexBasis': '20%'}}>{slogan}</i>
       <ul style={{'flexBasis': '20%'}}>
         {
           features.map((item, i) => {
@@ -19,21 +19,21 @@ const ProductDetail = ({description, slogan, features}) => {
       </ul>
 
       <div className='social-links' style={{'flexBasis': '20%'}}>
-        <p>Share At: &nbsp;&nbsp;&nbsp;</p>
+        <p>Share: &nbsp;&nbsp;&nbsp;</p>
         <div className='social-links'>
-          <button
+          <button className='facebook'
             onClick={() => {
               shareToSocialMedia('facebook');
             }}>
             <i className='fab fa-facebook-f'></i>
           </button>
-          <button
+          <button className='twitter'
             onClick={() => {
               shareToSocialMedia('twitter');
             }}>
             <i className='fab fa-twitter'></i>
           </button>
-          <button
+          <button className='pinterest'
             onClick={() => {
               shareToSocialMedia('pinterest');
             }}>

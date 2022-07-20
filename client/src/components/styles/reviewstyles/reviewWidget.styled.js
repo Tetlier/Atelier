@@ -3,32 +3,32 @@ import styled from 'styled-components';
 export const Grid = styled.div`
 width: 100%;
 height: 100%;
-
-`;
-
-export const Row = styled.div`
 display: flex;
-width: 100%;
+margin: auto;
 `;
 
 export const Meta = styled.div`
-width: 50%
+width: 30%
 `;
 
 export const ReviewArea = styled.div`
-width: 100%;
+width: 70%;
 `;
 
 export const Scroll = styled.div`
-  max-height: 320px;
+  max-height: 600px;
   overflow-y: auto;
   max-width: 700px;
   overflow-x: auto;
 `;
 
+export const Search = styled.div`
+  padding: 10px 5px 10px 5px;
+`;
+
 export const Searchbar = styled.input`
 padding: 5px;
-height: 30px;
+height: 45px;
 font-size: 1em;
 width: 100%;
 `;
@@ -53,5 +53,5 @@ color: #000;
 }`;
 
 export const ButtonPosition = styled.div`
-margin-left: 50%;
+text-align: center;
 `;
