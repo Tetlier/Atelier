@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StarReview = styled.div`
   --percent: calc(${({rating}) => rating} / 5 * 100%);
   --star-size: 1em;
-  --star-color: #fff;
+  --star-color: #808080;
   --star-background: #fc0;
 
   display: inline-block;
