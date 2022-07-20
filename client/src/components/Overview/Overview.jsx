@@ -40,7 +40,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(styles);
       }));
-  }, []);
+  }, [currentProductId]);
 
   // https://stackoverflow.com/questions/64191896/usestate-in-useeffect-does-not-update-state
   useEffect(() => {

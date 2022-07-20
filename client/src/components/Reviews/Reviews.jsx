@@ -131,7 +131,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
                 currentSearch={currentSearch}
                 setRefresh = {setRefresh}/> : null}
           </Scroll>
-          <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
+          <div><Form closeForm={closeForm} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
 
           <ButtonPosition>
             <Button

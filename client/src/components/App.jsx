@@ -30,7 +30,7 @@ const darkTheme = {
 };
 
 const ThemeSetter = styled.div`
-color : ${props => props.theme.fontColor}
+  color: ${props => props.theme.fontColor}
 `;
 
 export default function App({ sessionCookie, addToCookie }) {
