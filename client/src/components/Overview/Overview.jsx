@@ -97,7 +97,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
         </ImageGallery>
 
         <ProductContent className='productContent'>
-          <h4 ><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
+          <h4 style={{visibility: currentProductRating === 0 ? 'hidden' : 'visible'}}><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
