@@ -8,7 +8,6 @@ import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
 import { Panel } from '../styles/Overview/Panel.styled';
 import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
 import { ProductContent } from '../styles/Overview/ProductContent.styled';
-import ProductFeatures from './ProductFeatures';
 import ImageCarousel from './ImageCarousel';
 import StarReview from '../styles/StarReview.styled';
 

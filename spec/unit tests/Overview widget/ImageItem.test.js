@@ -1,5 +1,4 @@
 import TestRenderer from 'react-test-renderer';
-import ProductFeatures from '../../../client/src/components/Overview/ProductFeatures';
 import ImageItem from '../../../client/src/components/Overview/ImageItem';
 import { StyledImgItem } from '../../../client/src/components/styles/Overview/ImageItem.styled';
 
