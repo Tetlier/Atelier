@@ -35,7 +35,6 @@ const StyleSelector = ({productStyle, styleChange, skuChange, selectedStyleIndex
                 className={`${selectedStyleIndex === i ? 'active' : ''}`}
                 src={style.photos[0].thumbnail_url}
                 alt = 'shoe image'
-                // https://upmostly.com/tutorials/pass-a-parameter-through-onclick-in-react
                 onClick = {(event) => styleChange(event, i)}
               />
             );

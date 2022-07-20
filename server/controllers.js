@@ -33,6 +33,18 @@ let getProduct = (req, res) => {
     });
 };
 
+let addToCart = (req, res) => {
+  let skuId = req.body.data;
+  client.post('/cart', skuId)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server error adding to cart');
+      res.sendStatus(500);
+    });
+};
+
 let getReviews = (id, count, sort) => {
   return (client.get(`/reviews/?product_id=${id}&count=${count}&sort=${sort}`));
 };
@@ -195,6 +207,7 @@ let postAnswer = (req, res) => {
 
 module.exports.getProducts = getProducts;
 module.exports.getProduct = getProduct;
+module.exports.addToCart = addToCart;
 module.exports.getReviews = getReviews;
 module.exports.getQuestions = getQuestions;
 module.exports.getAnswers = getAnswers;
