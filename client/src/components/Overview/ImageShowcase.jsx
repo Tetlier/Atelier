@@ -78,8 +78,8 @@ const ImageShowcase = ({ productStyle, thumbnailChange, selectedThumbnailIndex }
           ))}
         </div>
 
-        <button onClick={event => nextProduct('left')}><AiOutlineArrowLeft /></button>
-        <button onClick={event => nextProduct('right')}><AiOutlineArrowRight /></button>
+        <button className = 'leftArrow' onClick={event => nextProduct('left')}><AiOutlineArrowLeft /></button>
+        <button className = 'rightArrow' onClick={event => nextProduct('right')}><AiOutlineArrowRight /></button>
 
         <div className="slideshowDots">
           {imageUrls.map((_, idx) => (
