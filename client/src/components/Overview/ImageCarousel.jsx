@@ -25,8 +25,11 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   // scroll the thumbnails up and down based on the direction
   const scroll = (direction) => {
-    let far = $( '.carousel-container' ).height() / 1.05 * direction;
+    console.log('container height ', $( '.carousel-container' ).height());
+    let far = $( '.carousel-container' ).height() / 1 * direction;
+    console.log('far is ', far);
     let pos = $('.carousel-container').scrollTop() + far;
+    console.log('pos is ', pos);
     if (pos <= 0) {
       setCurrentIndex(0);
     } else if (pos >= $( '.carousel-container' ).height()) {
