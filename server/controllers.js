@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const axios = require('axios');
 require('dotenv').config();
 
@@ -52,16 +53,27 @@ let getMetaReview = (id, page) => {
   return (client.get(`/reviews/meta?product_id=${id}`));
 };
 
-// eslint-disable-next-line camelcase
+
 let putHelpfulReview = (review_id) => {
-  // eslint-disable-next-line camelcase
+
   return (client.put(`/reviews/${review_id}/helpful`));
 };
 
-// eslint-disable-next-line camelcase
+
 let postReview = (product_id, rating, summary, body, name, email, photos, recommended, characteristics) => {
-  // eslint-disable-next-line camelcase
-  return (client.post(`/reviews/?product_id=${product_id}&rating=${rating}&summary=${summary}&body=${body}&recommend=${recommended}&name=${name}&email=${email}&photos=${photos}&characteristics=${characteristics}`));
+
+  let data = {
+    'product_id': product_id,
+    'rating': rating,
+    'summary': summary,
+    'body': body,
+    'recommend': recommended,
+    'name': name,
+    'email': email,
+    'photos': photos,
+    'characteristics': characteristics
+  };
+  return (client.post('/reviews', data));
 };
 
 // returns first ${count} number of questions that contains filter term, sorted by helpfulness
@@ -94,7 +106,7 @@ let getQuestions = (req, res) => {
 let getAnswers = (req, res) => {
   let questionId = req.params.question_id;
   let count = req.query.count;
-  let sellerName = req.query.sellerName.toLowerCase();
+  let sellerName = req.query.sellerName.toLowerCase() || '';
 
   client.get(`/qa/questions/${questionId}/answers?count=${count}`)
     .then((result) => {

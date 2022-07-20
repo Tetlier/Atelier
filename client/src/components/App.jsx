@@ -1,27 +1,42 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Reviews from './Reviews/Reviews.jsx';
 import QA from './Q-A/QA.jsx';
 import styled from 'styled-components';
-import {Container} from './styles/Container.styled.js';
-import {ThemeProvider} from 'styled-components';
+import { Container } from './styles/Container.styled.js';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/Global.js';
-import {Button} from './styles/Button.styled.js';
+import { Button, SideButton } from './styles/Button.styled.js';
 import Overview from './Overview/Overview';
 import StarReview from './styles/StarReview.styled.js';
 import ProductSelection from './Product Selection/ProductSelection';
+import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 
 const theme = {
   colors: {
     header: '#ebfbff',
     body: '#fff'
-  }
+  },
+  fontColor: '#000000'
 };
 
-export default function App ({sessionCookie, addToCookie}) {
+const darkTheme = {
+  colors: {
+    header: '#fff',
+    body: '#343434',
+  },
+  fontColor: '#dfe3de'
+};
+
+const ThemeSetter = styled.div`
+color : ${props => props.theme.fontColor}
+`;
+
+export default function App({ sessionCookie, addToCookie }) {
   const [currentProductId, setCurrentId] = useState(40344);
   const [currentProductRating, setRating] = useState(0);
+  const [darkMode, setDarkMode] = useState(false);
   const [productName, setProductName] = useState('Camo Onesie');
 
   useEffect(() => {
@@ -36,7 +51,7 @@ export default function App ({sessionCookie, addToCookie}) {
       });
   }, [currentProductId]);
 
-  const getAverageRating = function(id) {
+  const getAverageRating = function (id) {
     axios.get('/meta', { params: { id: id } })
       .then(results => {
         let avg = 0;
@@ -59,16 +74,14 @@ export default function App ({sessionCookie, addToCookie}) {
       .catch(err => console.log(err));
   };
 
-  //first div should be the current item and its details
-  //second div should be the rest of the products (related products) -if have enough time
-  //third div should be questions and answers
-  //fourth div should be reviews
-
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <>
-          <GlobalStyles/>
+      <ThemeProvider theme={darkMode ? darkTheme : theme}>
+        <ThemeSetter>
+          <div>
+            {darkMode ? <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsFillMoonFill /></SideButton> :
+              <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsSun/></SideButton>}</div>
+          <GlobalStyles />
           <Container>
             <h1>Welcome to Atelier!</h1>
             <Overview
@@ -83,7 +96,7 @@ export default function App ({sessionCookie, addToCookie}) {
               currentProductRating={currentProductRating}
               productName={productName}
             />
-            <br/>
+            <br />
             <QA
               productId={currentProductId}
               sessionCookie={sessionCookie}
@@ -91,7 +104,7 @@ export default function App ({sessionCookie, addToCookie}) {
               productName={productName}
             />
           </Container>
-        </>
+        </ThemeSetter>
       </ThemeProvider>
     </div>
   );

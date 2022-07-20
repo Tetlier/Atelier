@@ -24,7 +24,6 @@ const GlobalStyles = createGlobalStyle`
     height: 100px;
     display: block;
   }
-
 `;
 
 export default GlobalStyles;
