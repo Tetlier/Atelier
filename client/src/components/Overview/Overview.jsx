@@ -18,12 +18,9 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0);
   const [selectedSizeQuantity, setSelectedSizeQuantity] = useState([]);
-<<<<<<< HEAD
-=======
   const [selectedSku, setSelectedSku] = useState('default');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [skuAlert, setSkuAlert] = useState(false);
->>>>>>> main
   useEffect(() => {
     axios.get(`/product/${currentProductId}`)
       .then((response => {
@@ -39,10 +36,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
           // styles.results[i].skus = {'000001': {quantity: 1, size: 'SELECT SIZE'}, ...styles.results[i].skus};
           styles.results[i].skusArr = Object.entries(styles.results[i].skus);
           styles.results[i].skusArr.unshift(['000001', {quantity: 0, size: 'SELECT SIZE'}]);
-<<<<<<< HEAD
-          console.log(':::: ', styles.results[i].skusArr);
-=======
->>>>>>> main
         }
         setCurrentProduct(response.data.productInfo);
         setCurrentProductStyle(styles);
@@ -54,11 +47,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
   }, [currentProductStyle]);
 
   // https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component
-<<<<<<< HEAD
-  const handleStyleChange = (key) => {
-    setSelectedStyleIndex(key);
-    setSelectedSizeQuantity([]);
-=======
   const handleStyleChange = (event, key) => {
     event.preventDefault();
     setSelectedStyleIndex(key);
@@ -66,7 +54,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
     setSelectedSku('default');
     setSelectedQuantity(0);
     setSkuAlert(false);
->>>>>>> main
   };
 
   const handleThumbnailChange = (key) => {
@@ -74,13 +61,8 @@ const Overview = ({currentProductId, currentProductRating}) => {
   };
 
   const handleSkuChange = (text) => {
-<<<<<<< HEAD
-    // console.log('called ', text);
-    // console.log('currentProductStyle.skus ', currentProductStyle.results[selectedStyleIndex].skus);
-=======
     setSelectedSku(text);
     setSkuAlert(false);
->>>>>>> main
     for (const [key, value] of Object.entries(currentProductStyle.results[selectedStyleIndex].skus)) {
       if (value.size === text) {
         var quantityArr = [];
@@ -90,9 +72,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
       }
     }
     setSelectedSizeQuantity(quantityArr);
-<<<<<<< HEAD
-  }
-=======
   };
 
   const handleQuantityChange = (text) => {
@@ -103,7 +82,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
   const handleSkuAlertChange = (value) => {
     setSkuAlert(value);
   };
->>>>>>> main
 
 
   return (
@@ -119,20 +97,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
           thumbnailChange={handleThumbnailChange}
           selectedThumbnailIndex={selectedThumbnailIndex}
         />
-<<<<<<< HEAD
-
-        <ImageGallery className='imageGallery'>
-          <ImageShowcase
-            productStyle={currentProductStyle.results[selectedStyleIndex]}
-            thumbnailChange={handleThumbnailChange}
-            selectedThumbnailIndex={selectedThumbnailIndex}
-          />
-        </ImageGallery>
-
-        <ProductContent className='productContent'>
-          {/* TODO: Link Read all review to review */}
-          <h4 ><StarReview rating={currentProductRating} /> <span style={{'textDecoration': 'underline'}}>Read all reviews </span></h4>
-=======
 
         <ImageGallery className='imageGallery'>
           <ImageShowcase
@@ -145,7 +109,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
         <ProductContent className='productContent'>
           {/* TODO: Link Read all review to review */}
           <h4 ><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
->>>>>>> main
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
           <StyleSelector
@@ -153,9 +116,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
             styleChange={handleStyleChange}
             skuChange={handleSkuChange}
             selectedStyleIndex={selectedStyleIndex}
-<<<<<<< HEAD
-            selectedSizeQuantity={selectedSizeQuantity}/>
-=======
             selectedSizeQuantity={selectedSizeQuantity}
             selectedSku={selectedSku}
             selectedQuantity={selectedQuantity}
@@ -163,7 +123,6 @@ const Overview = ({currentProductId, currentProductRating}) => {
             skuAlert={skuAlert}
             skuAlertChange={handleSkuAlertChange}
           />
->>>>>>> main
         </ProductContent>
       </OverviewContainer>
 
@@ -174,8 +133,4 @@ const Overview = ({currentProductId, currentProductRating}) => {
   );
 };
 
-<<<<<<< HEAD
 export default Overview;
-=======
-export default Overview;
->>>>>>> main

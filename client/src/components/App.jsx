@@ -28,40 +28,15 @@ const darkTheme = {
   fontColor: '#dfe3de'
 };
 
-<<<<<<< HEAD
 const ThemeSetter = styled.div`
 color : ${props => props.theme.fontColor}
 `;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentProductId: 40344,
-      currentProductRating: 0,
-      currentProductName: '',
-      darkMode: true,
-      sessionCookie: {
-        's_id': document.cookie.slice(5),
-        actions: []
-      }
-    };
-    this.getProducts = this.getProducts.bind(this);
-    this.addToCookie = this.addToCookie.bind(this);
-  }
-
-  getProducts() {
-    axios.get('http://localhost:3000/products')
-      .then(response => {
-        this.setState({ productList: response.data }, () => {
-          return this.state.productList;
-        });
-=======
 export default function App ({sessionCookie, addToCookie}) {
   const [currentProductId, setCurrentId] = useState(40344);
   const [currentProductRating, setRating] = useState(0);
+  const [darkMode, setDarkMode] = useState(true);
   const [productName, setProductName] = useState('Camo Onesie');
->>>>>>> main
 
   useEffect(() => {
     getAverageRating(currentProductId);
@@ -96,51 +71,33 @@ export default function App ({sessionCookie, addToCookie}) {
       }
       )
       .catch(err => console.log(err));
-<<<<<<< HEAD
-  }
-
-  componentDidMount() {
-    this.getProducts();
-    //below is a test. remove when testing complete
-    this.getAverageRating(40344); // gives us 3.75
-  }
-
-  // takes in id (question or answer) and action (helpful or reported) to add to cookie
-  addToCookie(id, action) {
-    action = action.toLowerCase();
-    // adds id number + h or r for helpful or reported
-    this.state.sessionCookie.actions.push(id + action.slice(0, 1));
-  }
-=======
   };
->>>>>>> main
 
   //first div should be the current item and its details
   //second div should be the rest of the products (related products) -if have enough time
   //third div should be questions and answers
   //fourth div should be reviews
 
-<<<<<<< HEAD
-  render() {
-    return (
-      <ThemeProvider theme= {this.state.darkMode ? darkTheme : theme}>
-        <ThemeSetter>
-          <GlobalStyles />
-          <Container>
-            <h1>Welcome to Atelier!</h1>
-            <Overview
-              currentProductId={this.state.currentProductId}
-              currentProductRating={this.state.currentProductRating} />
-            <div><Reviews currentProductId='40344' currentProductRating={this.state.currentProductRating} /></div>
-            <br />
-            <div><QA productId={this.state.currentProductId}
-              sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie} />
-            </div>
-=======
+
+  // render() {
+  //   return (
+  //     <ThemeProvider theme= {this.state.darkMode ? darkTheme : theme}>
+  //       <ThemeSetter>
+  //         <GlobalStyles />
+  //         <Container>
+  //           <h1>Welcome to Atelier!</h1>
+  //           <Overview
+  //             currentProductId={this.state.currentProductId}
+  //             currentProductRating={this.state.currentProductRating} />
+  //           <div><Reviews currentProductId='40344' currentProductRating={this.state.currentProductRating} /></div>
+  //           <br />
+  //           <div><QA productId={this.state.currentProductId}
+  //             sessionCookie={this.state.sessionCookie} addToCookie={this.addToCookie} />
+  //           </div>
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <>
+      <ThemeProvider theme={darkMode ? darkTheme : theme}>
+        <ThemeSetter>
           <GlobalStyles/>
           <Container>
             <h1>Welcome to Atelier!</h1>
@@ -163,7 +120,6 @@ export default function App ({sessionCookie, addToCookie}) {
               addToCookie={addToCookie}
               productName={productName}
             />
->>>>>>> main
           </Container>
         </ThemeSetter>
       </ThemeProvider>
