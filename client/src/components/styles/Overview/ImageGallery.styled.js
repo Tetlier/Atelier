@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ImageGallery = styled.div`
+<<<<<<< HEAD
   // overflow: hidden;
   // display: flex;
   // width: 20%;
@@ -12,5 +13,8 @@ export const ImageGallery = styled.div`
   // width: 65%;
   // position: relative
   // margin-right: 50px;
+=======
+  width:50%;
+>>>>>>> main
   }
 `;

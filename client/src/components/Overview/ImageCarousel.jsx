@@ -13,10 +13,18 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   // check if the prev/next button that move the thumbnails should be disabled or not.
   const isDisabled = (direction) => {
+<<<<<<< HEAD
     if (direction === 'prev') {
       return currentIndex <= 0;
     }
     if (direction === 'next' ) {
+=======
+    if (productStyle.photos.length <= 7) {
+      return true;
+    } else if (direction === 'prev') {
+      return currentIndex <= 0;
+    } else if (direction === 'next' ) {
+>>>>>>> main
       return currentIndex >= $( '.carousel-container' ).height();
     }
     return false;
@@ -24,8 +32,17 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   // scroll the thumbnails up and down based on the direction
   const scroll = (direction) => {
+<<<<<<< HEAD
     let far = $( '.carousel-container' ).height() / 2 * direction;
     let pos = $('.carousel-container').scrollTop() + far;
+=======
+    console.log('.carousel-container height is',  $( '.carousel-container' ).height());
+    let far = $( '.carousel-container' ).height() / 1.05 * direction;
+    console.log('far is ', far);
+    console.log('.carousel-container).scrollTop() is ', $('.carousel-container').scrollTop());
+    let pos = $('.carousel-container').scrollTop() + far;
+    console.log('pos is ', pos);
+>>>>>>> main
     if (pos <= 0) {
       setCurrentIndex(0);
     } else if (pos >= $( '.carousel-container' ).height()) {

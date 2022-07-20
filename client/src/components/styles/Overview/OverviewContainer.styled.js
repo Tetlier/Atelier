@@ -7,6 +7,7 @@ export const OverviewContainer = styled.div`
   height: 50%;
   margin-bottom: 1em;
   margin-top: 1em;
+<<<<<<< HEAD
 
   // display: grid;
   // align-items: center;
@@ -27,5 +28,15 @@ export const OverviewContainer = styled.div`
   .imageCarousel { flex: 1 1 1; }
   .imageGallery { flex: 2 1 2; }
   .productContent { flex: 1 1 1; }
+=======
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items:center;
+  .imageCarousel { flex: 15%; flex-shrink: 0; flex-grow: 0; align-self: center}
+  .imageGallery { flex-basis: 50%; flex-shrink: 0; flex-grow: 0; align-self: flex-start}
+  .productContent { flex-basis: 35%; flex-shrink: 0; flex-grow: 0; align-self: flex-start}
+>>>>>>> main
 
 `;

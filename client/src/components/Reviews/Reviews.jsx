@@ -132,6 +132,7 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
                 setRefresh = {setRefresh}/> : null}
           </Scroll>
           <div><Form closeForm={closeForm.bind(this)} form={form} metaReview={metaReview} currentProductId={currentProductId} /></div>
+<<<<<<< HEAD
 
           <ButtonPosition>
             <Button
@@ -141,6 +142,14 @@ const Reviews = ({ currentProductId, currentProductRating, totalReviews }) => {
               onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
           </ButtonPosition>
         </ReviewArea>
+=======
+          <div> {!noMoreResults ? <Button
+            onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
+          <Button
+            data-testid='addReview'
+            onClick={() => formClick(true)}>Add a Review + </Button></div>
+        </Col>
+>>>>>>> main
       </Row>
     </Grid>
   );

@@ -14,26 +14,22 @@ let getProducts = () => {
   return (client.get('/products'));
 };
 
-let getProduct = (productId, callback) => {
-  let options = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `${process.env.TOKEN}`
-    }
-  };
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348', options)
+let getProduct = (req, res) => {
+  let productId = req.params.product_id
+
+  client.get(`products/${productId}`)
     .then((product) => {
-      axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40348/styles', options)
+      client.get(`/products/${productId}/styles`)
         .then((styles) => {
           var result = { productInfo: product.data, styleInfo: styles.data };
-          callback(null, result);
+          res.status(200).send(result);
         })
         .catch(stylesErr => {
-          callback(stylesErr, null);
+          res.status(500).send(stylesErr);
         });
     })
     .catch(err => {
-      callback(err, null);
+      res.status(500).send(err);
     });
 };
 
@@ -197,7 +193,10 @@ let postAnswer = (req, res) => {
     });
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 module.exports.getProducts = getProducts;
 module.exports.getProduct = getProduct;
 module.exports.getReviews = getReviews;

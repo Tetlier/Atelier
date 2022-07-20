@@ -45,6 +45,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
       left: (ev.pageX - ev.nativeEvent.offsetX) / windowSize.width * 100, top: (ev.pageY - ev.nativeEvent.offsetY) / windowSize.height * 100});
     // left: ev.nativeEvent.pageX, top: ev.nativeEvent.pageY });
     // left: (ev.pageX - ev.nativeEvent.offsetX), top: (ev.pageY - ev.nativeEvent.offsetY)});
+<<<<<<< HEAD
   };
 
   const showExpandedView = (imageUrl, index) => {
@@ -56,6 +57,9 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
         />
       </Background>
     );
+=======
+    // left: (-ev.nativeEvent.offsetX), top: (-ev.nativeEvent.offsetY)});
+>>>>>>> main
   };
 
   return (
@@ -147,8 +151,13 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             // https://codepen.io/elevadorstudio/pen/zYxyVVy
             // https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
             // transformOrigin: `${MousePosition.left}% ${MousePosition.top}%`
+<<<<<<< HEAD
             // backgroundPositionX: MousePosition.left,
             // backgroundPositionY: MousePosition.top
+=======
+            backgroundPositionX: MousePosition.left + '%',
+            backgroundPositionY: MousePosition.top + '%'
+>>>>>>> main
             // left: MousePosition.left, top: MousePosition.top
           }}
         />
