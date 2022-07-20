@@ -443,7 +443,7 @@ module.exports.getQuestions40344 = {
             "question_body": "Where is the foretold chainmail?? I've looked everywhere!!",
             "question_date": "2022-02-23T00:00:00.000Z",
             "asker_name": "Din",
-            "question_helpfulness": 2,
+            "question_helpfulness": 3,
             "reported": false,
             "answers": {
                 "5360956": {
