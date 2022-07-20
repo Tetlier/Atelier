@@ -33,7 +33,7 @@ export const LinkHover = styled.span`
 `;
 
 export const ClickedLink = styled.span`
-  color: #6E6D70;
+  color: #e2e2e2;
   font-weight: bold;
 `;
 

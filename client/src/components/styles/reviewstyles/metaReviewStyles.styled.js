@@ -43,20 +43,20 @@ export const SummaryStar = styled.div`
 export const Styles = styled.input`
 appearance: none;
 outline: none;
-background: #000;
+background: #7c7c7c;
 height: 5px;
 border-radius: 1em;
-`
+`;
 
 export const RateSpace = styled.label`
 > * {margin-left:1em;}
-`
+`;
 
 export const StyleSpace = styled.label`
 > * { margin-right: 10em;
       margin-top: 1em;
       float:right;}
-`
+`;
 
 export const SmallButton = styled.button`
 display: flex;
@@ -67,13 +67,13 @@ border-radius: 6px;
 border: none;
 cursor: pointer;
 
-background: #6E6D70;
+background: #e2e2e2;
 box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
-color: #DFDEDF;
+color: #000;
 
 &:hover {
   opacity: 0.9;
   transform: scale(0.98);
-  background: #000;
+  background: #7c7c7c;
 }
 `;

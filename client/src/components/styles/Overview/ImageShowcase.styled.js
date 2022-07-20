@@ -68,7 +68,7 @@ export const StyledImgShowcase = styled.div`
     cursor: pointer;
     margin: 15px 7px 0px;
 
-    background-color: #6E6D70;
+    background-color: #e2e2e2;
   }
 
   .slideshowDot.active {

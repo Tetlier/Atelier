@@ -8,7 +8,7 @@ export const StyleGridItem = styled.div`
   img {
     &:hover {
       opacity: 0.8;
-      background: #000;
+      background: #7c7c7c;
     }
   }
 `;
