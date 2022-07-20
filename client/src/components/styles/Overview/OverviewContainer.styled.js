@@ -12,8 +12,8 @@ export const OverviewContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items:center;
-  .imageCarousel { flex: 15%; flex-shrink: 0; flex-grow: 0; align-self: center}
-  .imageGallery { flex-basis: 50%; flex-shrink: 0; flex-grow: 0; align-self: flex-start}
-  .productContent { flex-basis: 35%; flex-shrink: 0; flex-grow: 0; align-self: flex-start}
+  .imageCarousel { flex: 15%; flex-shrink: 0; flex-grow: 0;}
+  .imageGallery { flex-basis: 50%; flex-shrink: 0; flex-grow: 0;}
+  .productContent { flex-basis: 35%; flex-shrink: 0; flex-grow: 0;}
 
 `;

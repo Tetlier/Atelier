@@ -17,9 +17,6 @@ export const StyledImgShowcase = styled.div`
     display: flex;
     align-items: center;
 
-    // If the user hovers over the main image
-    // the mouse icon should change to show a magnifying glass
-    // https://stackoverflow.com/questions/13171968/magnifying-glass-zoom-cursor-over-image
     &: hover {
       cursor: -moz-zoom-in;
       cursor: -webkit-zoom-in;
@@ -113,11 +110,9 @@ export const StyledImgShowcase = styled.div`
     justify-content: center;
   }
 
-  .zoomedImageView.active div {
-    width: 600px;
+  .zoomedImageView.active  div {
+    width: 800px;
     height: 600px;
-    transform: scale(2.5);
-
     &:hover {
       cursor: zoom-out;
     }
