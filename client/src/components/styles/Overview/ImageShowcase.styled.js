@@ -21,16 +21,6 @@ export const StyledImgShowcase = styled.div`
     width: 100%;
   }
 
-  .buttonHolder {
-    margin: 10px;
-    color: #000000;
-    text-align: center;
-    opacity: 0.75;
-    &:hover {
-      opacity: 1;
-    }
-  }
-
   .slideshowSlider {
     white-space: nowrap;
     transition: ease 1000ms;
@@ -74,6 +64,7 @@ export const StyledImgShowcase = styled.div`
   .slideshowDot.active {
     background-color: #000000;
   }
+
 
   .expandedView {
     display: none;

@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import { StyledImageCarousel } from '../styles/Overview/ImageCarousel.styled';
 import ImageItem from './ImageItem';
 import $ from 'jquery';
+import { Button } from '../styles/Button.styled';
 
 /**
  * ImageCarousel that holds all the thumbnails in the default view
@@ -41,16 +42,15 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
     <StyledImageCarousel>
       <div className='container'>
         <div className='buttonContainer'>
-          <button
+          <Button
             onClick={() => {
               scroll(-1);
             }}
-            className='buttonHolder'
             disabled={isDisabled('prev')}
             style={{visibility: isDisabled('prev') ? 'hidden' : 'visible'}}
           >
             <i className="fa-solid fa-angles-up"></i>
-          </button>
+          </Button>
 
           <div className='carousel-container'>
             {productStyle.photos.map((photo, index) => {
@@ -67,16 +67,15 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             })}
           </div>
 
-          <button
+          <Button
             onClick={() => {
               scroll(1);
             }}
-            className='buttonHolder'
             disabled={isDisabled('next')}
             style={{visibility: isDisabled('next') ? 'hidden' : 'visible'}}
           >
             <i className="fa-solid fa-angles-down"></i>
-          </button>
+          </Button>
         </div>
       </div>
     </StyledImageCarousel>

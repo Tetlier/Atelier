@@ -3,6 +3,7 @@ import { React, useState, useEffect, useRef } from 'react';
 import { Background } from '../styles/reviewstyles/FormBackground.styled';
 import { LargePhoto } from '../styles/reviewstyles/LargePhoto.styled';
 import $ from 'jquery';
+import { Button } from '../styles/Button.styled';
 
 const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) => {
   let imageUrls = [];
@@ -74,8 +75,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
         </div>
       </div>
       <div className='buttonContainer'>
-        <button
-          className='buttonHolder'
+        <Button
           onClick={() => {
             thumbnailChange(selectedThumbnailIndex - 1);
           }}
@@ -83,7 +83,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
           style={{visibility: isDisabled('prev') ? 'hidden' : 'visible'}}
         >
           <i className="fa-solid fa-angles-left"></i>
-        </button>
+        </Button>
         <div className="slideshowDots">
           {imageUrls.map((_, idx) => (
             <div
@@ -95,8 +95,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
             ></div>
           ))}
         </div>
-        <button
-          className='buttonHolder'
+        <Button
           onClick={() => {
             thumbnailChange(selectedThumbnailIndex + 1);
           }}
@@ -104,7 +103,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
           style={{visibility: isDisabled('next') ? 'hidden' : 'visible'}}
         >
           <i className="fa-solid fa-angles-right"></i>
-        </button>
+        </Button>
       </div>
       <div
         className={`expandedView${expandedView === true ? ' active' : ''}`}

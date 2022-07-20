@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Searchbar} from '../styles/reviewstyles/reviewWidget.styled.js';
+import {Search, Searchbar} from '../styles/reviewstyles/reviewWidget.styled.js';
 
 const SearchBar = ({ setCurrentSearch }) => {
 
@@ -17,14 +17,14 @@ const SearchBar = ({ setCurrentSearch }) => {
   };
 
   return (
-    <div>
+    <Search>
       <Searchbar
         type='text'
         value={search}
         onChange={event => handleChange(event)}
-        placeholder = 'Text Filter. minimum 3 characters'
+        placeholder = 'HAVE A QUESTION? SEARCH FOR REVIEWS...'
       />
-    </div>
+    </Search>
   );
 };
 

@@ -43,7 +43,7 @@ export const AnswerStyle = styled.div`
 
 export const AnswerFooter = styled.div`
   font-size: 0.875em;
-
+  color: #464646;
 `;
 
 export const LoadMore = styled.div`

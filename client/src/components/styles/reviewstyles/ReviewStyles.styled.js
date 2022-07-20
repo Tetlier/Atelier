@@ -36,4 +36,4 @@ export const ReviewStars = styled.div`
 export const ReviewArea = styled.div`
 inline-size: 40em;
 overflow-wrap: break-word;
-`
+`;

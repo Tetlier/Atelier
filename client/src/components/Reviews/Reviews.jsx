@@ -7,6 +7,7 @@ import Form from './Form.jsx';
 import SearchBar from './SearchBar.jsx';
 //styled components
 import { Grid, Row, Meta, ReviewArea, Scroll, Button, ButtonPosition } from '../styles/reviewstyles/reviewWidget.styled.js';
+import { ReviewGrid } from '../styles/reviewstyles/ReviewStyles.styled';
 
 const Reviews = ({ currentProductId, currentProductRating, productName }) => {
 
@@ -101,52 +102,50 @@ const Reviews = ({ currentProductId, currentProductRating, productName }) => {
 
   return (
     <Grid>
-      <Row>
-        <Meta>
-          <MetaReview
-            metaReview={metaReview}
-            currentProductRating={currentProductRating}
-            getPageReviews={getPageReviews}
-            toggleFilter={toggleFilter}
-            setFilterRating={setFilterRating}
-            filterRating={filterRating}
-            setTotalRatings={setTotalRatings}
-            totalRatings={totalRatings}
-            reviewList={reviewList}
-            setRefresh={setRefresh} />
-        </Meta>
-        <ReviewArea>
-          <label> {totalRatings} reviews, sorted by: </label>
-          <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
-            <option value='helpful'>Helpfulness</option>
-            <option value='newest'>Newest</option>
-            <option value='relevant'>Relevance</option>
-          </select>
-          <SearchBar setCurrentSearch={setCurrentSearch} />
-          <Scroll> {
-            reviewList.length > 1 ?
-              <ReviewMapper
-                reviewList={reviewList}
-                filterRating={filterRating}
-                currentSearch={currentSearch}
-                setRefresh={setRefresh} /> : null}
-          </Scroll>
-          <div><Form
-            closeForm={closeForm}
-            form={form}
-            metaReview={metaReview}
-            currentProductId={currentProductId}
-            productName={productName} />
-          </div>
-          <ButtonPosition>
-            <Button
-              data-testid='addReview'
-              onClick={() => setForm(true)}>Add a Review + </Button>
-            {!noMoreResults ? <Button
-              onClick={() => getTwoReviews(currentProductId)}>More Reviews</Button> : null}
-          </ButtonPosition>
-        </ReviewArea>
-      </Row>
+      <Meta>
+        <MetaReview
+          metaReview={metaReview}
+          currentProductRating={currentProductRating}
+          getPageReviews={getPageReviews}
+          toggleFilter={toggleFilter}
+          setFilterRating={setFilterRating}
+          filterRating={filterRating}
+          setTotalRatings={setTotalRatings}
+          totalRatings={totalRatings}
+          reviewList={reviewList}
+          setRefresh={setRefresh} />
+      </Meta>
+      <ReviewArea>
+        <label> {totalRatings} reviews, sorted by: </label>
+        <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
+          <option value='helpful'>Helpfulness</option>
+          <option value='newest'>Newest</option>
+          <option value='relevant'>Relevance</option>
+        </select>
+        <SearchBar setCurrentSearch={setCurrentSearch} />
+        <Scroll> {
+          reviewList.length > 0 &&
+            <ReviewMapper
+              reviewList={reviewList}
+              filterRating={filterRating}
+              currentSearch={currentSearch}
+              setRefresh={setRefresh} />}
+        </Scroll>
+        <div><Form
+          closeForm={closeForm}
+          form={form}
+          metaReview={metaReview}
+          currentProductId={currentProductId}
+          productName={productName} />
+        </div>
+        <ButtonPosition>
+          <Button
+            data-testid='addReview'
+            onClick={() => setForm(true)}>ADD A REVIEW + </Button>
+          {!noMoreResults ? <Button
+            onClick={() => getTwoReviews(currentProductId)}>MORE REVIEWS</Button> : null}
+        </ButtonPosition>
+      </ReviewArea>
     </Grid>
   );
 };
