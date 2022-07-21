@@ -4,6 +4,7 @@ export const QAContainer = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 2em;
+  margin-top: 2em;
 `;
 
 export const QAChild = styled.div`

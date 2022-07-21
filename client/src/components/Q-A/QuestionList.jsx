@@ -67,10 +67,10 @@ export default function QuestionList({productId, searchTerm, sessionCookie, addT
       </ScrollList>
       <br></br>
       <ButtonPosition>
+        <LargeButton onClick={() => setAddQuestion(true)}>ADD A QUESTION +</LargeButton>
         {hasMore &&
           <LargeButton onClick={() => setQuestionCount(questionCount + 2)}>MORE ANSWERED QUESTIONS</LargeButton>
         }
-        <LargeButton onClick={() => setAddQuestion(true)}>ADD A QUESTION +</LargeButton>
       </ButtonPosition>
       <QuestionForm
         triggered={addQuestion}

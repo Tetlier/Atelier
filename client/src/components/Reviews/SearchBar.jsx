@@ -22,7 +22,7 @@ const SearchBar = ({ setCurrentSearch }) => {
         type='text'
         value={search}
         onChange={event => handleChange(event)}
-        placeholder = 'HAVE A QUESTION? SEARCH FOR REVIEWS...'
+        placeholder = 'SEARCH FOR REVIEWS...'
       />
     </Search>
   );

@@ -59,10 +59,10 @@ export const StyleSpace = styled.label`
 `;
 
 export const SmallButton = styled.button`
-display: flex;
+display: inline;
 flex-direction: column;
 align-items: center;
-padding: 6px 14px;
+padding: 4px 14px;
 border-radius: 6px;
 border: none;
 cursor: pointer;
