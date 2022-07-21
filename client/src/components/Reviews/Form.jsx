@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import StyleRating from './StyleRating.jsx';
 import StarRating from './StarRating.jsx';
+import { SmallButton } from '../styles/reviewstyles/metaReviewStyles.styled';
 
 const Form = ({ closeForm, form, metaReview, currentProductId, productName }) => {
   //form values
@@ -137,7 +138,7 @@ const Form = ({ closeForm, form, metaReview, currentProductId, productName }) =>
               required></input>
             <div>For authentication reasons, you will not be emailed</div></div>
 
-            <div>Attach up to 5 images
+            <div>Attach up to 5 images &nbsp;
               {photoArray.length < 5 ?
                 <input
                   id='file'
@@ -159,9 +160,8 @@ const Form = ({ closeForm, form, metaReview, currentProductId, productName }) =>
               <label>Yes <input id='yes' name='selectOne' type='radio' onClick={() => setRecommend(true)} required></input></label>
               <label>No <input id='no' name='selectOne' type='radio' onClick={() => setRecommend(false)}></input></label>
             </div>
-
-            <button type='submit'>Submit Review</button>
-            <button onClick={() => closeForm(true)}> Cancel</button>
+            <SmallButton type='submit'>Submit Review</SmallButton> &nbsp;
+            <SmallButton onClick={() => closeForm(true)}> Cancel</SmallButton>
           </FormRow>
         </FormGrid>
       </FormModal>

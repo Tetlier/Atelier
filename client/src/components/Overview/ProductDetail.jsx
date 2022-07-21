@@ -7,9 +7,10 @@ const ProductDetail = ({description, slogan, features}) => {
 
   return (
     <StyledProductDetail>
-      <b style={{'flexBasis': '40%'}}>{description}</b>
-      <br/>
-      <i style={{'flexBasis': '20%'}}>{slogan}</i>
+      <div style={{'flexBasis': '60%', 'paddingRight': '22px'}}>
+        <h1>{slogan}</h1>
+        <b>{description}</b>
+      </div>
       <ul style={{'flexBasis': '20%'}}>
         {
           features.map((item, i) => {

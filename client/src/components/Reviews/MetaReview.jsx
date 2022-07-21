@@ -43,10 +43,11 @@ const MetaReview = ({ metaReview, currentProductRating, filterRating, setFilterR
           <h2>Average Review: {currentProductRating}</h2>
           <div> {recommended}% of reviewers recommend this product.</div>
           {/* <div>Rating Breakdown</div> */}
-          <div> {filterRating.length !== 0 ? <SmallButton onClick={() => setFilterRating([])}> Remove all filters</SmallButton> : null}</div>
+          <div> {filterRating.length !== 0 ? <SmallButton onClick={() => setFilterRating([])}> Remove all filters</SmallButton> : <div>&nbsp;</div>} </div>
           <div>{[...ratingsArray].reverse().map(rating =>
             <Clickable onClick={() => toggleFilter(parseInt(rating.star))} key={ratingsArray.indexOf(rating)}>
-              <label>{rating.star} stars <RateSpace><progress value={rating.amount / totalRatings} /></RateSpace></label>
+              <label>{rating.star} stars <RateSpace><progress className='progressBar'
+                value={rating.amount / totalRatings} /></RateSpace></label>
               <p><small>{rating.amount} ratings</small></p>
             </Clickable>)}</div>
         </MetaRow>

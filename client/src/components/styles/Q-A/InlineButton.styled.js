@@ -22,7 +22,7 @@ export const LargeButton = styled.button`
 `;
 
 export const ButtonPosition = styled.div`
-  text-align: center;
+  float: right;
 `;
 
 export const SmallButton = styled.button`

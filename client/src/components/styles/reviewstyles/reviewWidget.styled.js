@@ -5,6 +5,8 @@ width: 100%;
 height: 100%;
 display: flex;
 margin: auto;
+padding-bottom: 2em;
+border-bottom: 1px #ccc solid;
 `;
 
 export const Meta = styled.div`
@@ -18,7 +20,7 @@ width: 70%;
 export const Scroll = styled.div`
   max-height: 600px;
   overflow-y: auto;
-  max-width: 700px;
+  max-width: 100%;
   overflow-x: auto;
 `;
 
@@ -53,5 +55,5 @@ color: #000;
 }`;
 
 export const ButtonPosition = styled.div`
-text-align: center;
+float: right;
 `;

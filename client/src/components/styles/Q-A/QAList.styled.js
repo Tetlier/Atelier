@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const ScrollList = styled.div`
   max-height: 600px;
   overflow-y: auto;
+  .question-and-answer {
+    width: 100%;
+    padding-bottom: 1em;
+    border-bottom: 1px #ccc solid;
+  }
 `;
 
 export const QorATitle = styled.div`
