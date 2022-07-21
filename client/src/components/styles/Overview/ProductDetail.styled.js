@@ -5,8 +5,8 @@ export const StyledProductDetail = styled.div`
   margin: 0 auto;
   display: flex;
   column-gap: 20px;
-  justify-content: center;
-  align-items:start;
+  justify-content: space-between;
+  align-items:center;
   margin-bottom: 1em;
   margin-top: 3em;
   padding: 0 0 2em 0;
