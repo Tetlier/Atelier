@@ -22,6 +22,7 @@ let getProduct = (req, res) => {
       client.get(`/products/${productId}/styles`)
         .then((styles) => {
           var result = { productInfo: product.data, styleInfo: styles.data };
+          res.set('Cache-control', 'public, max-age=300');
           res.status(200).send(result);
           res.flush();
         })
