@@ -95,13 +95,11 @@ export default function App({ sessionCookie, addToCookie }) {
               currentProductId={currentProductId}
               setCurrentId={setCurrentId}
             />
-            <div id='review'>
-              <Reviews
-                currentProductId={currentProductId}
-                currentProductRating={currentProductRating}
-                productName={productName}
-              />
-            </div>
+            <Reviews
+              currentProductId={currentProductId}
+              currentProductRating={currentProductRating}
+              productName={productName}
+            />
             <QA
               productId={currentProductId}
               sessionCookie={sessionCookie}

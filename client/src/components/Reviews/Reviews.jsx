@@ -102,19 +102,21 @@ const Reviews = ({ currentProductId, currentProductRating, productName }) => {
 
   return (
     <Grid>
-      <Meta>
-        <MetaReview
-          metaReview={metaReview}
-          currentProductRating={currentProductRating}
-          getPageReviews={getPageReviews}
-          toggleFilter={toggleFilter}
-          setFilterRating={setFilterRating}
-          filterRating={filterRating}
-          setTotalRatings={setTotalRatings}
-          totalRatings={totalRatings}
-          reviewList={reviewList}
-          setRefresh={setRefresh} />
-      </Meta>
+      <div id='review'>
+        <Meta>
+          <MetaReview
+            metaReview={metaReview}
+            currentProductRating={currentProductRating}
+            getPageReviews={getPageReviews}
+            toggleFilter={toggleFilter}
+            setFilterRating={setFilterRating}
+            filterRating={filterRating}
+            setTotalRatings={setTotalRatings}
+            totalRatings={totalRatings}
+            reviewList={reviewList}
+            setRefresh={setRefresh} />
+        </Meta>
+      </div>
       <ReviewArea>
         <label> {totalRatings} reviews, sorted by: </label>
         <select value={dropDownSort} onChange={event => setDropDownSort(event.target.value)}>
