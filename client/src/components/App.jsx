@@ -12,6 +12,8 @@ import Overview from './Overview/Overview';
 import StarReview from './styles/StarReview.styled.js';
 import ProductSelection from './Product Selection/ProductSelection';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
+import logo from '../../../TetlierLogo.png';
+import { Header } from './styles/Header.styled';
 
 const theme = {
   colors: {
@@ -78,12 +80,14 @@ export default function App({ sessionCookie, addToCookie }) {
     <div>
       <ThemeProvider theme={darkMode ? darkTheme : theme}>
         <ThemeSetter>
-          <div>
-            {darkMode ? <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsFillMoonFill /></SideButton> :
-              <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsSun/></SideButton>}</div>
           <GlobalStyles />
+          <Header>
+            <img src={logo} alt='logo'/>
+            <div>
+              {darkMode ? <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsFillMoonFill /></SideButton> :
+                <SideButton onClick={() => { setDarkMode(!darkMode); }}><BsSun/></SideButton>}</div>
+          </Header>
           <Container>
-            <h1>Welcome to Atelier!</h1>
             <Overview
               currentProductId={currentProductId}
               currentProductRating={currentProductRating} />
@@ -91,13 +95,11 @@ export default function App({ sessionCookie, addToCookie }) {
               currentProductId={currentProductId}
               setCurrentId={setCurrentId}
             />
-            <div id='review'>
-              <Reviews
-                currentProductId={currentProductId}
-                currentProductRating={currentProductRating}
-                productName={productName}
-              />
-            </div>
+            <Reviews
+              currentProductId={currentProductId}
+              currentProductRating={currentProductRating}
+              productName={productName}
+            />
             <QA
               productId={currentProductId}
               sessionCookie={sessionCookie}

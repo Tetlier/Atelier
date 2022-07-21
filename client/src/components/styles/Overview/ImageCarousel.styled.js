@@ -33,6 +33,7 @@ export const StyledImageCarousel = styled.div`
     display: inline-block;
     width: 85px;
     height: 60px;
+    object-fit:cover;
     opacity: 1;
     transition: all 0.3s ease;
     object-fit: cover;
