@@ -3,56 +3,90 @@ const express = require('express');
 const controllers = require('./controllers.js');
 const cloudinary = require('./cloudinary.js');
 const bodyParser = require('body-parser');
+var compression = require('compression');
 // const cors = require('cors');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use(bodyParser.urlencoded({
-  limit: '50mb',
-  extended: false
-}));
-app.use(bodyParser.json({
-  limit: '50mb'
-}));
-
+app.use(
+  bodyParser.urlencoded({
+    limit: '50mb',
+    extended: false,
+  })
+);
+app.use(
+  bodyParser.json({
+    limit: '50mb',
+  })
+);
 app.use(express.json());
 
+const shouldCompress = (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res);
+};
+
+app.use(compression({ filter: shouldCompress }));
+
 app.get('/products', (req, res) => {
-  controllers.getProducts()
+  controllers
+    .getProducts()
     .then((results) => {
       res.status(201).send(results.data);
+      res.flush();
     })
     .catch((err) => {
       res.sendStatus(500);
+      res.flush();
     });
 });
 
 app.get('/reviews', (req, res) => {
-  controllers.getReviews(req.query.id, req.query.count, req.query.sort)
+  controllers
+    .getReviews(req.query.id, req.query.count, req.query.sort)
     .then((results) => {
       res.send(results.data).status(200);
+      res.flush();
     })
-    .catch(err => {
+    .catch((err) => {
       res.sendStatus(500);
+      res.flush();
     });
 });
 
 app.get('/meta', (req, res) => {
-  controllers.getMetaReview(req.query.id)
+  controllers
+    .getMetaReview(req.query.id)
     .then((results) => {
       res.send(results.data).status(200);
+      res.flush();
     })
-    .catch(err => { console.log(err); res.sendStatus(500); });
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+      res.flush();
+    });
 });
 
 app.put('/reviews', (req, res) => {
-  controllers.putHelpfulReview(req.body.review_id)
+  controllers
+    .putHelpfulReview(req.body.review_id)
     .then((results) => {
       res.send(results.data).status(200);
+      res.flush();
     })
-    .catch(err => { console.log(err); res.sendStatus(500); });
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+      res.flush();
+    });
 });
 
 app.post('/reviews', (req, res) => {
@@ -66,21 +100,45 @@ app.post('/reviews', (req, res) => {
   let photos = req.body.photos;
   let recommended = req.body.recommended;
   let characteristics = req.body.characteristics;
-  console.log('hello', req.body, req.body.photos);
-  controllers.postReview(product_id, rating, summary, body, name, email, photos, recommended, characteristics)
+  controllers.postReview(
+    product_id,
+    rating,
+    summary,
+    body,
+    name,
+    email,
+    photos,
+    recommended,
+    characteristics
+  )
     .then((results) => {
       res.send(results.data).status(201);
+      res.flush();
     })
-    .catch(err => { console.log(err); res.sendStatus(500); });
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+      res.flush();
+    });
 });
 
 //posts image to cloudinary and retrieves the cloudinary URL
 app.post('/cloudinary', (req, res) => {
   var link = '';
-  cloudinary.uploadImage(req.body.img,
-    function (error, result) { console.log(result, error); })
-    .then(results => { link = results.url; res.send(link); })
-    .catch(err => { console.log(err); res.send(err); });
+  cloudinary
+    .uploadImage(req.body.img, function (error, result) {
+      console.log(result, error);
+    })
+    .then((results) => {
+      link = results.url;
+      res.send(link);
+      res.flush();
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send(err);
+      res.flush();
+    });
 });
 
 const router = express.Router();

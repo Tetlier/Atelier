@@ -23,13 +23,16 @@ let getProduct = (req, res) => {
         .then((styles) => {
           var result = { productInfo: product.data, styleInfo: styles.data };
           res.status(200).send(result);
+          res.flush();
         })
         .catch(stylesErr => {
           res.status(500).send(stylesErr);
+          res.flush();
         });
     })
     .catch(err => {
       res.status(500).send(err);
+      res.flush();
     });
 };
 
@@ -38,10 +41,12 @@ let addToCart = (req, res) => {
   client.post('/cart', skuId)
     .then(() => {
       res.sendStatus(201);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error adding to cart');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -96,10 +101,12 @@ let getQuestions = (req, res) => {
       });
       // slice off the first ${count} number of questions
       res.status(200).send(filtered.slice(0, count));
+      res.flush();
     })
     .catch((err) => {
       console.log('server error getting questions');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -125,10 +132,12 @@ let getAnswers = (req, res) => {
         }
       });
       res.status(200).send(answers);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error getting answers');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -137,10 +146,12 @@ let markQasHelpful = (req, res) => {
   client.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
       res.sendStatus(204);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error marking question as helpful');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -149,10 +160,12 @@ let reportQuestion = (req, res) => {
   client.put(`/qa/questions/${questionId}/report`)
     .then(() => {
       res.sendStatus(204);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error reporting question');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -161,10 +174,12 @@ let markAasHelpful = (req, res) => {
   client.put(`/qa/answers/${answerId}/helpful`)
     .then(() => {
       res.sendStatus(204);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error marking answer as helpful');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -173,10 +188,12 @@ let reportAnswer = (req, res) => {
   client.put(`/qa/answers/${answerId}/report`)
     .then(() => {
       res.sendStatus(204);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error reporting answer');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -185,10 +202,12 @@ let postQuestion = (req, res) => {
   client.post('/qa/questions', question)
     .then(() => {
       res.sendStatus(201);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error posting question: ', err);
       res.sendStatus(500);
+      res.flush();
     });
 };
 
@@ -198,10 +217,12 @@ let postAnswer = (req, res) => {
   client.post(`/qa/questions/${questionId}/answers`, answer)
     .then(() => {
       res.sendStatus(201);
+      res.flush();
     })
     .catch((err) => {
       console.log('server error posting answer');
       res.sendStatus(500);
+      res.flush();
     });
 };
 
