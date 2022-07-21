@@ -39,6 +39,7 @@ app.get('/products', (req, res) => {
   controllers
     .getProducts()
     .then((results) => {
+      res.set('Cache-control', 'public, max-age=300');
       res.status(201).send(results.data);
       res.flush();
     })
