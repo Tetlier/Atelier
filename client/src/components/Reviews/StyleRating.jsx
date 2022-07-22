@@ -88,7 +88,6 @@ const StyleRating = ({ metaReview, setCharRating, charRating }) => {
                     name={characteristic}
                     value={thisRating}
                     onClick={(event) => {
-                      console.log();
                       selection(
                         event.target.name,
                         event.target.id,

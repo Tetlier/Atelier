@@ -12,9 +12,6 @@ cloudinary.config({
   secure: true
 });
 
-// Log the configuration
-// console.log(cloudinary.config());
-
 /////////////////////////
 // Uploads an image file
 /////////////////////////
