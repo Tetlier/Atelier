@@ -62,6 +62,7 @@ const ImageCarousel = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
                   onClick={() => {
                     thumbnailChange(index);
                   }}
+                  loading='lazy'
                   alt = 'shoe image'/>
               );
             })}

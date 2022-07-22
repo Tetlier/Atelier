@@ -28,12 +28,14 @@ const shouldCompress = (req, res) => {
     // don't compress responses with this request header
     return false;
   }
-
   // fallback to standard filter function
   return compression.filter(req, res);
 };
 
-app.use(compression({ filter: shouldCompress }));
+app.use(compression({
+  level: 6,
+  threshold: 100 * 1000,
+  filter: shouldCompress }));
 
 app.get('/products', (req, res) => {
   controllers
