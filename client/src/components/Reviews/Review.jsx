@@ -53,10 +53,10 @@ const Review = ({ review, setRefresh }) => {
       </ReviewRow>
       <ReviewRow><b> {review.summary}</b></ReviewRow>
       {review.recommend ? <p><small> I recommend this product </small><FcCheckmark /></p> : null}
-      {restriction ? <ReviewArea maxLength={250}>{review.body}</ReviewArea> : <ReviewArea>{review.body}</ReviewArea>}
+      {(!restriction) ? <ReviewArea>{review.body.slice(0, 250)}</ReviewArea> : <ReviewArea>{review.body}</ReviewArea>}
       {review.body.length > 250 ?
         <button
-          onClick={() => setRestriction(!restriction)}>{restriction ? 'Show More' : 'Show Less'}</button> : null}
+          onClick={() => setRestriction(!restriction)}>{(!restriction) ? 'Show More' : 'Show Less'}</button> : null}
       {review.response ? <i>Response from seller: {review.response}</i> : null}
 
       <ReviewRow>{[...review.photos].map((photo, index) => <ReviewCol key={photo.url}> {enlarged[index] ? enlargeThumbnail(photo.url, index) : <ThumbNail
