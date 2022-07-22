@@ -11,10 +11,6 @@ const app = express();
 
 const clientDirPath = path.resolve(__dirname, '../client/dist');
 
-clientIndexHtml = path.join(clientDirPath, 'index.html');
-
-bundlegz = path.join(clientDirPath, 'bundle.js.gz');
-
 const router = express.Router();
 
 router.use(cors());
