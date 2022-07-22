@@ -38,7 +38,7 @@ export const LinkHover = styled.span`
 `;
 
 export const ClickedLink = styled.span`
-  color: #e2e2e2;
+  color: black;
   font-weight: bold;
 `;
 
