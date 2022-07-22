@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const CompressionPlugin = require('compression-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_DIR = path.join(__dirname, 'client', 'src');
 const OUT_DIR = path.join(__dirname, '/client/dist');
@@ -38,10 +36,6 @@ module.exports = {
       'process.env': {
         TOKEN: JSON.stringify(process.env.TOKEN),
       },
-    }),
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /.js$|.css$/,
     })
   ],
 };
