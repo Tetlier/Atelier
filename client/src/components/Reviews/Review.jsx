@@ -15,7 +15,6 @@ const Review = ({ review, setRefresh }) => {
 
   //enlarges thumbnail and changes array values of true and false for each image
   const enlargeThumbnail = (img, index) => {
-    console.log(img);
     return (
       <Background onClick={() => {
         let newDecreasedState = enlarged.slice();

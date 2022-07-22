@@ -3,10 +3,36 @@ const express = require('express');
 const controllers = require('./controllers.js');
 const cloudinary = require('./cloudinary.js');
 const bodyParser = require('body-parser');
-var compression = require('compression');
-// const cors = require('cors');
+const compression = require('compression');
+const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
+
+const clientDirPath = path.resolve(__dirname, '../client/dist');
+
+clientIndexHtml = path.join(clientDirPath, 'index.html');
+
+bundlegz = path.join(clientDirPath, 'bundle.js.gz');
+
+const router = express.Router();
+
+router.use(cors());
+
+const shouldCompress = (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false;
+  }
+  // fallback to standard filter function
+  return compression.filter(req, res);
+};
+
+app.use(compression({
+  level: 6,
+  threshold: 100 * 1000,
+  filter: shouldCompress }));
+
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -23,19 +49,6 @@ app.use(
 );
 app.use(express.json());
 
-const shouldCompress = (req, res) => {
-  if (req.headers['x-no-compression']) {
-    // don't compress responses with this request header
-    return false;
-  }
-  // fallback to standard filter function
-  return compression.filter(req, res);
-};
-
-app.use(compression({
-  level: 6,
-  threshold: 100 * 1000,
-  filter: shouldCompress }));
 
 app.get('/products', (req, res) => {
   controllers
@@ -144,7 +157,7 @@ app.post('/cloudinary', (req, res) => {
     });
 });
 
-const router = express.Router();
+
 
 app.use('/', router);
 
