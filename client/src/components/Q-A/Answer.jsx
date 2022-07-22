@@ -77,6 +77,7 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
                     setEnlarged(newEnlargedState);
                   }}
                   src={photo.url}
+                  loading='lazy'
                   alt='answer photo'
                   loading='lazy'
                 />

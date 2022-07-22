@@ -29,7 +29,6 @@ app.use(compression({
   threshold: 100 * 1000,
   filter: shouldCompress }));
 
-
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use(
@@ -44,7 +43,6 @@ app.use(
   })
 );
 app.use(express.json());
-
 
 app.get('/products', (req, res) => {
   controllers
