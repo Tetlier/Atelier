@@ -68,6 +68,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               className="slide"
               key={index}
               src={imageUrl.url}
+              loading='lazy'
               onClick={() => {
                 changeView();
               }} />

@@ -78,6 +78,7 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
                   }}
                   src={photo.url}
                   alt='answer photo'
+                  loading='lazy'
                 />
               }
             </div>)}

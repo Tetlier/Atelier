@@ -67,6 +67,7 @@ const Review = ({ review, setRefresh }) => {
           setEnlarged(newEnlargedState);
         }}
         src={photo.url}
+        loading='lazy'
         key={photo.url} />}</ReviewCol>)}</ReviewRow>
 
 
