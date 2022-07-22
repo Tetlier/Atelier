@@ -59,8 +59,8 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
 
   return (
     <AnswerStyle>
-      <div className="answer">
-        <div className="answer-body">{answer.body}</div>
+      <div className='answer'>
+        <div className='answer-body'>{answer.body}</div>
         <ImageList>
           {answer.photos.map((photo, index) =>
             <div key={photo.url}>
@@ -79,12 +79,13 @@ export default function Answer ({answer, answers, setAnswers, sessionCookie, add
                   src={photo.url}
                   loading='lazy'
                   alt='answer photo'
+                  loading='lazy'
                 />
               }
             </div>)}
         </ImageList>
         <AnswerFooter>
-          <div className="answer-footer">by&nbsp;
+          <div className='answer-footer'>by&nbsp;
             {answer.answerer_name.toLowerCase() === sellerName && <b>Seller</b>}
             {answer.answerer_name.toLowerCase() !== sellerName && answer.answerer_name}
             , {month} {day}, {year} {'\n'}
