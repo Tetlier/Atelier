@@ -33,7 +33,10 @@ const shouldCompress = (req, res) => {
   return compression.filter(req, res);
 };
 
-app.use(compression({ filter: shouldCompress }));
+app.use(compression({
+  level: 6,
+  threshold: 100 * 1000,
+  filter: shouldCompress }));
 
 app.get('/products', (req, res) => {
   controllers

@@ -68,6 +68,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
               className="slide"
               key={index}
               src={imageUrl.url}
+              loading='lazy'
               onClick={() => {
                 changeView();
               }} />
@@ -114,6 +115,7 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
         <LargePhoto
           className='expandedViewPhoto'
           src={productStyle.photos[selectedThumbnailIndex].url}
+          loading='lazy'
           onClick={(e) => {
             e.stopPropagation();
             changeToZoomView();
