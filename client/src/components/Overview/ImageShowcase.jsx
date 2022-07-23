@@ -33,7 +33,10 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
 
   let changeToZoomView = () => {
     setZoomedImageView(true);
-    setExpandedView(false);
+    if (matchMedia('(pointer:fine)').matches) {
+      // Device has a mouse
+      setExpandedView(false);
+    }
   };
 
   let changeToExpandedView = () => {
