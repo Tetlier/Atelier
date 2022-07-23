@@ -16,8 +16,7 @@ min-width: 30%
 `;
 
 export const ReviewArea = styled.div`
-// flex-grow: 1;
-min-width: 70%;
+min-width: 65%;
 `;
 
 export const Scroll = styled.div`
