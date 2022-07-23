@@ -6,8 +6,6 @@ import StyleSelector from './StyleSelector';
 import ProductDetail from './ProductDetail';
 import { OverviewContainer } from '../styles/Overview/OverviewContainer.styled';
 import { Panel } from '../styles/Overview/Panel.styled';
-import { ImageGallery } from '../styles/Overview/ImageGallery.styled';
-import { ProductContent } from '../styles/Overview/ProductContent.styled';
 import ImageCarousel from './ImageCarousel';
 import StarReview from '../styles/StarReview.styled';
 
@@ -87,15 +85,13 @@ const Overview = ({currentProductId, currentProductRating}) => {
           selectedThumbnailIndex={selectedThumbnailIndex}
         />
 
-        <ImageGallery className='imageGallery'>
-          <ImageShowcase
-            productStyle={currentProductStyle.results[selectedStyleIndex]}
-            thumbnailChange={handleThumbnailChange}
-            selectedThumbnailIndex={selectedThumbnailIndex}
-          />
-        </ImageGallery>
+        <ImageShowcase
+          productStyle={currentProductStyle.results[selectedStyleIndex]}
+          thumbnailChange={handleThumbnailChange}
+          selectedThumbnailIndex={selectedThumbnailIndex}
+        />
 
-        <ProductContent className='productContent'>
+        <div className='productContent'>
           <h4 style={{visibility: currentProductRating === 0 ? 'hidden' : 'visible'}}><StarReview rating={currentProductRating} /> <a href={'#review'} style={{'textDecoration': 'underline'}}>Read all reviews </a></h4>
           <h2 className='product-category'>{currentProduct.category}</h2>
           <h1 className='product-title'>{currentProduct.name}</h1>
@@ -111,7 +107,7 @@ const Overview = ({currentProductId, currentProductRating}) => {
             skuAlert={skuAlert}
             skuAlertChange={handleSkuAlertChange}
           />
-        </ProductContent>
+        </div>
       </OverviewContainer>
 
       {/* down panel */}

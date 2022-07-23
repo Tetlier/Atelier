@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledImageCarousel = styled.div`
   display: flex;
   flex-direction: column;
-  width:10%;
 
   .container {
     overflow: hidden;
@@ -36,7 +35,6 @@ export const StyledImageCarousel = styled.div`
     object-fit:cover;
     opacity: 1;
     transition: all 0.3s ease;
-    object-fit: cover;
     border-radius: 10px;
   }
 

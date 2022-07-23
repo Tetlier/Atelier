@@ -5,16 +5,19 @@ width: 100%;
 height: 100%;
 display: flex;
 margin: auto;
+display: flex;
+flex-wrap: wrap;
 padding-bottom: 2em;
 border-bottom: 1px #ccc solid;
 `;
 
 export const Meta = styled.div`
-width: 30%
+min-width: 30%
 `;
 
 export const ReviewArea = styled.div`
-width: 70%;
+// flex-grow: 1;
+min-width: 70%;
 `;
 
 export const Scroll = styled.div`
