@@ -10,7 +10,6 @@ const ImageShowcase = ({productStyle, thumbnailChange, selectedThumbnailIndex}) 
   for (let i = 0; i < productStyle.photos.length; i++) {
     imageUrls.push({ index: i, url: productStyle.photos[i].url });
   }
-  const isMobile = navigator.userAgentData.mobile;
   const [expandedView, setExpandedView] = useState(false);
   const [zoomedImageView, setZoomedImageView] = useState(false);
   const [MousePosition, setMousePosition] = useState({
