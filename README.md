@@ -11,8 +11,7 @@ This project has 4 main sections and various functionalities:
       The product may be viewed more closely via zoom features by clicking on the displayed image.
       Various other clickable styles of a product may be selected in the style selection space.
       An image carousel and arrow buttons may be used to switch between different photos of the style.
-      The products may be added to a cart for later checkout. Users can share the product to different social media
-      platforms.
+      The products may be added to a cart for later checkout. Users can share the product to different social media platforms.
 
 2. Other Products:
       This section displays other products available for sale, which are clickable to change the selected product.
@@ -41,9 +40,22 @@ This project has 4 main sections and various functionalities:
       Clicking on the moon will turn the dark-mode feature on for the user. The moon then becomes a sun.
       Clicking on the sun will turn off dark mode.
 
-
+# Installation
 To start this application, run the following in separate terminals:
 
 $ npm install (installs dependencies)
 $ npm run server-dev (runs the server on localhost: 3000)
-$ npm run client-dev (builds the webpack and watches for changes to code via babel-loader )
+$ npm run client-dev (builds the webpack and watches for changes to code via babel-loader)
+
+# Demo
+Overview: 
+![](https://github.com/Tetlier/Atelier/blob/main/overview-section.gif)
+
+Dark mode and Other Products: 
+![](https://github.com/Tetlier/Atelier/blob/main/dark-mode%20and%20other-products.gif)
+
+Reviews: 
+![](https://github.com/Tetlier/Atelier/blob/main/reviews-section.gif)
+
+Questions & Answers: 
+![](https://github.com/Tetlier/Atelier/blob/main/questions-section.gif)
