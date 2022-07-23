@@ -12,7 +12,15 @@ export const OverviewContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items:center;
-  .imageCarousel { flex: 15%; flex-shrink: 0; flex-grow: 0;}
-  .imageGallery { flex-basis: 50%; flex-shrink: 0; flex-grow: 0;}
-  .productContent { flex-basis: 35%; flex-shrink: 0; flex-grow: 0;}
+  .imageCarousel { min-width: 15%; }
+  .imageShowcase { min-width: 50%; }
+  .productContent {
+    min-width: 35%;
+    @media only screen and (max-width: 1000px) {
+      min-width: 100%;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    flex-wrap: wrap-reverse;
+  }
 `;

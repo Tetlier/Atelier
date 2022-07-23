@@ -7,11 +7,11 @@ const ProductDetail = ({description, slogan, features}) => {
 
   return (
     <StyledProductDetail>
-      <div style={{'flexBasis': '60%', 'paddingRight': '22px'}}>
+      <div style={{ 'paddingRight': '22px'}}>
         <h1>{slogan}</h1>
         <b>{description}</b>
       </div>
-      <ul style={{'flexBasis': '20%'}}>
+      <ul>
         {
           features.map((item, i) => {
             return (<li key={i}> {item.feature}, {item.value} </li>);
@@ -19,7 +19,7 @@ const ProductDetail = ({description, slogan, features}) => {
         }
       </ul>
 
-      <div className='social-links' style={{'flexBasis': '20%'}}>
+      <div className='social-links-container'>
         <p>Share: &nbsp;&nbsp;&nbsp;</p>
         <div className='social-links'>
           <button className='facebook'

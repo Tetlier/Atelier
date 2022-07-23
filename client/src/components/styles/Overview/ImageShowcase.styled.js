@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyledImgShowcase = styled.div`
 
-  margin-right: 2em;
-  margin-left: 2em;
+  // margin-right: 2em;
+  // margin-left: 2em;
 
   .slideshow {
     margin: 0 auto;
@@ -16,7 +16,6 @@ export const StyledImgShowcase = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    // background-color: yellow;
     height: 100%;
     width: 100%;
   }
@@ -47,6 +46,9 @@ export const StyledImgShowcase = styled.div`
 
   .slideshowDots {
     text-align: center;
+    @media only screen and (max-width: 475px) {
+      display: none;
+    }
   }
 
   .slideshowDot {

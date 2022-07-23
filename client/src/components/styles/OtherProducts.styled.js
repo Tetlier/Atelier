@@ -27,6 +27,7 @@ export const OtherProducts = styled.aside`
 
 export const OtherProductsList = styled.section`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 1em;
   border-bottom: 1px #ccc solid;
