@@ -4,6 +4,7 @@ export const FormView = styled.div`
   padding: 30px 30px 30px 30px;
   width: 75%;
   height: 75%;
+  overflow-y: auto;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
