@@ -44,7 +44,9 @@ This project has 4 main sections and various functionalities:
 To start this application, run the following commands in the terminal:
 
 $ npm install (installs dependencies)
+
 $ npm run build (creates bundle using webpack)
+
 $ npm run start (runs the server on localhost: 3000)
 
 # Demo
