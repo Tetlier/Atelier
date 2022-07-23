@@ -2,7 +2,7 @@
 
 Welcome to Tetlier, an online e-commerce marketing website displaying various unique styles of clothing!
 
-This e-commerce attire website features a product overview, ability to add products to a cart, a reviews section, and a question-and-answers section. The information is pulled from an API database.
+This e-commerce attire website features a product overview, ability to add products to a cart, a reviews section, and a question-and-answers section. The information is pulled from an API database. This product has been formatted to fit all devices. 
 
 This project has 4 main sections and various functionalities:
 
@@ -41,11 +41,13 @@ This project has 4 main sections and various functionalities:
       Clicking on the sun will turn off dark mode.
 
 # Installation
-To start this application, run the following in separate terminals:
+To start this application, run the following commands in the terminal:
 
 $ npm install (installs dependencies)
-$ npm run server-dev (runs the server on localhost: 3000)
-$ npm run client-dev (builds the webpack and watches for changes to code via babel-loader)
+
+$ npm run build (creates bundle using webpack)
+
+$ npm run start (runs the server on localhost: 3000)
 
 # Demo
 Overview: 
