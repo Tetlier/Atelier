@@ -1,8 +1,12 @@
 # Tetlier
+[Sections]() | [Installation](https://github.com/Tetlier/Atelier#installation) | [Demo](https://github.com/Tetlier/Atelier#demo)
+Tech stack used: ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
 Welcome to Tetlier, an online e-commerce marketing website displaying various unique styles of clothing!
 
 This e-commerce attire website features a product overview, ability to add products to a cart, a reviews section, and a question-and-answers section. The information is pulled from an API database. This product has been formatted to fit all devices. 
+
+# Sections
 
 This project has 4 main sections and various functionalities:
 
